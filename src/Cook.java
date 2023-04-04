@@ -29,4 +29,6 @@ public class Cook {
     }
 
     //getters                                                   //get cost could be the only implementation of cost
+
+    //Daniel Edinger
 }
