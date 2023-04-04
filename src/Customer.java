@@ -47,7 +47,6 @@ public class Customer {
         Scanner scanner = new Scanner(System.in);
         while(i!=3) {
             System.out.println("Would you like to place(1) an order, cancel(2) an order, or quit(3) the program");
-            System.in.
         }
     }
 }
