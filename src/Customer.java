@@ -37,7 +37,7 @@ public class Customer {
         else if (method == 2) {
             Onsite order = new Onsite(item, quantity, method, index);}
         else if (method == 3){
-            Pickup order = new Pickup(item, quantity, method, index);}
+            Phone order = new Phone(item, quantity, method, index);}
         else{
             Doordash order = new Doordash(item, quantity, method, index);}
         index += 1;

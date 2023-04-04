@@ -5,7 +5,7 @@ public class Drivethrough extends Order{
 
     public void sendtoQueue(){
 
-        //send to doordash queu
+        //send to doordash queue
     };
 
 }
