@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Order extends FileWriter {
     public static File file = new File("savedData");
-    FileWriter fileWriter = new FileWriter("savedData");
+    public FileWriter fileWriter = new FileWriter("savedData");
     protected int orderNumber;
     protected ArrayList<Integer> itemID = new ArrayList<>();
     protected ArrayList<Integer> quantity = new ArrayList<>();
@@ -28,8 +28,8 @@ public class Order extends FileWriter {
         super(file);
         fileWriter.write("HEADER");
         fileWriter.write(orderType);
-        for(int i=0;i<itemID.size();i++){fileWriter.write(itemID.get(i));}
-        for(int i=0;i<quantity.size();i++){fileWriter.write(quantity.get(i));}
+        fileWriter.write(String.valueOf(itemID));
+        fileWriter.write(String.valueOf(quantity));
         fileWriter.write(orderNumber);
         fileWriter.write(name);
         if(complete) {fileWriter.write("Completed");}
