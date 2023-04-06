@@ -32,12 +32,24 @@ public class Order extends FileWriter {
     }
 
     public void writeToFile() throws IOException {
+        /**
+         * HEADER
+         * ORDER TYPE
+         * [ItemID, ItemID, ItemID]
+         * [Quantity, Quantity, Quantity]
+         * ORDER NUMBER
+         * CUSTOMER NAME
+         * TIMES SKIPPED
+         * IS COMPLETED
+         **/
+
         fileWriter.write("HEADER");
         fileWriter.write(orderType);
         fileWriter.write(String.valueOf(itemID));
         fileWriter.write(String.valueOf(quantity));
         fileWriter.write(orderNumber);
         fileWriter.write(name);
+        fileWriter.write(skipped);
         if(complete) {fileWriter.write("Completed");}
     }
 
