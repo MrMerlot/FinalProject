@@ -63,4 +63,9 @@ public class Order {
      * Sets the order as complete
      */
     public void completeOrder() { complete = true; }
+
+    public String orderInfo(){
+
+
+    }
 }
