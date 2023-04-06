@@ -1,9 +1,14 @@
 package Model;
 
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Order {
-
+public class Order extends FileWriter {
+    public static File file = new File("savedData");
+    FileWriter fileWriter = new FileWriter("savedData");
     protected int orderNumber;
     protected ArrayList<Integer> itemID = new ArrayList<>();
     protected ArrayList<Integer> quantity = new ArrayList<>();
@@ -11,6 +16,7 @@ public class Order {
     protected boolean complete;
     protected String orderInfo;
     protected String name;
+    protected int skipped = 0;
 
     /**
      * Creeates an order with a name and number.
@@ -18,7 +24,15 @@ public class Order {
      * @param name  Customer name
      * @param orderNumber  Order's number
      */
-    public Order( String name, int orderNumber ){
+    public Order( String name, int orderNumber ) throws IOException {
+        super(file);
+        fileWriter.write("HEADER");
+        fileWriter.write(orderType);
+        for(int i=0;i<itemID.size();i++){fileWriter.write(itemID.get(i));}
+        for(int i=0;i<quantity.size();i++){fileWriter.write(quantity.get(i));}
+        fileWriter.write(orderNumber);
+        fileWriter.write(name);
+        if(complete) {fileWriter.write("Completed");}
 
         this.name = name;
         this.orderNumber = orderNumber;
@@ -66,6 +80,6 @@ public class Order {
 
     public String orderInfo(){
 
-
+        return null;
     }
 }
