@@ -1,4 +1,4 @@
 package Model;
 
-public class Hamburger {
+public class Hamburger implements Sandwich {
 }
