@@ -2,9 +2,9 @@ package Model;
 
 public class DoorDash extends Order {
 
-    public DoorDash( String name ){
+    public DoorDash( String name, int orderNumber ){
 
-        super( name );
+        super( name, orderNumber );
 
         super.orderType = 1;
     }

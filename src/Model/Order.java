@@ -36,5 +36,31 @@ public class Order {
         this.quantity.add(quantity);
     }
 
+    /**
+     * Get item ID at index
+     *
+     * @param index  Index of wanted item
+     * @return  The item's iD
+     */
+    public int getItemID( int index ) { return itemID.get(index); }
 
+    /**
+     * Get the item's quantity at an index
+     *
+     * @param index  Item quantity's index
+     * @return  The quantity
+     */
+    public int getItemQuantity( int index ){ return quantity.get( index ); }
+
+    /**
+     * Checks if the order is complete or not.
+     *
+     * @return  True or false
+     */
+    public boolean checkComplete() { return complete; }
+
+    /**
+     * Sets the order as complete
+     */
+    public void completeOrder() { complete = true; }
 }

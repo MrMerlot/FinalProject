@@ -2,9 +2,9 @@ package Model;
 
 public class DriveThrough extends Order {
 
-    public DriveThrough( String name ){
+    public DriveThrough( String name, int orderNumber ){
 
-        super(name);
+        super(name, orderNumber);
 
         super.orderType = 2;
     }
