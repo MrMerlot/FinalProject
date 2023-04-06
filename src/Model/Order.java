@@ -26,6 +26,12 @@ public class Order extends FileWriter {
      */
     public Order( String name, int orderNumber ) throws IOException {
         super(file);
+
+        this.name = name;
+        this.orderNumber = orderNumber;
+    }
+
+    public void writeToFile() throws IOException {
         fileWriter.write("HEADER");
         fileWriter.write(orderType);
         fileWriter.write(String.valueOf(itemID));
@@ -33,9 +39,6 @@ public class Order extends FileWriter {
         fileWriter.write(orderNumber);
         fileWriter.write(name);
         if(complete) {fileWriter.write("Completed");}
-
-        this.name = name;
-        this.orderNumber = orderNumber;
     }
 
     /**
