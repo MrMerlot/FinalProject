@@ -23,6 +23,10 @@ public class OrderData {
         this.driveThroughQueue.add( driveThroughOrder );
     }
 
+    /**
+     *
+     * @param onSiteOrder
+     */
     public void setOnSiteQueue( Order onSiteOrder ){
         this.onSiteQueue.add( onSiteOrder );
     }
