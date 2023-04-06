@@ -12,8 +12,29 @@ public class Order {
     protected String orderInfo;
     protected String name;
 
-    public Order( String name ){
+    /**
+     * Creeates an order with a name and number.
+     *
+     * @param name  Customer name
+     * @param orderNumber  Order's number
+     */
+    public Order( String name, int orderNumber ){
 
         this.name = name;
+        this.orderNumber = orderNumber;
     }
+
+    /**
+     * Adds an item to the order.
+     *
+     * @param itemID  The item's ID
+     * @param quantity  How many items ordered
+     */
+    public void addItem( int itemID, int quantity ){
+
+        this.itemID.add(itemID);
+        this.quantity.add(quantity);
+    }
+
+
 }

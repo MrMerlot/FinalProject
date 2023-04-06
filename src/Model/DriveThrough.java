@@ -1,11 +1,11 @@
 package Model;
 
-public class DriveThrough {
+public class DriveThrough extends Order {
 
-    protected String phoneNumber;
+    public DriveThrough( String name ){
 
-    public DriveThrough(){
+        super(name);
 
-
+        super.orderType = 2;
     }
 }
