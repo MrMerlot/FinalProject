@@ -1,9 +1,14 @@
 package Model;
 
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Order {
-
+public class Order extends FileWriter {
+    public static File file = new File("savedData");
+    public FileWriter fileWriter = new FileWriter("savedData");
     protected int orderNumber;
     protected ArrayList<Integer> itemID = new ArrayList<>();
     protected ArrayList<Integer> quantity = new ArrayList<>();
@@ -11,6 +16,7 @@ public class Order {
     protected boolean complete;
     protected String orderInfo;
     protected String name;
+    protected int skipped = 0;
 
     /**
      * Creeates an order with a name and number.
@@ -18,10 +24,33 @@ public class Order {
      * @param name  Customer name
      * @param orderNumber  Order's number
      */
-    public Order( String name, int orderNumber ){
+    public Order( String name, int orderNumber ) throws IOException {
+        super(file);
 
         this.name = name;
         this.orderNumber = orderNumber;
+    }
+
+    public void writeToFile() throws IOException {
+        /**
+         * HEADER
+         * ORDER TYPE
+         * [ItemID, ItemID, ItemID]
+         * [Quantity, Quantity, Quantity]
+         * ORDER NUMBER
+         * CUSTOMER NAME
+         * TIMES SKIPPED
+         * IS COMPLETED
+         **/
+
+        fileWriter.write("HEADER");
+        fileWriter.write(orderType);
+        fileWriter.write(String.valueOf(itemID));
+        fileWriter.write(String.valueOf(quantity));
+        fileWriter.write(orderNumber);
+        fileWriter.write(name);
+        fileWriter.write(skipped);
+        if(complete) {fileWriter.write("Completed");}
     }
 
     /**
@@ -63,4 +92,11 @@ public class Order {
      * Sets the order as complete
      */
     public void completeOrder() { complete = true; }
+
+    public String orderInfo(){
+
+        return null;
+    }
+
+
 }
