@@ -26,7 +26,7 @@ public class OrderData {
 
     /**
      * Adds a drivethrough order to the driveThroughQueue
-     * @param driveThroughOrder Order
+     * @param driveThroughOrder DT Order
      */
     public void setDriveThroughQueue( Order driveThroughOrder ){
         this.driveThroughQueue.add( driveThroughOrder );
