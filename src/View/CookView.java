@@ -26,7 +26,7 @@ public class CookView extends Application {
     private Label currentOrder = new Label( "test CO" );
 
 
-    CookController controller = new CookController(this);
+    //CookController controller = new CookController(this);
     public CookView(){
         setLayout();
     }
