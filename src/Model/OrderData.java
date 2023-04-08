@@ -7,18 +7,18 @@ import java.util.Queue;
 
 public class OrderData {
 
-    private Queue< Order > doorDashQueue = new LinkedList<>();                        //stores all door dash orders
-    private Queue< Order > driveThroughQueue = new LinkedList<>();                    //stores all drive through orders
-    private Queue< Order > onSiteQueue = new LinkedList<>();                          //stores all onsite orders
-    private Queue< Order > phoneQueue = new LinkedList<>();                           //stores all phone orders
-    protected PriorityQueue< Order > orderPriorityQueue = new PriorityQueue<>();      //what will be cooked next
+    private static Queue< Order > doorDashQueue = new LinkedList<>();                 //stores all door dash orders
+    private static Queue< Order > driveThroughQueue = new LinkedList<>();             //stores all drive through orders
+    private static Queue< Order > onSiteQueue = new LinkedList<>();                   //stores all onsite orders
+    private static Queue< Order > phoneQueue = new LinkedList<>();                    //stores all phone orders
+    protected static PriorityQueue< Order > orderPriorityQueue = new PriorityQueue<>();//what will be cooked next
 
 
-    private ArrayList< Order > completedOrders = new ArrayList<>();                           //where completed orders are stored
+    private static ArrayList< Order > completedOrders = new ArrayList<>();          //where completed orders are stored
 
     /**
      * Adds a door dash order to doorDashQueue
-     * @param doorDashOrder Order
+     * @param doorDashOrder DD Order
      */
     public void setDoorDashQueue( Order doorDashOrder ){
         this.doorDashQueue.add( doorDashOrder );
