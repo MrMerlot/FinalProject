@@ -14,7 +14,7 @@ public class OrderData {
     protected static PriorityQueue< Order > orderPriorityQueue = new PriorityQueue<>();//what will be cooked next
 
 
-    private static ArrayList< Order > completedOrders = new ArrayList<>();          //where completed orders are stored
+    private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
 
     /**
      * Adds a door dash order to doorDashQueue
@@ -63,5 +63,8 @@ public class OrderData {
         orderPriorityQueue.peek();
     }
 
+    public void setPickupOrders(String order){
+        pickupOrders.add(order);
+    }
 
 }
