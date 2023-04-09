@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import sun.font.TrueTypeFont;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +27,12 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @param cv
      */
     public OrderController( CustomerView cv ){ this.cv = cv; }
+
+    public void clearMenu(){
+        cv.getMealGroup().setVisible(false);
+        cv.getDrinkGroup().setVisible(false);
+        cv.getSideGroup().setVisible(false);
+    }
 
     /**
      * Handles the buttons in CustomerView
@@ -57,12 +64,31 @@ public class OrderController implements EventHandler<ActionEvent> {
         });
 
         /**
-         * Toggles the view
+         * The following determines what menu layer is visible.
          */
-        cv.getToggleButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        cv.getDoneButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) { clearMenu(); }
+        });
+        cv.getDrinkButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                clearMenu();
+                cv.getDrinkGroup().setVisible(true);
+            }
+        });
+        cv.getMealButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clearMenu();
+                cv.getMealGroup().setVisible(true);
+            }
+        });
+        cv.getSidesButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clearMenu();
+                cv.getSideGroup().setVisible(true);
             }
         });
     }

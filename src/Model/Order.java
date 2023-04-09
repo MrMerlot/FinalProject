@@ -13,7 +13,7 @@ public class Order{ //extends FileWriter {
     protected ArrayList<Integer> itemID = new ArrayList<>();
     protected ArrayList<Integer> quantity = new ArrayList<>();
     protected int orderType;
-    protected boolean complete;
+    protected boolean complete = false;
     protected String orderInfo;
     protected String name;
     protected int skipped = 0;
@@ -32,28 +32,6 @@ public class Order{ //extends FileWriter {
         this.orderType = orderType;
 
     }
-
-//    public void writeToFile() throws IOException {
-//        /**
-//         * HEADER
-//         * ORDER TYPE
-//         * [ItemID, ItemID, ItemID]
-//         * [Quantity, Quantity, Quantity]
-//         * ORDER NUMBER
-//         * CUSTOMER NAME
-//         * TIMES SKIPPED
-//         * IS COMPLETED
-//         **/
-//
-//        fileWriter.write("HEADER");
-//        fileWriter.write(orderType);
-//        fileWriter.write(String.valueOf(itemID));
-//        fileWriter.write(String.valueOf(quantity));
-//        fileWriter.write(orderNumber);
-//        fileWriter.write(name);
-//        fileWriter.write(skipped);
-//        if(complete) {fileWriter.write("Completed");}
-//    }
 
     /**
      * Adds an item to the order.
@@ -100,5 +78,25 @@ public class Order{ //extends FileWriter {
         return null;
     }
 
-
+    //    public void writeToFile() throws IOException {
+//        /**
+//         * HEADER
+//         * ORDER TYPE
+//         * [ItemID, ItemID, ItemID]
+//         * [Quantity, Quantity, Quantity]
+//         * ORDER NUMBER
+//         * CUSTOMER NAME
+//         * TIMES SKIPPED
+//         * IS COMPLETED
+//         **/
+//
+//        fileWriter.write("HEADER");
+//        fileWriter.write(orderType);
+//        fileWriter.write(String.valueOf(itemID));
+//        fileWriter.write(String.valueOf(quantity));
+//        fileWriter.write(orderNumber);
+//        fileWriter.write(name);
+//        fileWriter.write(skipped);
+//        if(complete) {fileWriter.write("Completed");}
+//    }
 }
