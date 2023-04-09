@@ -45,9 +45,9 @@ public class OrderController implements EventHandler<ActionEvent> {
                 if( orderType == 1 ) order = new DoorDash( customerName, orderNumber, orderType);
                 else if( orderType == 2 ) order = new DriveThrough( customerName, orderNumber, orderType );
                 else if( orderType == 3 ) order = new Onsite( customerName, orderNumber, orderType);
-                else if( orderType == 4 ) order = new Phone( customerName, orderNumber, orderType);
+                else order = new Phone( customerName, orderNumber, orderType);
 
-
+                orderData.addOrder( order );
             }
         });
     }
