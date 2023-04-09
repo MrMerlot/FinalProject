@@ -67,4 +67,9 @@ public class OrderData {
         pickupOrders.add(order);
     }
 
+    public ArrayList<String> getPickupOrders(){
+
+        return pickupOrders;
+    }
+
 }
