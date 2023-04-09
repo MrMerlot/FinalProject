@@ -2,17 +2,15 @@ package View;
 
 import Controller.OrderController;
 import javafx.application.Application;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.xml.soap.Text;
+import java.util.ArrayList;
 
 public class CustomerView extends Application {
 
@@ -29,11 +27,17 @@ public class CustomerView extends Application {
     private Label priceLabel = new Label("Price");
     private Label menuLabel = new Label("Menu:");
 
+    //  Connects CustomerView to OrderController
+    private OrderController orderController = new OrderController(this);
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         setPositions();
+
+        submitButton.setOnAction( orderController );
+        nameField.setOnAction( orderController );
 
         group = returnNodes();
 
@@ -41,16 +45,9 @@ public class CustomerView extends Application {
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
+        System.out.println();
         primaryStage.setTitle("CustomerView");
         primaryStage.show();
-    }
-
-    public class ButtonCaller implements EventHandler{
-        @Override
-        public void handle(Event event) {
-
-            if( event.equals(submitButton) );
-        }
     }
 
     /**
@@ -92,6 +89,30 @@ public class CustomerView extends Application {
         return g;
     }
 
+    /**
+     * Gets the submit button.
+     *
+     * @return  Submit button
+     */
+    public Button getSubmit(){
+        return submitButton;
+    }
+
+    /**
+     * Gets the nameField
+     * @return  nameField
+     */
+    public TextField getNameButton(){
+        return nameField;
+    }
+
+    /**
+     * Gets typeField
+     * @return typeField
+     */
+    public TextField getOrderType(){
+        return typeField;
+    }
 
     public static void main(String[] args) {
 
