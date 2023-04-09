@@ -92,16 +92,12 @@ public class CookView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        pane.getChildren().addAll(nextOrderLabel,toggleView,finishOrder,showPickupOrders,CV,currentOrder);
+        pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
 
-        Scene scene = new Scene(pane,1000,600);     //instantiating scene and adding the pane & window size
+        Scene scene = new Scene(pane, 1000, 600);     //instantiating scene and adding the pane & window size
         primaryStage.setScene(scene);                           //setting the scene
         primaryStage.setResizable(false);                       //making sure the user can't resize the window
         primaryStage.show();                                    //calling show
-    }
-
-    public void begin(){
-        Application.launch();
     }
 
 

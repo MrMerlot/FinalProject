@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,8 @@ public class CustomerView extends Application {
     private TextField typeField = new TextField();
     private Label priceLabel = new Label("Price");
     private Label menuLabel = new Label("Menu:");
+    private CookView cookView = new CookView();
+    private Scene scene;
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
@@ -42,7 +45,7 @@ public class CustomerView extends Application {
 
         group = returnNodes();
 
-        Scene scene = new Scene(group,1000,600);
+        scene = new Scene(group, 1000,600);
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
@@ -131,10 +134,13 @@ public class CustomerView extends Application {
         int num = Integer.parseInt( orderNumberLabel.getText() ) + 1;
         orderNumberLabel.setText( String.valueOf( num ) );
     }
-    public static void main(String[] args) throws Exception {
-        Application.launch();
-        //CookView cookView = new CookView();
-        //cookView.begin();
-    }
 
+    /**
+     * @return  The toggle button
+     */
+    public Button getToggleButton(){ return toggleView; }
+
+    public static void main(String[] args) throws Exception {
+
+    }
 }

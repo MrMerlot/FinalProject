@@ -3,6 +3,7 @@ import Model.*;
 import View.CustomerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,6 +19,7 @@ public class OrderController implements EventHandler<ActionEvent> {
     private String customerName;
     private int orderType;
     private int orderNumber;
+    private boolean flip = false;
 
     /**
      * Constructor that connects to CustomerView
@@ -32,6 +34,9 @@ public class OrderController implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
+        /**
+         * When submit is hit, a new order is created
+         */
         cv.getSubmit().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -48,6 +53,16 @@ public class OrderController implements EventHandler<ActionEvent> {
                 else order = new Phone( customerName, orderNumber, orderType);
 
                 orderData.addOrder( order );
+            }
+        });
+
+        /**
+         * Toggles the view
+         */
+        cv.getToggleButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                setScene();
             }
         });
     }
