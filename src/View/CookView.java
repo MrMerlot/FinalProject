@@ -25,7 +25,7 @@ public class CookView extends Application {
 
     private Button showPickupOrders = new Button( "List all Pickup Orders");    //displays all orders to be picked up
 
-    private Label cv = new Label( "Cook View");
+    private final Label CV = new Label( "Cook View");
 
     private Label currentOrder = new Label( "test CO" );
 
@@ -53,11 +53,11 @@ public class CookView extends Application {
         showPickupOrders.setOnAction(controller);       //sending to Cook Controller when Clicked
 
 
-        cv.setLayoutX(0);                            //setting the x-axis
-        cv.setLayoutY(0);                            //setting the y-axis
-        cv.setFont(new Font("Arial",40));  //using CSS sets the font and size of the Label
-        cv.setStyle("-fx-border-width: 2;");
-        cv.setStyle("-fx-border-color: black;");
+        CV.setLayoutX(0);                            //setting the x-axis
+        CV.setLayoutY(0);                            //setting the y-axis
+        CV.setFont(new Font("Arial",40));  //using CSS sets the font and size of the Label
+        CV.setStyle("-fx-border-width: 2;");
+        CV.setStyle("-fx-border-color: black;");
 
 
         currentOrder.setLayoutX(50);                //setting the x-axis
@@ -92,7 +92,7 @@ public class CookView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        pane.getChildren().addAll(nextOrderLabel,toggleView,finishOrder,showPickupOrders,cv,currentOrder);
+        pane.getChildren().addAll(nextOrderLabel,toggleView,finishOrder,showPickupOrders,CV,currentOrder);
 
         Scene scene = new Scene(pane,1000,600);     //instantiating scene and adding the pane & window size
         primaryStage.setScene(scene);                           //setting the scene
