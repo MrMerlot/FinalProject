@@ -41,8 +41,12 @@ public class OrderData {
         pickupOrders.add(order);
     }
 
-    public ArrayList<String> getPickupOrders(){
+    public void removePickUpOrder(String rpu){
+        pickupOrders.remove(rpu);
 
+    }
+
+    public ArrayList<String> getPickupOrders(){
         return pickupOrders;
     }
 }
