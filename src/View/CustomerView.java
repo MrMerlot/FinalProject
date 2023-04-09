@@ -16,7 +16,8 @@ public class CustomerView extends Application {
 
     private Group group;
     private Label customerLabel = new Label("Customer");
-    private Label orderLabel = new Label("Order # 1");
+    private Label orderLabel = new Label("Order # ");
+    private Label orderNumberLabel = new Label(""+1);
     private Label promptLabel = new Label("Order Type? \n\nName?");
     private Label cancelLabel = new Label("Cancel Order #");
     private TextField cancelField = new TextField("__");
@@ -56,6 +57,7 @@ public class CustomerView extends Application {
     private void setPositions(){
 
         orderLabel.setLayoutX(900);
+        orderNumberLabel.setLayoutX(950);
         promptLabel.setLayoutY(100);
         cancelLabel.setLayoutY(500);
         cancelLabel.setLayoutX(900);
@@ -84,7 +86,7 @@ public class CustomerView extends Application {
         Group g = new Group();
         g.getChildren().addAll(customerLabel, orderLabel, promptLabel,
                 cancelField, toggleView, submitButton, cancelLabel, nameField,
-                typeField, priceLabel, menuLabel);
+                typeField, priceLabel, menuLabel, orderNumberLabel);
 
         return g;
     }
@@ -114,9 +116,25 @@ public class CustomerView extends Application {
         return typeField;
     }
 
-    public static void main(String[] args) {
+    /**
+     * Gets the order number
+     * @return  the order number
+     */
+    public Label getOrderNumber(){
+        return orderNumberLabel;
+    }
 
+    /**
+     * Increments the order number
+     */
+    public void addOrderNumber(){
+        int num = Integer.parseInt( orderNumberLabel.getText() ) + 1;
+        orderNumberLabel.setText( String.valueOf( num ) );
+    }
+    public static void main(String[] args) throws Exception {
         Application.launch();
+        //CookView cookView = new CookView();
+        //cookView.begin();
     }
 
 }

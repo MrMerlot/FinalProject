@@ -12,36 +12,42 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class OrderController implements EventHandler<ActionEvent> {
-    CustomerView cv;
-    public OrderController( CustomerView cv ){
-        this.cv = cv;
-    }
+    private CustomerView cv;
 
+    private OrderData orderData = new OrderData();
     private String customerName;
-    private String orderType;
+    private int orderType;
+    private int orderNumber;
 
+    /**
+     * Constructor that connects to CustomerView
+     * @param cv
+     */
+    public OrderController( CustomerView cv ){ this.cv = cv; }
 
-    public String setOrderName( String name ){
-
-
-
-        return null;
-    }
-
-
+    /**
+     * Handles the buttons in CustomerView
+     * @param event the event which occurred
+     */
     @Override
     public void handle(ActionEvent event) {
 
-        cv.getNameButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
+        cv.getSubmit().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(KeyEvent event) {
-                if( event.getCode().equals(KeyCode.ENTER)){
+            public void handle(MouseEvent event) {
 
-                    customerName = cv.getNameButton().getText();
-                    orderType = cv.getOrderType().getText();
+                customerName = cv.getNameButton().getText();
+                orderType = Integer.parseInt( cv.getOrderType().getText() );
+                orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
+                Order order;
+                cv.addOrderNumber();
 
-                    //Order order = new Order()
-                }
+                if( orderType == 1 ) order = new DoorDash( customerName, orderNumber, orderType);
+                else if( orderType == 2 ) order = new DriveThrough( customerName, orderNumber, orderType );
+                else if( orderType == 3 ) order = new Onsite( customerName, orderNumber, orderType);
+                else if( orderType == 4 ) order = new Phone( customerName, orderNumber, orderType);
+
+
             }
         });
     }

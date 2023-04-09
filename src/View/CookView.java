@@ -100,6 +100,10 @@ public class CookView extends Application {
         primaryStage.show();                                    //calling show
     }
 
+    public void begin(){
+        Application.launch();
+    }
+
 
     public static void main(String[] args) {
         Application.launch(args);                           //calling launch
