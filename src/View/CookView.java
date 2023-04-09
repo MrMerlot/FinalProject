@@ -55,7 +55,7 @@ public class CookView extends Application {
 
         cv.setLayoutX(0);                            //setting the x-axis
         cv.setLayoutY(0);                            //setting the y-axis
-        cv.setFont(new Font("Arial",40));
+        cv.setFont(new Font("Arial",40));  //using CSS sets the font and size of the Label
         cv.setStyle("-fx-border-width: 2;");
         cv.setStyle("-fx-border-color: black;");
 
