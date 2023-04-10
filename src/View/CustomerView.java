@@ -1,14 +1,11 @@
 package View;
 
 import Controller.OrderController;
-import Model.OrderData;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class CustomerView extends Application {
     private Label customerLabel = new Label("Customer");
@@ -25,7 +22,8 @@ public class CustomerView extends Application {
     private Label menuLabel = new Label("Menu:");
     private CookView cookView = new CookView();
     private Scene scene;
-    private Group group, drinkGroup, mealGroup, sideGroup;
+    private Group group, drinkGroup, mealGroup, sideGroup, icedGroup,
+    hotDrinkGroup;
     private RadioButton hotDrink, coldDrink, hotMeal, coldMeal, fries,
             pickles, friedOreos, drinks, meals, sides, done, icedTea, water,
             hotCoffee, hotChoco;
@@ -123,8 +121,7 @@ public class CustomerView extends Application {
         g.getChildren().addAll(customerLabel, orderLabel, promptLabel,
                 cancelField, toggleView, submitButton, cancelLabel, nameField,
                 typeField, priceLabel, menuLabel, orderNumberLabel, meals,
-                drinks, sides, done, drinkGroup, mealGroup, sideGroup, water, icedTea,
-                hotCoffee, hotChoco);
+                drinks, sides, done, drinkGroup, mealGroup, sideGroup, icedGroup, hotDrinkGroup);
 
         return g;
     }
@@ -138,6 +135,8 @@ public class CustomerView extends Application {
         drinkToggleG = new ToggleGroup();
         mealToggleG = new ToggleGroup();
         sidesToggleG = new ToggleGroup();
+        icedToggleG = new ToggleGroup();
+        hotDrinkToggleG = new ToggleGroup();
 
 
         // First layer of menu
@@ -169,14 +168,28 @@ public class CustomerView extends Application {
         pickles.setToggleGroup(sidesToggleG);
         friedOreos.setToggleGroup(sidesToggleG);
 
+        //  The third layer of menu
+        icedTea = new RadioButton("Iced Tea");
+        water = new RadioButton("Water");
+        hotCoffee = new RadioButton("Hot Coffee");
+        hotChoco = new RadioButton("Hot Chocolate");
+
+        icedTea.setToggleGroup(icedToggleG);
+        water.setToggleGroup(icedToggleG);
+        hotCoffee.setToggleGroup(hotDrinkToggleG);
+        hotChoco.setToggleGroup(hotDrinkToggleG);
+
         //  Handles the groups
         drinkGroup = new Group(hotDrink, coldDrink);
         mealGroup = new Group( hotMeal, coldMeal );
         sideGroup = new Group( fries, friedOreos, pickles);
+        icedGroup = new Group( icedTea, water );
+        hotDrinkGroup = new Group( hotChoco, hotCoffee );
 
         sideGroup.setVisible(false);
         drinkGroup.setVisible(false);
         mealGroup.setVisible(false);
+        icedGroup.setVisible(false);
     }
 
     public void setActions(){
