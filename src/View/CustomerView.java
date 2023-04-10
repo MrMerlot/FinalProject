@@ -190,6 +190,7 @@ public class CustomerView extends Application {
         drinkGroup.setVisible(false);
         mealGroup.setVisible(false);
         icedGroup.setVisible(false);
+        hotDrinkGroup.setVisible(false);
     }
 
     public void setActions(){
@@ -244,6 +245,13 @@ public class CustomerView extends Application {
     public RadioButton getDrinkButton(){ return drinks; }
 
     /**
+     * @return  the coldDrink button
+     */
+    public RadioButton getColdDrink(){ return coldDrink; }
+
+    public Group getIcedGroup(){ return icedGroup; }
+
+    /**
      * @return  Gets the done button
      */
     public RadioButton getDoneButton(){ return done; }
@@ -273,6 +281,12 @@ public class CustomerView extends Application {
      */
     public Group getSideGroup(){ return sideGroup; }
 
+    /**
+     * @return  the hot drink radio button
+     */
+    public RadioButton getHotDrink(){ return hotDrink; }
+
+    public Group getHotDrinkGroup(){ return hotDrinkGroup; }
     public static void main(String[] args) throws Exception {
         Application.launch();
     }

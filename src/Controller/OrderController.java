@@ -32,6 +32,8 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getMealGroup().setVisible(false);
         cv.getDrinkGroup().setVisible(false);
         cv.getSideGroup().setVisible(false);
+        cv.getIcedGroup().setVisible(false);
+        cv.getHotDrinkGroup().setVisible(false);
     }
 
     /**
@@ -75,22 +77,33 @@ public class OrderController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
                 clearMenu();
                 cv.getDrinkGroup().setVisible(true);
-            }
-        });
+            }});
         cv.getMealButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 clearMenu();
                 cv.getMealGroup().setVisible(true);
-            }
-        });
+            }});
         cv.getSidesButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 clearMenu();
                 cv.getSideGroup().setVisible(true);
-            }
-        });
+            }});
+        cv.getColdDrink().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clearMenu();
+                cv.getIcedGroup().setVisible(true);
+                cv.getDrinkGroup().setVisible(true);
+            }});
+        cv.getHotDrink().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clearMenu();
+                cv.getHotDrinkGroup().setVisible(true);
+                cv.getDrinkGroup().setVisible(true);
+            }});
     }
 
     /**
