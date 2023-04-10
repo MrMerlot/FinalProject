@@ -11,7 +11,8 @@ public class OrderData {
     private static Queue< Order > driveThroughQueue = new LinkedList<>();             //stores all drive through orders
     private static Queue< Order > onSiteQueue = new LinkedList<>();                   //stores all onsite orders
     private static Queue< Order > phoneQueue = new LinkedList<>();                    //stores all phone orders
-    protected static PriorityQueue< Order > orderPriorityQueue = new PriorityQueue<>();  //what will be cooked next
+    protected static Order currentOrder;
+    protected static Order nextOrder;
 
 
     private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
