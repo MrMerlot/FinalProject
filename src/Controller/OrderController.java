@@ -34,6 +34,8 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getSideGroup().setVisible(false);
         cv.getIcedGroup().setVisible(false);
         cv.getHotDrinkGroup().setVisible(false);
+        cv.getColdMealGroup().setVisible(false);
+        cv.getHotMealGroup().setVisible(false);
     }
 
     /**
@@ -104,47 +106,19 @@ public class OrderController implements EventHandler<ActionEvent> {
                 cv.getHotDrinkGroup().setVisible(true);
                 cv.getDrinkGroup().setVisible(true);
             }});
+        cv.getHotMeal().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clearMenu();
+                cv.getHotMealGroup().setVisible(true);
+                cv.getMealGroup().setVisible(true);
+            }});
+        cv.getColdMeal().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clearMenu();
+                cv.getColdMealGroup().setVisible(true);
+                cv.getMealGroup().setVisible(true);
+            }});
     }
-
-    /**
-     * Creates an order object with the nessesary information
-     *
-     *
-     * @throws IOException
-     */
-//    public void createOrder() throws IOException {
-//        if(getOrderType() == 1) {
-//            DoorDash order = new DoorDash(getName(), getOrderNum());
-//        }
-//        else if(getOrderType() == 2){
-//            DriveThrough order = new DriveThrough(getName(), getOrderNum());
-//        }
-//        else if(getOrderType() == 3){
-//            Onsite order = new Onsite(getName(), getOrderNum());
-//        }
-//        else{
-//            Phone order = new Phone(getName(), getOrderNum());
-//        }
-//    }
-//
-//
-//    public int getOrderNum(){
-//        return cv.orderNum;
-//    }
-//    public ArrayList<Integer> getItemID(){
-//        return cv.itemID;
-//    }
-//    public ArrayList<Integer> getQuantity(){
-//        return cv.quantity;
-//    }
-//    public int getOrderType(){
-//        return cv.orderType;
-//    }
-//    public String getOrderInfo(){
-//        return cv.orderInfo;
-//    }
-//    public String getName(){
-//        return cv.name;
-//    }
-
 }

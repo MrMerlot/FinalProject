@@ -1,6 +1,7 @@
 package View;
 
 import Controller.OrderController;
+import com.sun.org.apache.bcel.internal.generic.GotoInstruction;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -23,12 +24,12 @@ public class CustomerView extends Application {
     private CookView cookView = new CookView();
     private Scene scene;
     private Group group, drinkGroup, mealGroup, sideGroup, icedGroup,
-    hotDrinkGroup;
+    hotDrinkGroup, coldMealGroup, hotMealGroup;
     private RadioButton hotDrink, coldDrink, hotMeal, coldMeal, fries,
             pickles, friedOreos, drinks, meals, sides, done, icedTea, water,
-            hotCoffee, hotChoco;
+            hotCoffee, hotChoco, cheeseBurger, pineapplePizza, icedNoodles, watermelonSalad;
     private ToggleGroup menuToggleG1, drinkToggleG, mealToggleG, sidesToggleG,
-            icedToggleG, hotDrinkToggleG;
+            icedToggleG, hotDrinkToggleG, hotMealToggle, coldMealToggle;
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
@@ -109,6 +110,15 @@ public class CustomerView extends Application {
         hotChoco.setLayoutY(240);
         hotCoffee.setLayoutX(200);
         hotChoco.setLayoutX(200);
+
+        pineapplePizza.setLayoutY(220);
+        cheeseBurger.setLayoutY(240);
+        icedNoodles.setLayoutY(220);
+        watermelonSalad.setLayoutY(240);
+        pineapplePizza.setLayoutX(200);
+        cheeseBurger.setLayoutX(200);
+        watermelonSalad.setLayoutX(200);
+        icedNoodles.setLayoutX(200);
     }
 
     /**
@@ -121,7 +131,8 @@ public class CustomerView extends Application {
         g.getChildren().addAll(customerLabel, orderLabel, promptLabel,
                 cancelField, toggleView, submitButton, cancelLabel, nameField,
                 typeField, priceLabel, menuLabel, orderNumberLabel, meals,
-                drinks, sides, done, drinkGroup, mealGroup, sideGroup, icedGroup, hotDrinkGroup);
+                drinks, sides, done, drinkGroup, mealGroup, sideGroup, icedGroup, hotDrinkGroup,
+                hotMealGroup, coldMealGroup);
 
         return g;
     }
@@ -179,18 +190,32 @@ public class CustomerView extends Application {
         hotCoffee.setToggleGroup(hotDrinkToggleG);
         hotChoco.setToggleGroup(hotDrinkToggleG);
 
+        pineapplePizza = new RadioButton("Pineapple Pizza");
+        cheeseBurger = new RadioButton("Cheeseburger");
+        watermelonSalad = new RadioButton("Watermelon Salad");
+        icedNoodles = new RadioButton("Iced Noodles");
+
+        pineapplePizza.setToggleGroup(hotMealToggle);
+        cheeseBurger.setToggleGroup(hotMealToggle);
+        watermelonSalad.setToggleGroup(coldMealToggle);
+        icedNoodles.setToggleGroup(coldMealToggle);
+
         //  Handles the groups
         drinkGroup = new Group(hotDrink, coldDrink);
         mealGroup = new Group( hotMeal, coldMeal );
         sideGroup = new Group( fries, friedOreos, pickles);
         icedGroup = new Group( icedTea, water );
         hotDrinkGroup = new Group( hotChoco, hotCoffee );
+        hotMealGroup = new Group( pineapplePizza, cheeseBurger );
+        coldMealGroup = new Group( icedNoodles, watermelonSalad );
 
         sideGroup.setVisible(false);
         drinkGroup.setVisible(false);
         mealGroup.setVisible(false);
         icedGroup.setVisible(false);
         hotDrinkGroup.setVisible(false);
+        coldMealGroup.setVisible(false);
+        hotMealGroup.setVisible(false);
     }
 
     public void setActions(){
@@ -286,7 +311,31 @@ public class CustomerView extends Application {
      */
     public RadioButton getHotDrink(){ return hotDrink; }
 
+    /**
+     * @return  the HotDrinkGroup
+     */
     public Group getHotDrinkGroup(){ return hotDrinkGroup; }
+
+    /**
+     * @return  the hotMeal button
+     */
+    public RadioButton getHotMeal(){ return hotMeal; }
+
+    /**
+     * @return  the hotMealGroup group
+     */
+    public Group getHotMealGroup(){ return hotMealGroup; }
+
+    /**
+     * @return  the coldMeal button
+     */
+    public RadioButton getColdMeal(){ return coldMeal; }
+
+    /**
+     * @return the coldMealGroup
+     */
+    public Group getColdMealGroup(){ return coldMealGroup; }
+
     public static void main(String[] args) throws Exception {
         Application.launch();
     }
