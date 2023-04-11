@@ -50,6 +50,7 @@ public class CookView extends Application {
 
         finishOrder.setLayoutX(0);                     //setting the x-axis
         finishOrder.setLayoutY(350);                   //setting the y-axis
+        finishOrder.setOnAction(controller);
 
         showPickupOrders.setLayoutX(875);               //setting the x-axis
         showPickupOrders.setLayoutY(350);               //setting the y-axis
@@ -111,11 +112,44 @@ public class CookView extends Application {
     public Button getBackPickup(){
         return backPickUP;
     }
+    public Button getFinishOrder(){return finishOrder;}
+
+    /**
+     * Sets the text for the current order
+     * @param currentOrder String
+     */
+    public void setCurrentOrderLabel(String currentOrder){
+        this.currentOrder.setText(currentOrder);
+    }
+
+    /**
+     * Gets the Label for the Current Order
+     * @return Label
+     */
+    public Label getCurrentOrder(){
+        return this.currentOrder;
+    }
+
+
+    /**
+     * Sets the text for the Next Order
+     * @param nextOrder String
+     */
+    public void setNextOrderLabel(String nextOrder){
+        this.nextOrderLabel.setText(nextOrder);
+    }
+
+    /**
+     * Gets the Label for the Next Order
+     * @return Label
+     */
+    public Label getNextOrderLabel(){
+        return nextOrderLabel;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
-
 
 
 
