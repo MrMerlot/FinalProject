@@ -1,8 +1,8 @@
 package Controller;
-
 import Model.Order;
 import Model.OrderData;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -14,7 +14,6 @@ public class OrderDataController {
      * sets the current order to the next order and calls function to replace next order
      */
     public void setCurrentOrder(){
-        //send the current order if needed
         orderData.setCurrentOrderObject(orderData.getNextOrderObject());
         setNextOrder();
      }
@@ -24,38 +23,53 @@ public class OrderDataController {
      */
     public void setNextOrder(){
         String input = "";
-        if(!orderData.getDriveThroughQueue().isEmpty()){
+        ArrayList<Integer> itemID = new ArrayList<>();
+        ArrayList<Integer> quantities = new ArrayList<>();
+        if(!orderData.getDriveThroughQueue().isEmpty()){        //if the DT queue is empty
             input += orderData.getDriveThroughQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getDriveThroughQueue().peek().getItemID() + " ";
-            input += orderData.getDriveThroughQueue().peek().getQuantities() + "\n";
-            orderData.setNextOrder(input);
-            orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());
+            itemID = orderData.getDriveThroughQueue().peek().getItemID();
+            quantities = orderData.getDriveThroughQueue().peek().getQuantities();
+            for(int i = 0;i < itemID.size(); i++){      //read nessesary information into input string and assign to nextOrder
+                input += itemID.get(i) + " ";
+                input += quantities.get(i) + "\n" ;
+            }
+            orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());    //removes the object from queue and assigns it to next order object
         }
         else if(!orderData.getOnSiteQueue().isEmpty()){
             input += orderData.getOnSiteQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getOnSiteQueue().peek().getItemID() + " ";
-            input += orderData.getOnSiteQueue().peek().getQuantities() + "\n";
-            orderData.setNextOrder(input);
+            itemID = orderData.getOnSiteQueue().peek().getItemID();
+            quantities = orderData.getOnSiteQueue().peek().getQuantities();
+            for(int i = 0;i < itemID.size(); i++){
+                input += itemID.get(i) + " ";
+                input += quantities.get(i) + "\n" ;
+            }
             orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());
         }
         else if(!orderData.getPhoneQueue().isEmpty()){
             input += orderData.getPhoneQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getPhoneQueue().peek().getItemID() + " ";
-            input += orderData.getPhoneQueue().peek().getQuantities() + "\n";
-            orderData.setNextOrder(input);
+            itemID = orderData.getPhoneQueue().peek().getItemID();
+            quantities = orderData.getPhoneQueue().peek().getQuantities();
+            for(int i = 0;i < itemID.size(); i++){
+                input += itemID.get(i) + " ";
+                input += quantities.get(i) + "\n" ;
+            }
             orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
         }
         else if(!orderData.getDoorDashQueue().isEmpty()){
             input += orderData.getDoorDashQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getDoorDashQueue().peek().getItemID() + " ";
-            input += orderData.getDoorDashQueue().peek().getQuantities() + "\n";
-            orderData.setNextOrder(input);
+            itemID = orderData.getDoorDashQueue().peek().getItemID();
+            quantities = orderData.getDoorDashQueue().peek().getQuantities();
+            for(int i = 0;i < itemID.size(); i++){
+                input += itemID.get(i) + " ";
+                input += quantities.get(i) + "\n" ;
+            }
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
+        orderData.setNextOrder(input);
      }
 
     /**
-     * Checks that the next order up is the correct one, if not order is placed back into queue
+     * Checks that the next order up is the correct one, if not order is placed back into its queue
      *
      */
     public void checkQueue(){
