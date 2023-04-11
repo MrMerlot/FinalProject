@@ -29,6 +29,34 @@ public class OrderData {
 
     }
 
+    public void setDoorDashQueue(Order DDOrder){
+        doorDashQueue.add(DDOrder);
+    }
+    public Queue<Order> getDoorDashQueue(){
+        return doorDashQueue;
+    }
+
+    public void setOnSiteQueue(Order OSOrder){
+        onSiteQueue.add(OSOrder);
+    }
+    public Queue<Order> getDriveThroughQueue(){
+        return driveThroughQueue;
+    }
+
+    public void setDriveThroughQueue(Order DTOrder){
+        driveThroughQueue.add(DTOrder);
+    }
+
+    public Queue<Order> getOnSiteQueue(){
+        return onSiteQueue;
+    }
+
+    public void setPhoneQueue(Order POrder){
+        phoneQueue.add(POrder);
+    }
+    public Queue<Order> getPhoneQueue(){
+        return phoneQueue;
+    }
 
     /**
      * Adds an order to the pickup ArrayList
