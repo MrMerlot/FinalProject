@@ -7,10 +7,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class OrderDataController {
-    OrderData orderData;
-     public OrderDataController(OrderData orderData){
-         this.orderData = orderData;
-     }
+    OrderData orderData = new OrderData();
+     public OrderDataController(){}
 
     /**
      * sets the current order to the next order and calls funtionn to replace next order
