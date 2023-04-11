@@ -1,14 +1,8 @@
 package Model;
 
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class Order{ //extends FileWriter {
-    //public static File file = new File("savedData");
-    //public FileWriter fileWriter = new FileWriter("savedData");
+public class Order {
     protected int orderNumber;
     protected ArrayList<Integer> itemID = new ArrayList<>();
     protected ArrayList<Integer> quantity = new ArrayList<>();
@@ -21,10 +15,10 @@ public class Order{ //extends FileWriter {
     /**
      * Creeates an order with a name and number.
      *
-     * @param name  Customer name
-     * @param orderNumber  Order's number
+     * @param name        Customer name
+     * @param orderNumber Order's number
      */
-    public Order( String name, int orderNumber, int orderType ){
+    public Order(String name, int orderNumber, int orderType) {
         //super(file);
 
         this.name = name;
@@ -36,10 +30,10 @@ public class Order{ //extends FileWriter {
     /**
      * Adds an item to the order.
      *
-     * @param itemID  The item's ID
-     * @param quantity  How many items ordered
+     * @param itemID   The item's ID
+     * @param quantity How many items ordered
      */
-    public void addItem( int itemID, int quantity ){
+    public void addItem(int itemID, int quantity) {
 
         this.itemID.add(itemID);
         this.quantity.add(quantity);
@@ -48,23 +42,67 @@ public class Order{ //extends FileWriter {
     /**
      * Get item ID at index
      *
-     * @param index  Index of wanted item
-     * @return  The item's iD
+     * @param index Index of wanted item
+     * @return The item's iD
      */
     public int getItemID( int index ) { return itemID.get(index); }
 
     /**
+     * Get the array list of item ID's
+     * @return itemID's
+     */
+    public ArrayList<Integer> getItemID() {return itemID;}
+    /**
+     * Get the array list of item quantites
+     * @return quantities
+     */
+    public ArrayList<Integer> getQuantities() {return quantity;}
+
+    /**
+     * Gets the order number
+     * @return order number
+     */
+    public int getOrderNumber(){return orderNumber;}
+
+    /**
+     * Gets the amount of times Skipped
+     * @return skipped
+     */
+    public int getIfSkipped(){ return skipped;}
+
+    /**
+     * Gets the name on the order
+     * @return name
+     */
+    public String getName(){return name;}
+
+    /**
+     * Gets the completion status
+     * @return complete
+     */
+    public boolean getIsComplete() {return complete;}
+
+    /**
      * Get the item's quantity at an index
      *
-     * @param index  Item quantity's index
-     * @return  The quantity
+     * @param index Item quantity's index
+     * @return The quantity
      */
-    public int getItemQuantity( int index ){ return quantity.get( index ); }
+    public int getItemQuantity(int index) {
+        return quantity.get(index);
+    }
+
+    /**
+     * Gets the item's order type
+     *
+     * @return order type
+     */
+    public int getOrderType(){return orderType;}
 
     /**
      * Checks if the order is complete or not.
      *
-     * @return  True or false
+     * @return True or false
      */
     public boolean checkComplete() { return complete; }
 
@@ -73,30 +111,8 @@ public class Order{ //extends FileWriter {
      */
     public void completeOrder() { complete = true; }
 
-    public String orderInfo(){
+    public String orderInfo() {
 
         return null;
     }
-
-    //    public void writeToFile() throws IOException {
-//        /**
-//         * HEADER
-//         * ORDER TYPE
-//         * [ItemID, ItemID, ItemID]
-//         * [Quantity, Quantity, Quantity]
-//         * ORDER NUMBER
-//         * CUSTOMER NAME
-//         * TIMES SKIPPED
-//         * IS COMPLETED
-//         **/
-//
-//        fileWriter.write("HEADER");
-//        fileWriter.write(orderType);
-//        fileWriter.write(String.valueOf(itemID));
-//        fileWriter.write(String.valueOf(quantity));
-//        fileWriter.write(orderNumber);
-//        fileWriter.write(name);
-//        fileWriter.write(skipped);
-//        if(complete) {fileWriter.write("Completed");}
-//    }
 }
