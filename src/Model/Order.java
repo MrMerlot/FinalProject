@@ -67,7 +67,7 @@ public class Order {
      * Sets the times the order has been skipped
      * @param x
      */
-    public void setSkipped(int x){skipped = x;}
+    public void setSkipped(int x){this.skipped = x;}
 
     /**
      *  Sets the completion status
