@@ -375,6 +375,28 @@ public class CustomerView extends Application {
      */
     public Slider getQuantitySlider(){ return quantitySlider; }
 
+    /**
+     * Adds to itemID
+     * @param ID  Holds the int for itemID
+     */
+    public void addItemID(int ID) { this.itemID.add( ID ); }
+
+    /**
+     * @return  itemID array list
+     */
+    public ArrayList<Integer> getItemID() { return itemID; }
+
+    /**
+     * Adds to itemQuantity
+     * @param quantity  Holds int
+     */
+    public void addItemQuantity( int quantity ) { this.itemQuantity.add( quantity ); }
+
+    /**
+     * @return  itemQuantity array list
+     */
+    public ArrayList<Integer> getItemQuantity() { return itemQuantity; }
+
     public static void main(String[] args) throws Exception {
 
         Application.launch();

@@ -120,5 +120,15 @@ public class OrderController implements EventHandler<ActionEvent> {
                 cv.getColdMealGroup().setVisible(true);
                 cv.getMealGroup().setVisible(true);
             }});
+
+        /**
+         * This adds the correct item ID and quantity to the arraylist
+         */
+        cv.getAddToOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
+            }
+        });
     }
 }
