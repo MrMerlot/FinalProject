@@ -51,11 +51,10 @@ public class CookController implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
 
 
-
-
         if (cookView.getPickupOrders().isSelected()){
 
             VBox vBox = new VBox();                                //creating a new vBox
+            cookView.getPane().getChildren().remove(tempVbox);    //in case user doesn't use back button or pickup order
             HBox hBox = new HBox();                                 //creating a new hBox
             for(int i = 0; i < orderData.getPickupOrders().size();i++){ //iterates through ArrayList(pickupOrders)
                 String temp = orderData.getPickupOrders().get(i);       //stores each index in a temp String
@@ -74,6 +73,7 @@ public class CookController implements EventHandler<ActionEvent> {
             vBox.visibleProperty().bind(cookView.getPickupOrders().selectedProperty());//sets when Vbox is Visible
             tempVbox = vBox;                                                //setting the vbox to a temporary Vbox
             cookView.setPane(tempVbox);                                    //sending it to the Pane in view to be shown
+
 
 
 
