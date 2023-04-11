@@ -1,14 +1,17 @@
 package View;
 
 import Controller.OrderController;
-import com.sun.org.apache.bcel.internal.generic.GotoInstruction;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class CustomerView extends Application {
+
+    Stage primaryStage = new Stage();
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
@@ -31,18 +34,22 @@ public class CustomerView extends Application {
     private ToggleGroup menuToggleG1, drinkToggleG, mealToggleG, sidesToggleG,
             icedToggleG, hotDrinkToggleG, hotMealToggle, coldMealToggle;
 
+    private Slider quantitySlider = new Slider();
+    private Button addToOrder = new Button("Add selected item(s) to order");
+    private ArrayList<Integer> itemID = new ArrayList<>();
+    private ArrayList<Integer> itemQuantity = new ArrayList<>();
+
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage secondStage) throws Exception {
 
         setMenu();
         setPositions();
         setActions();
-
-
+        setSlider();
 
         group = addNodes();
 
@@ -77,6 +84,10 @@ public class CustomerView extends Application {
         toggleView.setLayoutY(570);
         submitButton.setLayoutX(900);
         submitButton.setLayoutY(570);
+        addToOrder.setLayoutY(300);
+        addToOrder.setLayoutX(160);
+        quantitySlider.setLayoutY(305);
+        quantitySlider.setLayoutX(10);
 
         menuLabel.setLayoutY(200);
         menuLabel.setLayoutX(40);
@@ -132,7 +143,7 @@ public class CustomerView extends Application {
                 cancelField, toggleView, submitButton, cancelLabel, nameField,
                 typeField, priceLabel, menuLabel, orderNumberLabel, meals,
                 drinks, sides, done, drinkGroup, mealGroup, sideGroup, icedGroup, hotDrinkGroup,
-                hotMealGroup, coldMealGroup);
+                hotMealGroup, coldMealGroup, addToOrder, quantitySlider);
 
         return g;
     }
@@ -140,7 +151,7 @@ public class CustomerView extends Application {
     /**
      * Sets the menu radio buttons.
      */
-    public void setMenu(){
+    private void setMenu(){
         //  Creates togglegroups
         menuToggleG1 = new ToggleGroup();
         drinkToggleG = new ToggleGroup();
@@ -148,6 +159,8 @@ public class CustomerView extends Application {
         sidesToggleG = new ToggleGroup();
         icedToggleG = new ToggleGroup();
         hotDrinkToggleG = new ToggleGroup();
+        coldMealToggle = new ToggleGroup();
+        hotMealToggle = new ToggleGroup();
 
 
         // First layer of menu
@@ -218,17 +231,33 @@ public class CustomerView extends Application {
         hotMealGroup.setVisible(false);
     }
 
-    public void setActions(){
-        submitButton.setOnAction( orderController );
-        nameField.setOnAction( orderController );
-        hotDrink.setOnAction( orderController );
-        coldDrink.setOnAction( orderController );
-        hotMeal.setOnAction( orderController );
-        coldDrink.setOnAction( orderController );
-        done.setOnAction( orderController );
-        drinks.setOnAction( orderController );
-        meals.setOnAction( orderController );
-        sides.setOnAction( orderController );
+    private void setActions() {
+        submitButton.setOnAction(orderController);
+        nameField.setOnAction(orderController);
+        hotDrink.setOnAction(orderController);
+        coldDrink.setOnAction(orderController);
+        hotMeal.setOnAction(orderController);
+        coldDrink.setOnAction(orderController);
+        done.setOnAction(orderController);
+        drinks.setOnAction(orderController);
+        meals.setOnAction(orderController);
+        sides.setOnAction(orderController);
+        addToOrder.setOnAction(orderController);
+    }
+
+    /**
+     * Sets the quantitySlider
+     */
+    private void setSlider(){
+
+        quantitySlider.setMax(5);
+        quantitySlider.setMin(1);
+        quantitySlider.setMajorTickUnit(1);
+        quantitySlider.setShowTickLabels(true);
+        quantitySlider.setShowTickMarks(true);
+        quantitySlider.setSnapToTicks(true);
+        quantitySlider.setMinorTickCount(0);
+        quantitySlider.setValue(1);
     }
 
     /**
@@ -336,7 +365,18 @@ public class CustomerView extends Application {
      */
     public Group getColdMealGroup(){ return coldMealGroup; }
 
+    /**
+     * @return  addToOrder
+     */
+    public Button getAddToOrder() { return addToOrder; }
+
+    /**
+     * @return  gets the quantitySlider
+     */
+    public Slider getQuantitySlider(){ return quantitySlider; }
+
     public static void main(String[] args) throws Exception {
+
         Application.launch();
     }
 }
