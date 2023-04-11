@@ -8,7 +8,6 @@ import java.util.Queue;
 
 public class OrderDataController {
     OrderData orderData;
-    //int
      public OrderDataController(OrderData orderData){
          this.orderData = orderData;
      }
@@ -16,7 +15,7 @@ public class OrderDataController {
     /**
      * sets the current order to the next order and calls funtionn to replace next order
      */
-    public void finishCurrentOrder(){
+    public void setCurrentOrder(){
         //send the current order if needed
         orderData.setCurrentOrderObject(orderData.getNextOrderObject());
         setNextOrder();
@@ -26,16 +25,33 @@ public class OrderDataController {
      * assigns nextOrder its appropriate value
      */
     public void setNextOrder(){
+        String input = "";
         if(!orderData.getDriveThroughQueue().isEmpty()){
+            input += orderData.getDriveThroughQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getDriveThroughQueue().peek().getItemID();
+            input += orderData.getDriveThroughQueue().peek().getQuantities() + "\n";
+            orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());
         }
         else if(!orderData.getOnSiteQueue().isEmpty()){
+            input += orderData.getOnSiteQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getOnSiteQueue().peek().getItemID();
+            input += orderData.getOnSiteQueue().peek().getQuantities() + "\n";
+            orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());
         }
         else if(!orderData.getPhoneQueue().isEmpty()){
+            input += orderData.getPhoneQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getPhoneQueue().peek().getItemID();
+            input += orderData.getPhoneQueue().peek().getQuantities() + "\n";
+            orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
         }
         else{
+            input += orderData.getDoorDashQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getDoorDashQueue().peek().getItemID();
+            input += orderData.getDoorDashQueue().peek().getQuantities() + "\n";
+            orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
      }
@@ -61,8 +77,6 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setPhoneQueue(temp.remove());
                 }
-                //orderData.setNextOrder();
-
             }
             else if(!orderData.getOnSiteQueue().isEmpty()){              //if O queue has an object
                 temp.add(orderData.getNextOrderObject());
@@ -103,7 +117,7 @@ public class OrderDataController {
                     orderData.setDoorDashQueue(temp.remove());
                 }
             }
-
+            setNextOrder();
         }
      }
      //if empty, fill with information (start of code)
@@ -137,3 +151,5 @@ public class OrderDataController {
         }
     }
 }
+//OrderNum
+//quantity num
