@@ -16,7 +16,7 @@ public class OrderData {
     private static String nextOrder = "";                                                //String for the next order
 
     private static HashMap<Integer,String> itemIDNames = new HashMap<>();               //Hashmap for Item Names
-    private static HashMap<Integer,Integer> itemIDPrice = new HashMap<>();              //Hashmap for Item Prices
+    private static HashMap<Integer,Double> itemIDPrice = new HashMap<>();              //Hashmap for Item Prices
 
 
     private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
@@ -177,7 +177,7 @@ public class OrderData {
      * @param itemID Int
      * @param itemPrice Int
      */
-    public void setItemIDPrice(int itemID, int itemPrice){
+    public void setItemIDPrice(int itemID, double itemPrice){
         itemIDPrice.put(itemID,itemPrice);
     }
 
@@ -187,7 +187,7 @@ public class OrderData {
      * @param itemId Int
      * @return String
      */
-    public int getItemIDPrice(int itemId){
+    public double getItemIDPrice(int itemId){
         return itemIDPrice.get(itemId);
     }
 

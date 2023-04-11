@@ -8,7 +8,7 @@ import java.util.Queue;
 
 public class OrderDataController {
     OrderData orderData;
-    int
+    //int
      public OrderDataController(OrderData orderData){
          this.orderData = orderData;
      }
@@ -61,7 +61,7 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setPhoneQueue(temp.remove());
                 }
-                orderData.setNextOrder();
+                //orderData.setNextOrder();
 
             }
             else if(!orderData.getOnSiteQueue().isEmpty()){              //if O queue has an object
