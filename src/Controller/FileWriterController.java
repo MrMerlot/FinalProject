@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Order;
+import Model.OrderData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,7 +16,7 @@ public class FileWriterController extends FileWriter {
     }
 
 
-    public void writeToFile(Order order) throws IOException {
+    public void writeToFile(Order order, int x) throws IOException {
         /**
          * HEADER
          * ORDER TYPE
@@ -28,13 +29,23 @@ public class FileWriterController extends FileWriter {
          **/
 
         fileWriter.write("HEADER");
-        fileWriter.write(order.getOrderType); //order type
+        fileWriter.write(order.getOrderType()); //order type
         fileWriter.write(String.valueOf(order.getItemID()));
-        fileWriter.write(String.valueOf(quantity));
-        fileWriter.write(orderNumber);
-        fileWriter.write(name);
-        fileWriter.write(skipped);
-        if(complete) {fileWriter.write("Completed");}
+        fileWriter.write(String.valueOf(order.getQuantities()));
+        fileWriter.write(order.getOrderNumber());
+        fileWriter.write(order.getName());
+        fileWriter.write(order.getIfSkipped());
+        if(order.getIsComplete()) {fileWriter.write("Completed");}
+    }
+
+    public static void main(String[] args) {
+        OrderData orderData = new OrderData();
+        Order order = new Order("Order1 DD", 1, 4);
+        Order order1 = new Order("Order2 DT",2,2);
+        Order order2 = new Order("Order3 OS",3,1);
+        orderData.addOrder(order);
+        orderData.addOrder(order1);
+        orderData.addOrder(order2);
     }
 }
 
