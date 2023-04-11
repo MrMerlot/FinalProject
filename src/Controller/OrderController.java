@@ -131,4 +131,17 @@ public class OrderController implements EventHandler<ActionEvent> {
             }
         });
     }
+
+    /**
+     * Finds and returns the selected item's ID
+     * @return  item ID number
+     */
+    private int getItemID(){
+        int id = 0;
+
+        if( cv.getIcedToggleG().getSelectedToggle() == cv.getIcedTea() ){ id = 1; }
+        else if( cv.getIcedToggleG().getSelectedToggle() == cv.getWater() ){ id = 2; }
+
+        return id;
+    }
 }
