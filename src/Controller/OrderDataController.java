@@ -11,7 +11,7 @@ public class OrderDataController {
      public OrderDataController(){}
 
     /**
-     * sets the current order to the next order and calls funtionn to replace next order
+     * sets the current order to the next order and calls function to replace next order
      */
     public void setCurrentOrder(){
         //send the current order if needed
@@ -45,7 +45,7 @@ public class OrderDataController {
             orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
         }
-        else{
+        else if(!orderData.getDoorDashQueue().isEmpty()){
             input += orderData.getDoorDashQueue().peek().getOrderNumber() + "\n";
             input += orderData.getDoorDashQueue().peek().getItemID();
             input += orderData.getDoorDashQueue().peek().getQuantities() + "\n";
