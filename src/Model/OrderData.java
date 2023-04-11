@@ -9,7 +9,9 @@ public class OrderData {
     private static Queue< Order > onSiteQueue = new LinkedList<>();                   //stores all onsite orders
     private static Queue< Order > phoneQueue = new LinkedList<>();                    //stores all phone orders
 
+    private static Order currentOrderObject;                                            //Object of Current Order
 
+    private static Order nextOrderObject;                                              //Object of Next Order
     private static String currentOrder = "";                                           //String for the current order
     private static String nextOrder = "";                                                //String for the next order
 
@@ -27,6 +29,34 @@ public class OrderData {
 
     }
 
+    public void setDoorDashQueue(Order DDOrder){
+        doorDashQueue.add(DDOrder);
+    }
+    public Queue<Order> getDoorDashQueue(){
+        return doorDashQueue;
+    }
+
+    public void setOnSiteQueue(Order OSOrder){
+        onSiteQueue.add(OSOrder);
+    }
+    public Queue<Order> getDriveThroughQueue(){
+        return driveThroughQueue;
+    }
+
+    public void setDriveThroughQueue(Order DTOrder){
+        driveThroughQueue.add(DTOrder);
+    }
+
+    public Queue<Order> getOnSiteQueue(){
+        return onSiteQueue;
+    }
+
+    public void setPhoneQueue(Order POrder){
+        phoneQueue.add(POrder);
+    }
+    public Queue<Order> getPhoneQueue(){
+        return phoneQueue;
+    }
 
     /**
      * Adds an order to the pickup ArrayList
@@ -124,4 +154,35 @@ public class OrderData {
         return itemIDPrice.get(itemId);
     }
 
+    /**
+     * Sets the next order Object
+     * @param nxtOrderObject Order
+     */
+    public void setNextOrderObject(Order nxtOrderObject){
+        nextOrderObject = nxtOrderObject;
+    }
+
+    /**
+     * Gets the next order Object
+     * @return String
+     */
+    public Order getNextOrderObject(){
+        return nextOrderObject;
+    }
+
+    /**
+     * Sets the current order Object
+     * @param currntOrderObject
+     */
+    public void setCurrentOrderObject(Order currntOrderObject){
+        currentOrderObject = currntOrderObject;
+    }
+
+    /**
+     * Get the Current Order Object
+     * @return String
+     */
+    public Order getCurrentOrderObject(){
+        return currentOrderObject;
+    }
 }

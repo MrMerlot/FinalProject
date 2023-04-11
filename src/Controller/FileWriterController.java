@@ -16,7 +16,7 @@ public class FileWriterController extends FileWriter {
     }
 
 
-    public void writeToFile(Order order, int x) throws IOException {
+    public void writeToFile(Order order) throws IOException {
         /**
          * HEADER
          * ORDER TYPE
@@ -38,7 +38,8 @@ public class FileWriterController extends FileWriter {
         if(order.getIsComplete()) {fileWriter.write("Completed");}
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        FileWriterController f = new FileWriterController();
         OrderData orderData = new OrderData();
         Order order = new Order("Order1 DD", 1, 4);
         Order order1 = new Order("Order2 DT",2,2);
@@ -46,7 +47,12 @@ public class FileWriterController extends FileWriter {
         orderData.addOrder(order);
         orderData.addOrder(order1);
         orderData.addOrder(order2);
+        f.writeToFile(order);
+        f.writeToFile(order1);
+        f.writeToFile(order2);
+
+
     }
 }
 
-//}
+
