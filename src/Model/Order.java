@@ -1,6 +1,8 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Order {
     protected int orderNumber;
@@ -52,6 +54,36 @@ public class Order {
      * @return itemID's
      */
     public ArrayList<Integer> getItemID() {return itemID;}
+
+    /**
+     *  Sets the array of itemID's
+     * @param x list of integers
+     */
+    public void setItemID(List<Integer> x){itemID = (ArrayList<Integer>) x;}
+
+    /**
+     * Sets the quantites of the items
+     * @param x list of integers
+     */
+    public void setQuantities(List<Integer> x){quantity = (ArrayList<Integer>) x;}
+
+    /**
+     * Sets the times the order has been skipped
+     * @param x
+     */
+    public void setSkipped(int x){skipped = x;}
+
+    /**
+     *  Sets the completion status
+     * @param complete
+     */
+    public void setComplete(String complete) {
+        if (complete.equals("Incomplete")) {
+            this.complete = false;
+        }
+        else{this.complete=true;}
+    }
+
     /**
      * Get the array list of item quantites
      * @return quantities
