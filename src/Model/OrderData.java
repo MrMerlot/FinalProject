@@ -1,9 +1,6 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class OrderData {
 
@@ -11,8 +8,13 @@ public class OrderData {
     private static Queue< Order > driveThroughQueue = new LinkedList<>();             //stores all drive through orders
     private static Queue< Order > onSiteQueue = new LinkedList<>();                   //stores all onsite orders
     private static Queue< Order > phoneQueue = new LinkedList<>();                    //stores all phone orders
-    protected static Order currentOrder;
-    protected static Order nextOrder;
+
+
+    private static String currentOrder = "";                                           //String for the current order
+    private static String nextOrder = "";                                                //String for the next order
+
+    private static HashMap<Integer,String> itemIDNames = new HashMap<>();               //Hashmap for Item Names
+    private static HashMap<Integer,Integer> itemIDPrice = new HashMap<>();              //Hashmap for Item Prices
 
 
     private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
@@ -22,32 +24,104 @@ public class OrderData {
         else if (order instanceof DriveThrough) this.driveThroughQueue.add( order );
         else if (order instanceof  Onsite ) this.onSiteQueue.add( order );
         else this.phoneQueue.add( order );
+
     }
 
-    /**
-     * Updates the orders that are next to be cooked
-     * @param sortedOrder Order
-     */
-    public void setOrderPriorityQueue( Order sortedOrder ){
-        this.setOrderPriorityQueue( sortedOrder );
-    }
-    /**
-     * Displays the next order to be cooked
-     */
-    public void getNextOrder(){
-        orderPriorityQueue.peek();
-    }
 
+    /**
+     * Adds an order to the pickup ArrayList
+     * @param order String
+     */
     public void setPickupOrders(String order){
         pickupOrders.add(order);
     }
 
+
+    /**
+     * Removes the order that has been picked up
+     * @param rpu String
+     */
     public void removePickUpOrder(String rpu){
         pickupOrders.remove(rpu);
 
     }
 
+    /**
+     * Gets the ArrayList for the Pickup Orders
+     * @return ArrayList
+     */
     public ArrayList<String> getPickupOrders(){
         return pickupOrders;
     }
+
+    /**
+     * Sets the next order
+     * @param nxtOrder String
+     */
+    public void setNextOrder(String nxtOrder){
+        nextOrder = nxtOrder;
+    }
+
+    /**
+     * Gets the next order
+     * @return String
+     */
+    public String getNextOrder(){
+        return nextOrder;
+    }
+
+    /**
+     * Sets the current order
+     * @param currntOrder
+     */
+    public void setCurrentOrder(String currntOrder){
+        currentOrder = currntOrder;
+    }
+
+    /**
+     * Get the Current Order
+     * @return String
+     */
+    public String getCurrentOrder(){
+        return currentOrder;
+    }
+
+    /**
+     * Adds an item to the menu
+     * @param itemID Int
+     * @param itemName String
+     */
+    public void setItemIDNames(int itemID, String itemName){
+        itemIDNames.put(itemID,itemName);
+    }
+
+
+    /**
+     * returns the wanted Item from the HashMap
+     * @param itemId Int
+     * @return String
+     */
+    public String getItemIDNames(int itemId){
+        return itemIDNames.get(itemId);
+    }
+
+    /**
+     * Adds an items price to the menu
+     * @param itemID Int
+     * @param itemPrice Int
+     */
+    public void setItemIDPrice(int itemID, int itemPrice){
+        itemIDPrice.put(itemID,itemPrice);
+    }
+
+
+    /**
+     * returns the wanted Item Price from the HashMap
+     * @param itemId Int
+     * @return String
+     */
+    public int getItemIDPrice(int itemId){
+        return itemIDPrice.get(itemId);
+    }
+
 }
