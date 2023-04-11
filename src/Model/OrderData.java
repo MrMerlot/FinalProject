@@ -29,32 +29,68 @@ public class OrderData {
 
     }
 
-
+    /**
+     * Adds a Door Dash Order to the Door Dash Queue
+     * @param DDOrder Door Dash Order
+     */
     public void setDoorDashQueue(Order DDOrder){
         doorDashQueue.add(DDOrder);
     }
+
+    /**
+     * Gets the Door Dash
+     * @return Door Dash Order Queue
+     */
     public Queue<Order> getDoorDashQueue(){
         return doorDashQueue;
     }
 
+
+    /**
+     * Adds a OnSite Order to the OnSite Queue
+     * @param OSOrder OnSite Order
+     */
     public void setOnSiteQueue(Order OSOrder){
         onSiteQueue.add(OSOrder);
     }
+
+    /**
+     * Gets the DriveThrough Queue
+     * @return DriveThrough Queue
+     */
     public Queue<Order> getDriveThroughQueue(){
         return driveThroughQueue;
     }
 
+    /**
+     * Adds a Drive Through Order to DriveThrough Queue
+     * @param DTOrder DriveThrough Order
+     */
     public void setDriveThroughQueue(Order DTOrder){
         driveThroughQueue.add(DTOrder);
     }
 
+    /**
+     * Gets the OnSite Queue
+     * @return OnSite Queue
+     */
     public Queue<Order> getOnSiteQueue(){
         return onSiteQueue;
     }
 
+
+    /**
+     * Adds a Phone Order to the DriveThrough Queue
+     * @param POrder Phone Order
+     */
     public void setPhoneQueue(Order POrder){
         phoneQueue.add(POrder);
     }
+
+    /**
+     * Gets the Phone Queue
+     * @return Phone Queue
+     */
     public Queue<Order> getPhoneQueue(){
         return phoneQueue;
     }

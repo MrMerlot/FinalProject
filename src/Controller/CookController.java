@@ -42,6 +42,9 @@ public class CookController implements EventHandler<ActionEvent> {
     }
 
 
+    /**
+     * resets the V
+     */
     public void resetVbox(){
         if (!cookView.getPickupOrders().isSelected()){
             cookView.getPane().getChildren().remove(tempVbox);      //removing vBox from the pane
@@ -129,7 +132,7 @@ public class CookController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
-                orderData.setCurrentOrder(orderData.getNextOrder());                //Sets the CurrentCrder to NextOrder
+                orderData.setCurrentOrder(orderData.getNextOrder());                //Sets the CurrentOrder to NextOrder
                 cookView.setCurrentOrderLabel(orderData.getNextOrder());            //Sets the Label to the new Order
                 cookView.getPane().getChildren().remove(cookView.getCurrentOrder());//removes the old Label from Pane
                 cookView.getPane().getChildren().add(cookView.getCurrentOrder());   //Adds new Label to the pane
