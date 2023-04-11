@@ -61,10 +61,8 @@ public class FileWriterController extends FileWriter {
         while(s.hasNextLine()) {
             Order order = new Order(s.nextLine(), Integer.parseInt(s.nextLine()),
                     Integer.parseInt(s.nextLine()));
-            temp = s.nextLine();
-            order.setItemID(toIntArray(temp));
-            temp = s.nextLine();
-            order.setQuantities(toIntArray(temp));
+            order.setItemID(toIntArray(s.nextLine()));
+            order.setQuantities(toIntArray(s.nextLine()));
             order.setSkipped(Integer.parseInt(s.nextLine()));
             order.setComplete(s.nextLine());
             o.addOrder(order);
@@ -83,9 +81,9 @@ public class FileWriterController extends FileWriter {
         order.addItem(6,7);
         order1.addItem(3,2);
         order2.addItem(1,1);
-        orderData.addOrder(order2);
-        orderData.addOrder(order1);
         orderData.addOrder(order);
+        orderData.addOrder(order1);
+        orderData.addOrder(order2);
 
         try {
             f.writeToFile(order, f);
@@ -99,7 +97,7 @@ public class FileWriterController extends FileWriter {
             f.readInFile(file);
             Queue<Order> x = o.getPhoneQueue();
             for(int i=0;i<x.size();i++){
-                System.out.println(x.element().getName());
+                System.out.println(x.poll().getName());
             }
         }
         catch (IOException e) {
