@@ -135,7 +135,7 @@ public class OrderData {
     }
 
     /**
-     * Gets the next order
+     * Gets the next order Object
      * @return String
      */
     public Order getNextOrderObject(){
