@@ -24,6 +24,7 @@ public class CookController implements EventHandler<ActionEvent> {
         this.cookView = view;                   //how controller communicates with the view
         test();
         resetVbox();
+        setOrders();
     }
 
     public void test() {
@@ -31,6 +32,9 @@ public class CookController implements EventHandler<ActionEvent> {
         orderData.setPickupOrders("fsddf");
         orderData.setPickupOrders("sdfsdfsdf");                 //this will be removed soon
         orderData.setPickupOrders("falskdfj;alk");
+
+        orderData.setCurrentOrder("2 HotDogs 3 Burgers Hot Ice moreshit moreshit andmoreSHit");
+        orderData.setNextOrder("9HotDogs 4Burgers Hot Ice moreshit moreshit andmoreSHit");
     }
 
     public static void main(String[] args) {
@@ -38,6 +42,9 @@ public class CookController implements EventHandler<ActionEvent> {
     }
 
 
+    /**
+     * resets the V
+     */
     public void resetVbox(){
         if (!cookView.getPickupOrders().isSelected()){
             cookView.getPane().getChildren().remove(tempVbox);      //removing vBox from the pane
@@ -45,7 +52,10 @@ public class CookController implements EventHandler<ActionEvent> {
         }
     }
 
-
+    public void setOrders(){
+        cookView.setCurrentOrderLabel(orderData.getCurrentOrder());
+        cookView.setNextOrderLabel(orderData.getNextOrder());
+    }
 
     @Override
     public void handle(ActionEvent event) {
@@ -75,9 +85,9 @@ public class CookController implements EventHandler<ActionEvent> {
             cookView.setPane(tempVbox);                                    //sending it to the Pane in view to be shown
 
 
-
-
         }
+
+
 
 
         /**
@@ -114,5 +124,21 @@ public class CookController implements EventHandler<ActionEvent> {
             }
         });
 
-    }
-}
+
+        /**
+         * Handler for the Finish Order Button
+         */
+        cookView.getFinishOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
+                orderData.setCurrentOrder(orderData.getNextOrder());                //Sets the CurrentOrder to NextOrder
+                cookView.setCurrentOrderLabel(orderData.getNextOrder());            //Sets the Label to the new Order
+                cookView.getPane().getChildren().remove(cookView.getCurrentOrder());//removes the old Label from Pane
+                cookView.getPane().getChildren().add(cookView.getCurrentOrder());   //Adds new Label to the pane
+
+            }
+        });
+
+    }//end of handler
+}//end of Cook Controller
