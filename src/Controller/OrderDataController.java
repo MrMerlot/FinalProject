@@ -20,42 +20,47 @@ public class OrderDataController {
      }
 
     /**
-     * assigns nextOrder its appropriate value
+     * Sets nextOrder to its appropriate value (only use when NULL, call checkQueue otherwise)
      */
     public void setNextOrder(){
         String input = "";
         if(!orderData.getDriveThroughQueue().isEmpty()){
             input += orderData.getDriveThroughQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getDriveThroughQueue().peek().getItemID();
+            input += orderData.getDriveThroughQueue().peek().getItemID() + " ";
             input += orderData.getDriveThroughQueue().peek().getQuantities() + "\n";
             orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());
         }
         else if(!orderData.getOnSiteQueue().isEmpty()){
             input += orderData.getOnSiteQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getOnSiteQueue().peek().getItemID();
+            input += orderData.getOnSiteQueue().peek().getItemID() + " ";
             input += orderData.getOnSiteQueue().peek().getQuantities() + "\n";
             orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());
         }
         else if(!orderData.getPhoneQueue().isEmpty()){
             input += orderData.getPhoneQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getPhoneQueue().peek().getItemID();
+            input += orderData.getPhoneQueue().peek().getItemID() + " ";
             input += orderData.getPhoneQueue().peek().getQuantities() + "\n";
             orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
         }
         else if(!orderData.getDoorDashQueue().isEmpty()){
             input += orderData.getDoorDashQueue().peek().getOrderNumber() + "\n";
-            input += orderData.getDoorDashQueue().peek().getItemID();
+            input += orderData.getDoorDashQueue().peek().getItemID() + " ";
             input += orderData.getDoorDashQueue().peek().getQuantities() + "\n";
             orderData.setNextOrder(input);
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
      }
-     public void checkQueue(){
+
+    /**
+     * Checks that the next order up is the correct one, if not order is placed back into queue
+     *
+     */
+    public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
-        if(orderData.getNextOrderObject().getOrderType() == 2 ){            //if the next order is an O Object
+        if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){            //if the next order is an O Object
             if(!orderData.getDriveThroughQueue().isEmpty()) {               //if the DT Queue has an object
                 temp.add(orderData.getNextOrderObject());
                 while(!orderData.getOnSiteQueue().isEmpty()){
@@ -64,9 +69,10 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setOnSiteQueue(temp.remove());
                 }
+                orderData.getOnSiteQueue().peek().setSkipped(orderData.getOnSiteQueue().peek().getIfSkipped() + 1);
             }
         }
-        else if (orderData.getNextOrderObject().getOrderType() == 3){       //if the next order is a P Object
+        else if (orderData.getNextOrderObject().getOrderType() == 3 && orderData.getNextOrderObject().getIfSkipped() < 3){       //if the next order is a P Object
             if(!orderData.getDriveThroughQueue().isEmpty()){                //if DT queue has an object
                 temp.add(orderData.getNextOrderObject());
                 while(!orderData.getPickupOrders().isEmpty()){
@@ -75,6 +81,7 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setPhoneQueue(temp.remove());
                 }
+                orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() + 1);
             }
             else if(!orderData.getOnSiteQueue().isEmpty()){              //if O queue has an object
                 temp.add(orderData.getNextOrderObject());
@@ -84,10 +91,11 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setPhoneQueue(temp.remove());
                 }
+                orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() + 1);
             }
 
         }
-        else if (orderData.getNextOrderObject().getOrderType() == 4){     //if the next order is a DD object
+        else if (orderData.getNextOrderObject().getOrderType() == 4 && orderData.getNextOrderObject().getIfSkipped() < 3){     //if the next order is a DD object
             if(!orderData.getDriveThroughQueue().isEmpty()){
                 temp.add(orderData.getNextOrderObject());
                 while(!orderData.getDoorDashQueue().isEmpty()){
@@ -96,6 +104,7 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setDoorDashQueue(temp.remove());
                 }
+                orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
             }
             else if(!orderData.getOnSiteQueue().isEmpty() ){
                 temp.add(orderData.getNextOrderObject());
@@ -105,6 +114,7 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setDoorDashQueue(temp.remove());
                 }
+                orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
             }
             else if(!orderData.getPhoneQueue().isEmpty()){
                 temp.add(orderData.getNextOrderObject());
@@ -114,19 +124,18 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setDoorDashQueue(temp.remove());
                 }
+                orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
             }
-            setNextOrder();
+            if(orderData.getNextOrderObject() == null)
+                setNextOrder();
         }
      }
-     //if empty, fill with information (start of code)
 
-     //set variables to correct values
-    //clears variables at end of runtime
-    public void clear(){
-         orderData.setCurrentOrderObject(null);
-         orderData.setNextOrderObject(null);
-     }
-     //removed
+    /**
+     * Removes the requested order from OrderData
+     *
+     * @param order
+     */
     public void remove(Order order){
         if(orderData.getNextOrderObject() == order){
             orderData.setNextOrder(null);
@@ -149,5 +158,3 @@ public class OrderDataController {
         }
     }
 }
-//OrderNum
-//quantity num
