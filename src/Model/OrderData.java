@@ -9,7 +9,9 @@ public class OrderData {
     private static Queue< Order > onSiteQueue = new LinkedList<>();                   //stores all onsite orders
     private static Queue< Order > phoneQueue = new LinkedList<>();                    //stores all phone orders
 
+    private static Order currentOrderObject;                                            //Object of Current Order
 
+    private static Order nextOrderObject;                                              //Object of Next Order
     private static String currentOrder = "";                                           //String for the current order
     private static String nextOrder = "";                                                //String for the next order
 
@@ -124,4 +126,35 @@ public class OrderData {
         return itemIDPrice.get(itemId);
     }
 
+    /**
+     * Sets the next order Object
+     * @param nxtOrderObject Order
+     */
+    public void setNextOrderObject(Order nxtOrderObject){
+        nextOrderObject = nxtOrderObject;
+    }
+
+    /**
+     * Gets the next order
+     * @return String
+     */
+    public Order getNextOrderObject(){
+        return nextOrderObject;
+    }
+
+    /**
+     * Sets the current order Object
+     * @param currntOrderObject
+     */
+    public void setCurrentOrderObject(Order currntOrderObject){
+        currentOrderObject = currntOrderObject;
+    }
+
+    /**
+     * Get the Current Order Object
+     * @return String
+     */
+    public Order getCurrentOrderObject(){
+        return currentOrderObject;
+    }
 }
