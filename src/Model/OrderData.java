@@ -38,7 +38,7 @@ public class OrderData {
     }
 
     /**
-     * Gets the Door Dash
+     * Gets the Door Dash Queue
      * @return Door Dash Order Queue
      */
     public Queue<Order> getDoorDashQueue(){
