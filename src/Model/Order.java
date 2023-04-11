@@ -21,7 +21,6 @@ public class Order {
      * @param orderNumber Order's number
      */
     public Order(String name, int orderNumber, int orderType) {
-        //super(file);
 
         this.name = name;
         this.orderNumber = orderNumber;
