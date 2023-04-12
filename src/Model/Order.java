@@ -74,7 +74,7 @@ public class Order {
      * @param complete
      */
     public void setComplete(String complete) {
-        if (complete.equals("Incomplete")) {
+        if (complete.equals("false")) {
             this.complete = false;
         }
         else{this.complete=true;}
