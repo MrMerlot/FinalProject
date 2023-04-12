@@ -11,13 +11,12 @@ import java.util.ArrayList;
 
 public class CustomerView extends Application {
 
-    Stage primaryStage = new Stage();
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
     private Label promptLabel = new Label("Order Type? \n\nName?");
     private Label cancelLabel = new Label("Cancel Order #");
-    private TextField cancelField = new TextField("__");
+    private TextField cancelField = new TextField("");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
     private TextField nameField = new TextField();
@@ -44,7 +43,7 @@ public class CustomerView extends Application {
 
 
     @Override
-    public void start(Stage secondStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
 
         setMenu();
         setPositions();
@@ -410,7 +409,51 @@ public class CustomerView extends Application {
     /**
      * @return  water RadioButton
      */
+
+    /**
+     * @return  water Radiobutton
+     */
     public RadioButton getWater() { return water; }
+
+    /**
+     * @return  hotDrinkToggleG
+     */
+    public ToggleGroup getHotDrinkToggleG() { return hotDrinkToggleG; }
+
+    /**
+     * @return  icedNoodles Radiobutton
+     */
+    public RadioButton getIcedNoodles() { return icedNoodles; }
+
+    /**
+     * @return  hotCoffee radiobutton
+     */
+    public RadioButton getHotCoffee() { return hotCoffee; }
+
+    /**
+     * @return  hotChoco
+     */
+    public RadioButton getHotChoco() { return hotChoco; }
+
+    /**
+     * @return  watermelonSalad
+     */
+    public RadioButton getWatermelonSalad() { return watermelonSalad; }
+
+    /**
+     * @return  pineapplePizza
+     */
+    public RadioButton getPineapplePizza() { return pineapplePizza; }
+
+    /**
+     * @return  cheeseBurger
+     */
+    public RadioButton getCheeseBurger() { return cheeseBurger; }
+
+    /**
+     * @return  fries
+     */
+    public RadioButton getFries() { return fries; }
 
     public static void main(String[] args) throws Exception {
 
