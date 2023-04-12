@@ -397,11 +397,6 @@ public class CustomerView extends Application {
     public ArrayList<Integer> getItemQuantity() { return itemQuantity; }
 
     /**
-     * @return  icedToggleG
-     */
-    public ToggleGroup getIcedToggleG(){ return icedToggleG; }
-
-    /**
      * @return  icedTea RadioButton
      */
     public RadioButton getIcedTea() { return icedTea; }
