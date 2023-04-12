@@ -69,7 +69,6 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 cv.getItemID().clear();
                 cv.getItemQuantity().clear();
-
                 orderData.addOrder( order );
             }
         });

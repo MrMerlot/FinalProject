@@ -257,6 +257,7 @@ public class CustomerView extends Application {
         quantitySlider.setSnapToTicks(true);
         quantitySlider.setMinorTickCount(0);
         quantitySlider.setValue(1);
+
     }
 
     /**
