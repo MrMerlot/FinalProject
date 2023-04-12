@@ -1,0 +1,21 @@
+Order1 DD
+1
+4
+[2, 6]
+[3, 7]
+0
+Completed
+Order2 DT
+2
+2
+[3]
+[2]
+0
+Incomplete
+Order3 OS
+3
+1
+[1]
+[1]
+0
+Incomplete
