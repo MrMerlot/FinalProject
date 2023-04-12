@@ -52,7 +52,7 @@ public class CookView extends Application {
         finishOrder.setLayoutY(350);                   //setting the y-axis
         finishOrder.setOnAction(controller);
 
-        showPickupOrders.setLayoutX(875);               //setting the x-axis
+        showPickupOrders.setLayoutX(845);               //setting the x-axis
         showPickupOrders.setLayoutY(350);               //setting the y-axis
         showPickupOrders.setOnAction(controller);       //sending to Cook Controller when Clicked
 

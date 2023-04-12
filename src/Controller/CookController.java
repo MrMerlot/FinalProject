@@ -149,11 +149,9 @@ public class CookController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
-//                orderData.setCurrentOrder(orderData.getNextOrder());                //Sets the CurrentOrder to NextOrder
-//                cookView.setCurrentOrderLabel(orderData.getNextOrder());            //Sets the Label to the new Order
-                orderDataController.setCurrentOrder();
+                orderDataController.setCurrentOrder();                              //sets the current and next order V
                 cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
-                cookView.setNextOrderLabel(orderData.getNextOrder());
+                cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order
                 cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(),cookView.getNextOrderLabel());//removes the old Label from Pane
                 cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
 
