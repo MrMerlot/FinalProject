@@ -257,6 +257,7 @@ public class CustomerView extends Application {
         quantitySlider.setSnapToTicks(true);
         quantitySlider.setMinorTickCount(0);
         quantitySlider.setValue(1);
+
     }
 
     /**
@@ -395,11 +396,6 @@ public class CustomerView extends Application {
      * @return  itemQuantity array list
      */
     public ArrayList<Integer> getItemQuantity() { return itemQuantity; }
-
-    /**
-     * @return  icedToggleG
-     */
-    public ToggleGroup getIcedToggleG(){ return icedToggleG; }
 
     /**
      * @return  icedTea RadioButton

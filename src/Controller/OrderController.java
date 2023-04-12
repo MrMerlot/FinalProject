@@ -63,6 +63,12 @@ public class OrderController implements EventHandler<ActionEvent> {
                 else if( orderType == 3 ) order = new Onsite( customerName, orderNumber, orderType);
                 else order = new Phone( customerName, orderNumber, orderType);
 
+                for( int i = 0; i < cv.getItemID().size(); i++ ){
+                    order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
+                }
+
+                cv.getItemID().clear();
+                cv.getItemQuantity().clear();
                 orderData.addOrder( order );
             }
         });
@@ -128,6 +134,7 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
+                cv.addItemID( getItemID() );
             }
         });
     }
