@@ -63,7 +63,7 @@ public class FileWriterController extends FileWriter {
         }
         return array;
     }
-    public OrderData readInFile(File file, OrderData o) throws FileNotFoundException {
+    public void readInFile(File file, OrderData o) throws FileNotFoundException {
         Scanner s = new Scanner(file); //Read in from file
         while(s.hasNextLine()) {
             Order order = new Order(s.nextLine(), //Creates an order object based on the first 3 lines of
@@ -75,7 +75,6 @@ public class FileWriterController extends FileWriter {
             order.setComplete(s.nextLine());//sets the order completion status
             o.addOrder(order); //adds order to static order data
         }
-        return o; //returns order data
     }
 
     public static void main(String[] args) throws IOException {
