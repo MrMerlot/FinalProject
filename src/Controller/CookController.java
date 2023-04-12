@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Order;
 import Model.OrderData;
 import View.CookView;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.layout.VBox;
 
 public class CookController implements EventHandler<ActionEvent> {
 
+    OrderDataController orderDataController = new OrderDataController();
     OrderData orderData = new OrderData();      //new instance of OrderData
     CookView cookView;                          //instance of CookView
     ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
@@ -33,8 +35,16 @@ public class CookController implements EventHandler<ActionEvent> {
         orderData.setPickupOrders("sdfsdfsdf");                 //this will be removed soon
         orderData.setPickupOrders("falskdfj;alk");
 
-        orderData.setCurrentOrder("2 HotDogs 3 Burgers Hot Ice moreshit moreshit andmoreSHit");
-        orderData.setNextOrder("9HotDogs 4Burgers Hot Ice moreshit moreshit andmoreSHit");
+        //orderData.setCurrentOrder("2 HotDogs 3 Burgers Hot Ice 7 Pizza 8 hot tea");
+        //orderData.setNextOrder("9HotDogs 4Burgers Hot Ice 2 pizza 12 ham");
+
+        Order test = new Order("Steve",2,2);
+        test.addItem(2,6);
+        Order test2 = new Order("Billy",4,3);
+        test2.addItem(5,7);
+        orderData.setDriveThroughQueue(test);
+        orderData.setOnSiteQueue(test2);
+
     }
 
     public static void main(String[] args) {
@@ -132,10 +142,13 @@ public class CookController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
-                orderData.setCurrentOrder(orderData.getNextOrder());                //Sets the CurrentOrder to NextOrder
-                cookView.setCurrentOrderLabel(orderData.getNextOrder());            //Sets the Label to the new Order
-                cookView.getPane().getChildren().remove(cookView.getCurrentOrder());//removes the old Label from Pane
-                cookView.getPane().getChildren().add(cookView.getCurrentOrder());   //Adds new Label to the pane
+//                orderData.setCurrentOrder(orderData.getNextOrder());                //Sets the CurrentOrder to NextOrder
+//                cookView.setCurrentOrderLabel(orderData.getNextOrder());            //Sets the Label to the new Order
+                orderDataController.setCurrentOrder();
+                cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
+                cookView.setNextOrderLabel(orderData.getNextOrder());
+                cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(),cookView.getNextOrderLabel());//removes the old Label from Pane
+                cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
 
             }
         });
