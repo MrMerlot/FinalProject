@@ -10,8 +10,6 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class CustomerView extends Application {
-
-    Stage primaryStage = new Stage();
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
@@ -44,7 +42,7 @@ public class CustomerView extends Application {
 
 
     @Override
-    public void start(Stage secondStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
 
         setMenu();
         setPositions();

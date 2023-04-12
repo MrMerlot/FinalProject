@@ -26,42 +26,42 @@ public class OrderDataController {
         ArrayList<Integer> itemID = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
         if(!orderData.getDriveThroughQueue().isEmpty()){        //if the DT queue is empty
-            input += orderData.getDriveThroughQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getDriveThroughQueue().peek().getName() + "\n";
             itemID = orderData.getDriveThroughQueue().peek().getItemID();
             quantities = orderData.getDriveThroughQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){      //read nessesary information into input string and assign to nextOrder
-                input += itemID.get(i) + " ";
-                input += quantities.get(i) + "\n" ;
+                input += quantities.get(i) + " " ;
+                input += itemID.get(i) + "\n";
             }
             orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());    //removes the object from queue and assigns it to next order object
         }
         else if(!orderData.getOnSiteQueue().isEmpty()){
-            input += orderData.getOnSiteQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getOnSiteQueue().peek().getName() + "\n";
             itemID = orderData.getOnSiteQueue().peek().getItemID();
             quantities = orderData.getOnSiteQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){
-                input += itemID.get(i) + " ";
-                input += quantities.get(i) + "\n" ;
+                input += quantities.get(i) + " " ;
+                input += itemID.get(i) + "\n";
             }
             orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());
         }
         else if(!orderData.getPhoneQueue().isEmpty()){
-            input += orderData.getPhoneQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getPhoneQueue().peek().getName() + "\n";
             itemID = orderData.getPhoneQueue().peek().getItemID();
             quantities = orderData.getPhoneQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){
-                input += itemID.get(i) + " ";
-                input += quantities.get(i) + "\n" ;
+                input += quantities.get(i) + " " ;
+                input += itemID.get(i) + "\n";
             }
             orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
         }
         else if(!orderData.getDoorDashQueue().isEmpty()){
-            input += orderData.getDoorDashQueue().peek().getOrderNumber() + "\n";
+            input += orderData.getDoorDashQueue().peek().getName() + "\n";
             itemID = orderData.getDoorDashQueue().peek().getItemID();
             quantities = orderData.getDoorDashQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){
-                input += itemID.get(i) + " ";
-                input += quantities.get(i) + "\n" ;
+                input += quantities.get(i) + " " ;
+                input += itemID.get(i) + "\n";
             }
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
@@ -89,7 +89,7 @@ public class OrderDataController {
         else if (orderData.getNextOrderObject().getOrderType() == 3 && orderData.getNextOrderObject().getIfSkipped() < 3){       //if the next order is a P Object
             if(!orderData.getDriveThroughQueue().isEmpty()){                //if DT queue has an object
                 temp.add(orderData.getNextOrderObject());
-                while(!orderData.getPickupOrders().isEmpty()){
+                while(!orderData.getPhoneQueue().isEmpty()){
                     temp.add(orderData.getPhoneQueue().remove());    //puts the next order back into P queue
                 }
                 while(!temp.isEmpty()){
