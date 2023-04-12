@@ -139,8 +139,39 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int getItemID(){
         int id = 0;
 
-        if( cv.getIcedToggleG().getSelectedToggle() == cv.getIcedTea() ){ id = 1; }
-        else if( cv.getIcedToggleG().getSelectedToggle() == cv.getWater() ){ id = 2; }
+        if( cv.getIcedTea().isSelected() && cv.getColdDrink().isSelected()
+                && cv.getDrinkButton().isSelected() ){
+            id = 1;
+        }
+        else if( cv.getWater().isSelected() &&  cv.getColdDrink().isSelected()
+                && cv.getDrinkButton().isSelected()){
+            id = 2;
+        }
+        else if( cv.getHotCoffee().isSelected() && cv.getHotDrink().isSelected()
+                && cv.getDrinkButton().isSelected() ){
+            id = 3;
+        }
+        else if( cv.getHotChoco().isSelected() && cv.getHotDrink().isSelected()
+                && cv.getDrinkButton().isSelected() ){
+            id = 4;
+        }
+        else if( cv.getIcedNoodles().isSelected() && cv.getColdMeal().isSelected()
+                && cv.getMealButton().isSelected() ){
+            id = 5;
+        }
+        else if( cv.getWatermelonSalad().isSelected() && cv.getColdMeal().isSelected()
+                && cv.getMealButton().isSelected() ){
+            id = 6;
+        }
+        else if( cv.getPineapplePizza().isSelected() && cv.getHotMeal().isSelected()
+                && cv.getMealButton().isSelected() ){
+            id = 7;
+        }
+        else if( cv.getCheeseBurger().isSelected() && cv.getHotMeal().isSelected()
+                && cv.getMealButton().isSelected() ){
+            id = 8;
+        }
+
 
         return id;
     }
