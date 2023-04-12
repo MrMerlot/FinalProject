@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Order {
@@ -15,13 +14,12 @@ public class Order {
     protected int skipped = 0;
 
     /**
-     * Creeates an order with a name and number.
+     * Creates an order with a name and number
      *
      * @param name        Customer name
      * @param orderNumber Order's number
      */
     public Order(String name, int orderNumber, int orderType) {
-
         this.name = name;
         this.orderNumber = orderNumber;
         this.orderType = orderType;
@@ -35,7 +33,6 @@ public class Order {
      * @param quantity How many items ordered
      */
     public void addItem(int itemID, int quantity) {
-
         this.itemID.add(itemID);
         this.quantity.add(quantity);
     }
@@ -44,13 +41,13 @@ public class Order {
      * Get item ID at index
      *
      * @param index Index of wanted item
-     * @return The item's iD
+     * @return itemID The item's iD
      */
     public int getItemID( int index ) { return itemID.get(index); }
 
     /**
      * Get the array list of item ID's
-     * @return itemID's
+     * @return itemID List
      */
     public ArrayList<Integer> getItemID() {return itemID;}
 
@@ -116,9 +113,8 @@ public class Order {
 
     /**
      * Get the item's quantity at an index
-     *
      * @param index Item quantity's index
-     * @return The quantity
+     * @return quantity
      */
     public int getItemQuantity(int index) {
         return quantity.get(index);
@@ -126,15 +122,13 @@ public class Order {
 
     /**
      * Gets the item's order type
-     *
-     * @return order type
+     * @return orderType
      */
     public int getOrderType(){return orderType;}
 
     /**
      * Checks if the order is complete or not.
-     *
-     * @return True or false
+     * @return complete
      */
     public boolean checkComplete() { return complete; }
 
@@ -144,7 +138,6 @@ public class Order {
     public void completeOrder() { complete = true; }
 
     public String orderInfo() {
-
         return null;
     }
 }
