@@ -171,7 +171,15 @@ public class OrderController implements EventHandler<ActionEvent> {
                 && cv.getMealButton().isSelected() ){
             id = 8;
         }
-
+        else if( cv.getFries().isSelected() && cv.getSidesButton().isSelected() ){
+            id = 9;
+        }
+        else if( cv.getFriedOreos().isSelected() && cv.getSidesButton().isSelected() ){
+            id = 10;
+        }
+        else if( cv.getPickles().isSelected() && cv.getSidesButton().isSelected() ){
+            id = 11;
+        }
 
         return id;
     }

@@ -409,16 +409,7 @@ public class CustomerView extends Application {
     /**
      * @return  water RadioButton
      */
-
-    /**
-     * @return  water Radiobutton
-     */
     public RadioButton getWater() { return water; }
-
-    /**
-     * @return  hotDrinkToggleG
-     */
-    public ToggleGroup getHotDrinkToggleG() { return hotDrinkToggleG; }
 
     /**
      * @return  icedNoodles Radiobutton
@@ -454,6 +445,16 @@ public class CustomerView extends Application {
      * @return  fries
      */
     public RadioButton getFries() { return fries; }
+
+    /**
+     * @return  friedOreos
+     */
+    public RadioButton getFriedOreos() { return friedOreos; }
+
+    /**
+     * @return  pickles
+     */
+    public RadioButton getPickles() { return pickles; }
 
     public static void main(String[] args) throws Exception {
 

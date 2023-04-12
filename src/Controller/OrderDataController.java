@@ -1,4 +1,5 @@
 package Controller;
+import Model.HashTableID;
 import Model.Order;
 import Model.OrderData;
 
@@ -15,6 +16,7 @@ public class OrderDataController {
      */
     public void setCurrentOrder(){
         orderData.setCurrentOrderObject(orderData.getNextOrderObject());
+        orderData.setCurrentOrder(orderData.getNextOrder());
         setNextOrder();
      }
 
@@ -22,6 +24,7 @@ public class OrderDataController {
      * Sets nextOrder to its appropriate value (only use when NULL, call checkQueue otherwise)
      */
     public void setNextOrder(){
+        HashTableID hashTable = new HashTableID();
         String input = "";
         ArrayList<Integer> itemID = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
@@ -31,7 +34,7 @@ public class OrderDataController {
             quantities = orderData.getDriveThroughQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){      //read nessesary information into input string and assign to nextOrder
                 input += quantities.get(i) + " " ;
-                input += itemID.get(i) + "\n";
+                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
             }
             orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());    //removes the object from queue and assigns it to next order object
         }
@@ -41,7 +44,7 @@ public class OrderDataController {
             quantities = orderData.getOnSiteQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){
                 input += quantities.get(i) + " " ;
-                input += itemID.get(i) + "\n";
+                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
             }
             orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());
         }
@@ -51,7 +54,7 @@ public class OrderDataController {
             quantities = orderData.getPhoneQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){
                 input += quantities.get(i) + " " ;
-                input += itemID.get(i) + "\n";
+                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
             }
             orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
         }
@@ -61,7 +64,7 @@ public class OrderDataController {
             quantities = orderData.getDoorDashQueue().peek().getQuantities();
             for(int i = 0;i < itemID.size(); i++){
                 input += quantities.get(i) + " " ;
-                input += itemID.get(i) + "\n";
+                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
             }
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
