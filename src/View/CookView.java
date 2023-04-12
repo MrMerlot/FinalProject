@@ -40,7 +40,7 @@ public class CookView extends Application {
         setLayout();
     }
     public void setLayout(){
-        nextOrderLabel.setLayoutX(900);                  //setting the x-axis
+        nextOrderLabel.setLayoutX(870);                  //setting the x-axis
         nextOrderLabel.setLayoutY(10);                  //setting the y-axis
 
         toggleView.setLayoutX(0);                       //setting the x-axis
