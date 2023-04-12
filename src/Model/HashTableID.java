@@ -8,7 +8,10 @@ public class HashTableID {
     private HashMap<Integer, Double> itemPriceTable = new HashMap<>();
 
 
-    public HashTableID(){  }
+    public HashTableID(){
+        createItemIDTable();
+        createitemPriceTable();
+    }
     public String getItemIDName( int ID ){
         return itemIDTable.get( ID );
     }
