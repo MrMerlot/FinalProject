@@ -11,15 +11,16 @@ import java.util.*;
 
 public class FileWriterController extends FileWriter {
     public static File file = new File("savedData.txt");
-    public static OrderData o = new OrderData();
+    //Creates a static file to save the orders in
 
     public FileWriterController() throws IOException {
         super(file);
     }
+    //constructor
 
     public void writeToFile(Order order,FileWriterController fileWriter) throws IOException {
         /**
-        // * HEADER
+         * -HEADER-
          * ORDER TYPE
          * [ItemID, ItemID, ItemID]
          * [Quantity, Quantity, Quantity]
@@ -28,49 +29,57 @@ public class FileWriterController extends FileWriter {
          * TIMES SKIPPED
          * IS COMPLETED
          **/
+        //Order storage template
         try {
           //  fileWriter.write("HEADER"+String.format("%n"));
             fileWriter.write(order.getName()+String.format("%n"));
+            //Writes in order name and then ends the line
             fileWriter.write(order.getOrderNumber()+String.format("%n"));
-        fileWriter.write(order.getOrderType()+String.format("%n")); //order type
+            //Writes in order number and then ends the line
+        fileWriter.write(order.getOrderType()+String.format("%n"));
+            //Writes in order type and then ends the line
         fileWriter.write(String.valueOf(order.getItemID())+String.format("%n"));
+            //Writes in order items as an array and then ends the line
         fileWriter.write(String.valueOf(order.getQuantities())+String.format("%n"));
+            //Writes in order quantities as an array and then ends the line
         fileWriter.write(order.getIfSkipped()+String.format("%n"));
-        if(order.getIsComplete()) {fileWriter.write("Completed"+String.format("%n"));}
-        else{fileWriter.write("Incomplete"+String.format("%n"));}
+            //Writes in order times skipped and then ends the line
+            fileWriter.write((order.getIsComplete()+String.format("%n")));
+            //Writes in order completion status and then ends the line
         }
         catch(IOException e){
             e.getStackTrace();
-            System.out.println("Exception");
+            //Catches exception
         }
     }
-    public List<Integer> toIntArray(String x){
-        x=x.replace("[","");
-        x=x.replace("]","");
-        x=x.replace(" ","");
-        String[] y = x.split(",");
+    public List<Integer> toIntArray(String x){ //Converts the string line to int array
+        x=x.replace("[",""); //Removes initial bracket for the input string
+        x=x.replace("]",""); //Removes final bracket for the input string
+        x=x.replace(" ",""); //Removes all spaces from the input string
+        String[] y = x.split(","); //Splits the string into a string array at commas
         List<Integer> array = new ArrayList<>();
         for(int i=0;i<y.length;i++){
-            array.add(i,Integer.parseInt(y[i]));
+            array.add(i,Integer.parseInt(y[i])); //Converts string array to integer list
         }
         return array;
     }
-    public OrderData readInFile(File file) throws FileNotFoundException {
-        Scanner s = new Scanner(file);
-        String temp;
+    public OrderData readInFile(File file, OrderData o) throws FileNotFoundException {
+        Scanner s = new Scanner(file); //Read in from file
         while(s.hasNextLine()) {
-            Order order = new Order(s.nextLine(), Integer.parseInt(s.nextLine()),
-                    Integer.parseInt(s.nextLine()));
-            order.setItemID(toIntArray(s.nextLine()));
-            order.setQuantities(toIntArray(s.nextLine()));
-            order.setSkipped(Integer.parseInt(s.nextLine()));
-            order.setComplete(s.nextLine());
-            o.addOrder(order);
+            Order order = new Order(s.nextLine(), //Creates an order object based on the first 3 lines of
+                    Integer.parseInt(s.nextLine()), // the file read in
+                    Integer.parseInt(s.nextLine())); //name, number, type
+            order.setItemID(toIntArray(s.nextLine())); //adds ItemID's to order
+            order.setQuantities(toIntArray(s.nextLine())); //adds Quantities to order
+            order.setSkipped(Integer.parseInt(s.nextLine())); //sets skipped count to order
+            order.setComplete(s.nextLine());//sets the order completion status
+            o.addOrder(order); //adds order to static order data
         }
-        return o;
+        return o; //returns order data
     }
 
     public static void main(String[] args) throws IOException {
+        //Creates test case
         FileWriterController f = new FileWriterController();
         OrderData orderData = new OrderData();
         Order order = new Order("Order1 DD", 1, 4);
@@ -91,11 +100,8 @@ public class FileWriterController extends FileWriter {
             f.writeToFile(order2,f);
             f.close();
 
-            //o.addOrder(f.readInFile(file));
-            //o.addOrder(f.readInFile(file));
-            //o.addOrder(f.readInFile(file));
-            f.readInFile(file);
-            Queue<Order> x = o.getPhoneQueue();
+            f.readInFile(file,orderData);
+            Queue<Order> x = orderData.getPhoneQueue();
             for(int i=0;i<x.size();i++){
                 System.out.println(x.poll().getName());
             }
@@ -106,7 +112,6 @@ public class FileWriterController extends FileWriter {
         }
         System.out.println("done");
 
-//Commit
     }
 }
 
