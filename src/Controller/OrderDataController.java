@@ -16,6 +16,7 @@ public class OrderDataController {
      */
     public void setCurrentOrder(){
         orderData.setCurrentOrderObject(orderData.getNextOrderObject());
+        orderData.setCurrentOrder(orderData.getNextOrder());
         setNextOrder();
      }
 
