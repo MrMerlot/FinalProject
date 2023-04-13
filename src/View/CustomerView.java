@@ -161,8 +161,8 @@ public class CustomerView extends Application {
      */
     private void setMenu(){
         //  Creates togglegroups
-        menuToggleG1 = new ToggleGroup();
-        drinkToggleG = new ToggleGroup();
+        menuToggleG1 = new ToggleGroup( );
+        drinkToggleG = new ToggleGroup( );
         mealToggleG = new ToggleGroup();
         sidesToggleG = new ToggleGroup();
         icedToggleG = new ToggleGroup();

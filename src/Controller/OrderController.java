@@ -53,7 +53,7 @@ public class OrderController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
 
                 customerName = cv.getNameButton().getText();
-                orderType = getType();
+                orderType = getType( );
                 orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
                 Order order;
                 cv.addOrderNumber();
