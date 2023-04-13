@@ -6,12 +6,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import sun.font.FontStrikeDesc;
-
 import java.util.ArrayList;
 
 public class CustomerView extends Application {
-
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
@@ -493,7 +490,7 @@ public class CustomerView extends Application {
      */
     public RadioButton getDriveRadio() { return driveRadio; }
 
-    public static void main(String[] args) throws Exception {
-        Application.launch();
+    public static void main(String[] args) {
+        Application.launch(args);
     }
 }
