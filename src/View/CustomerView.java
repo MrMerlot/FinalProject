@@ -272,7 +272,6 @@ public class CustomerView extends Application {
      * Sets the quantitySlider
      */
     private void setSlider(){
-
         quantitySlider.setMax(5);
         quantitySlider.setMin(1);
         quantitySlider.setMajorTickUnit(1);
