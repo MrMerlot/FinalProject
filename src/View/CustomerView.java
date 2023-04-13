@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import sun.font.FontStrikeDesc;
 
 import java.util.ArrayList;
 
@@ -14,13 +15,13 @@ public class CustomerView extends Application {
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
-    private Label promptLabel = new Label("Order Type? \n\nName?");
+    private Label promptLabel = new Label("Order Type? \n\n\n\n\nName?");
     private Label cancelLabel = new Label("Cancel Order #");
     private TextField cancelField = new TextField("");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
     private TextField nameField = new TextField();
-    private TextField typeField = new TextField();
+    //private TextField typeField = new TextField();
     private Label priceLabel = new Label("Price");
     private Label menuLabel = new Label("Menu:");
     private CookView cookView = new CookView();
@@ -31,12 +32,13 @@ public class CustomerView extends Application {
             pickles, friedOreos, drinks, meals, sides, done, icedTea, water,
             hotCoffee, hotChoco, cheeseBurger, pineapplePizza, icedNoodles, watermelonSalad;
     private ToggleGroup menuToggleG1, drinkToggleG, mealToggleG, sidesToggleG,
-            icedToggleG, hotDrinkToggleG, hotMealToggle, coldMealToggle;
+            icedToggleG, hotDrinkToggleG, hotMealToggle, coldMealToggle, orderTypeToggle;
 
     private Slider quantitySlider = new Slider();
     private Button addToOrder = new Button("Add selected item(s) to order");
     private ArrayList<Integer> itemID = new ArrayList<>();
     private ArrayList<Integer> itemQuantity = new ArrayList<>();
+    private RadioButton doorDRadio, driveRadio, onsiteRadio, phoneRadio;
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
@@ -68,7 +70,7 @@ public class CustomerView extends Application {
 
         orderLabel.setLayoutX(900);
         orderNumberLabel.setLayoutX(950);
-        promptLabel.setLayoutY(100);
+        promptLabel.setLayoutY(50);
         cancelLabel.setLayoutY(500);
         cancelLabel.setLayoutX(900);
         priceLabel.setLayoutX(470);
@@ -76,8 +78,6 @@ public class CustomerView extends Application {
         cancelField.setLayoutX(980);
         cancelField.setLayoutY(500);
         cancelField.setMaxWidth(20);
-        typeField.setLayoutX(100);
-        typeField.setLayoutY(100);
         nameField.setLayoutX(100);
         nameField.setLayoutY(135);
         toggleView.setLayoutY(570);
@@ -129,6 +129,15 @@ public class CustomerView extends Application {
         cheeseBurger.setLayoutX(200);
         watermelonSalad.setLayoutX(200);
         icedNoodles.setLayoutX(200);
+
+        onsiteRadio.setLayoutY(50);
+        onsiteRadio.setLayoutX(100);
+        phoneRadio.setLayoutY(70);
+        phoneRadio.setLayoutX(100);
+        doorDRadio.setLayoutY(90);
+        doorDRadio.setLayoutX(100);
+        driveRadio.setLayoutX(100);
+        driveRadio.setLayoutY(110);
     }
 
     /**
@@ -139,10 +148,10 @@ public class CustomerView extends Application {
     private Group addNodes(){
         Group g = new Group();
         g.getChildren().addAll(customerLabel, orderLabel, promptLabel,
-                cancelField, toggleView, submitButton, cancelLabel, nameField,
-                typeField, priceLabel, menuLabel, orderNumberLabel, meals,
-                drinks, sides, done, drinkGroup, mealGroup, sideGroup, icedGroup, hotDrinkGroup,
-                hotMealGroup, coldMealGroup, addToOrder, quantitySlider);
+                cancelField, toggleView, submitButton, cancelLabel, nameField, priceLabel,
+                menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
+                sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
+                quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio);
 
         return g;
     }
@@ -160,6 +169,7 @@ public class CustomerView extends Application {
         hotDrinkToggleG = new ToggleGroup();
         coldMealToggle = new ToggleGroup();
         hotMealToggle = new ToggleGroup();
+        orderTypeToggle = new ToggleGroup();
 
 
         // First layer of menu
@@ -211,6 +221,20 @@ public class CustomerView extends Application {
         cheeseBurger.setToggleGroup(hotMealToggle);
         watermelonSalad.setToggleGroup(coldMealToggle);
         icedNoodles.setToggleGroup(coldMealToggle);
+
+        //  Handles the order type radio buttons.
+        onsiteRadio = new RadioButton("Onsite");
+        phoneRadio = new RadioButton("Phone");
+        driveRadio = new RadioButton("Drivethrough");
+        doorDRadio = new RadioButton("DoorDash");
+
+        onsiteRadio.setToggleGroup(orderTypeToggle);
+        phoneRadio.setToggleGroup(orderTypeToggle);
+        doorDRadio.setToggleGroup(orderTypeToggle);
+        driveRadio.setToggleGroup(orderTypeToggle);
+
+        orderTypeToggle.selectToggle(onsiteRadio);
+
 
         //  Handles the groups
         drinkGroup = new Group(hotDrink, coldDrink);
@@ -272,12 +296,6 @@ public class CustomerView extends Application {
      * @return  nameField
      */
     public TextField getNameButton(){ return nameField; }
-
-    /**
-     * Gets typeField
-     * @return typeField
-     */
-    public TextField getOrderType(){ return typeField; }
 
     /**
      * Gets the order number
@@ -451,6 +469,26 @@ public class CustomerView extends Application {
      * @return  pickles
      */
     public RadioButton getPickles() { return pickles; }
+
+    /**
+     * @return  onsiteRadio
+     */
+    public RadioButton getOnsiteRadio() { return onsiteRadio; }
+
+    /**
+     * @return  doorDRadio
+     */
+    public RadioButton getDoorDRadio() { return doorDRadio; }
+
+    /**
+     * @return  phoneRadio
+     */
+    public RadioButton getPhoneRadio() { return phoneRadio; }
+
+    /**
+     * @return  driveRadio
+     */
+    public RadioButton getDriveRadio() { return driveRadio; }
 
     public static void main(String[] args) throws Exception {
 

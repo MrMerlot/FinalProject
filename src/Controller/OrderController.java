@@ -53,14 +53,15 @@ public class OrderController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
 
                 customerName = cv.getNameButton().getText();
-                orderType = Integer.parseInt( cv.getOrderType().getText() );
+                orderType = getType();
+                System.out.println(orderType);
                 orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
                 Order order;
                 cv.addOrderNumber();
 
-                if( orderType == 1 ) order = new DoorDash( customerName, orderNumber, orderType);
-                else if( orderType == 2 ) order = new DriveThrough( customerName, orderNumber, orderType );
-                else if( orderType == 3 ) order = new Onsite( customerName, orderNumber, orderType);
+                if( orderType == 4 ) order = new DoorDash( customerName, orderNumber, orderType);
+                else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber, orderType );
+                else if( orderType == 2 ) order = new Onsite( customerName, orderNumber, orderType);
                 else order = new Phone( customerName, orderNumber, orderType);
 
                 for( int i = 0; i < cv.getItemID().size(); i++ ){
@@ -190,5 +191,16 @@ public class OrderController implements EventHandler<ActionEvent> {
         }
 
         return id;
+    }
+
+    private int getType(){
+        int type = 0;
+
+        if( cv.getDriveRadio().isSelected() ) type = 1;
+        else if( cv.getOnsiteRadio().isSelected() ) type = 2;
+        else if( cv.getPhoneRadio().isSelected() ) type = 3;
+        else if( cv.getDoorDRadio().isSelected() ) type = 4;
+
+        return type;
     }
 }
