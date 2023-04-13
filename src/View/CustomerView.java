@@ -10,13 +10,13 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class CustomerView extends Application {
-
+    Stage primaryStage = new Stage();
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
     private Label promptLabel = new Label("Order Type? \n\nName?");
     private Label cancelLabel = new Label("Cancel Order #");
-    private TextField cancelField = new TextField("");
+    private TextField cancelField = new TextField("__");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
     private TextField nameField = new TextField();
@@ -43,7 +43,7 @@ public class CustomerView extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage secondStage) throws Exception {
 
         setMenu();
         setPositions();
@@ -257,7 +257,6 @@ public class CustomerView extends Application {
         quantitySlider.setSnapToTicks(true);
         quantitySlider.setMinorTickCount(0);
         quantitySlider.setValue(1);
-
     }
 
     /**
@@ -398,6 +397,11 @@ public class CustomerView extends Application {
     public ArrayList<Integer> getItemQuantity() { return itemQuantity; }
 
     /**
+     * @return  icedToggleG
+     */
+    public ToggleGroup getIcedToggleG(){ return icedToggleG; }
+
+    /**
      * @return  icedTea RadioButton
      */
     public RadioButton getIcedTea() { return icedTea; }
@@ -407,53 +411,7 @@ public class CustomerView extends Application {
      */
     public RadioButton getWater() { return water; }
 
-    /**
-     * @return  icedNoodles Radiobutton
-     */
-    public RadioButton getIcedNoodles() { return icedNoodles; }
-
-    /**
-     * @return  hotCoffee radiobutton
-     */
-    public RadioButton getHotCoffee() { return hotCoffee; }
-
-    /**
-     * @return  hotChoco
-     */
-    public RadioButton getHotChoco() { return hotChoco; }
-
-    /**
-     * @return  watermelonSalad
-     */
-    public RadioButton getWatermelonSalad() { return watermelonSalad; }
-
-    /**
-     * @return  pineapplePizza
-     */
-    public RadioButton getPineapplePizza() { return pineapplePizza; }
-
-    /**
-     * @return  cheeseBurger
-     */
-    public RadioButton getCheeseBurger() { return cheeseBurger; }
-
-    /**
-     * @return  fries
-     */
-    public RadioButton getFries() { return fries; }
-
-    /**
-     * @return  friedOreos
-     */
-    public RadioButton getFriedOreos() { return friedOreos; }
-
-    /**
-     * @return  pickles
-     */
-    public RadioButton getPickles() { return pickles; }
-
     public static void main(String[] args) throws Exception {
-
         Application.launch();
     }
 }
