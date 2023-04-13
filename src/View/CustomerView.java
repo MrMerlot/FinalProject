@@ -21,7 +21,6 @@ public class CustomerView extends Application {
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
     private TextField nameField = new TextField();
-    //private TextField typeField = new TextField();
     private Label priceLabel = new Label("Price");
     private Label menuLabel = new Label("Menu:");
     private CookView cookView;
