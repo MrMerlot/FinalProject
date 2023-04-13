@@ -54,7 +54,6 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 customerName = cv.getNameButton().getText();
                 orderType = getType();
-                System.out.println(orderType);
                 orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
                 Order order;
                 cv.addOrderNumber();
