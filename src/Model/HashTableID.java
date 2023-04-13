@@ -29,6 +29,7 @@ public class HashTableID {
         itemIDTable.put( 9, "Fries");
         itemIDTable.put( 10, "Fried Oreos");
         itemIDTable.put( 11, "Pickles");
+        itemIDTable.put(12, "The Special");
     }
 
     public void createitemPriceTable(){
@@ -43,5 +44,6 @@ public class HashTableID {
         itemPriceTable.put( 9, 15.99);
         itemPriceTable.put( 10, 13.99);
         itemPriceTable.put( 11, 22.99);
+        itemPriceTable.put(12, 99.99);
     }
 }
