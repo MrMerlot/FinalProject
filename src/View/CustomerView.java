@@ -491,7 +491,6 @@ public class CustomerView extends Application {
     public RadioButton getDriveRadio() { return driveRadio; }
 
     public static void main(String[] args) throws Exception {
-
         Application.launch();
     }
 }
