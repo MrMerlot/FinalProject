@@ -24,7 +24,7 @@ public class CustomerView extends Application {
     //private TextField typeField = new TextField();
     private Label priceLabel = new Label("Price");
     private Label menuLabel = new Label("Menu:");
-    private CookView cookView = new CookView();
+    private CookView cookView;
     private Scene scene;
     private Group group, drinkGroup, mealGroup, sideGroup, icedGroup,
     hotDrinkGroup, coldMealGroup, hotMealGroup;
@@ -42,6 +42,10 @@ public class CustomerView extends Application {
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
+
+    public CustomerView() {
+        cookView = new CookView();
+    }
 
 
     @Override
