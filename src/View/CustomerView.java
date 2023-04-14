@@ -160,7 +160,7 @@ public class CustomerView extends Application {
      * Sets the menu radio buttons.
      */
     private void setMenu(){
-        //  Creates togglegroups
+        //  Creates toggle groups
         menuToggleG1 = new ToggleGroup( );
         drinkToggleG = new ToggleGroup( );
         mealToggleG = new ToggleGroup();
