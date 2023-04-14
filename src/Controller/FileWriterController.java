@@ -20,11 +20,11 @@ public class FileWriterController extends FileWriter {
 
     public void writeToFile(Order order,FileWriterController fileWriter) throws IOException {
         /**
+         * CUSTOMER NAME
+         * ORDER NUMBER
          * ORDER TYPE
          * [ItemID, ItemID, ItemID]
          * [Quantity, Quantity, Quantity]
-         * ORDER NUMBER
-         * CUSTOMER NAME
          * TIMES SKIPPED
          * IS COMPLETED
          **/

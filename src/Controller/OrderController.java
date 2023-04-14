@@ -67,7 +67,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                 String items = "";//test
                 for( int i = 0; i < cv.getItemID().size(); i++ ){
                     order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
-                    items += cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i) + "\n";//test
+                    items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
                 }
 
                 System.out.println(customerName+" "+orderNumber+" "+orderType+ " "+items);//test
