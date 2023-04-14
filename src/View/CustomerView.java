@@ -6,12 +6,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import sun.font.FontStrikeDesc;
-
 import java.util.ArrayList;
 
 public class CustomerView extends Application {
-
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
@@ -21,7 +18,6 @@ public class CustomerView extends Application {
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
     private TextField nameField = new TextField();
-    //private TextField typeField = new TextField();
     private Label priceLabel = new Label("Price");
     private Label menuLabel = new Label("Menu:");
     private CookView cookView;
@@ -276,7 +272,6 @@ public class CustomerView extends Application {
      * Sets the quantitySlider
      */
     private void setSlider(){
-
         quantitySlider.setMax(5);
         quantitySlider.setMin(1);
         quantitySlider.setMajorTickUnit(1);
@@ -494,7 +489,7 @@ public class CustomerView extends Application {
      */
     public RadioButton getDriveRadio() { return driveRadio; }
 
-    public static void main(String[] args) throws Exception {
-        Application.launch();
+    public static void main(String[] args) {
+        Application.launch(args);
     }
 }

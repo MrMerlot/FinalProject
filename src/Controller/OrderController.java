@@ -63,9 +63,14 @@ public class OrderController implements EventHandler<ActionEvent> {
                 else if( orderType == 2 ) order = new Onsite( customerName, orderNumber, orderType);
                 else order = new Phone( customerName, orderNumber, orderType);
 
+
+                String items = "";//test
                 for( int i = 0; i < cv.getItemID().size(); i++ ){
                     order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
+                    items += cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i) + "\n";//test
                 }
+
+                System.out.println(customerName+" "+orderNumber+" "+orderType+ " "+items);//test
 
                 cv.getItemID().clear();
                 cv.getItemQuantity().clear();

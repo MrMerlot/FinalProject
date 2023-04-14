@@ -53,14 +53,8 @@ public class CookController implements EventHandler<ActionEvent> {
         orderData.setOnSiteQueue(test4);
 
     }
-
-    public static void main(String[] args) {
-
-    }
-
-
     /**
-     * resets the V
+     * resets the Vbox
      */
     public void resetVbox(){
         if (!cookView.getPickupOrders().isSelected()){
@@ -90,7 +84,6 @@ public class CookController implements EventHandler<ActionEvent> {
                 vBox.getChildren().add(po);                             //adding each Radio Button to the vBox
 
             }
-
             vBox.setLayoutX(400);                                       //setting the x-axis
             vBox.setLayoutY(100);                                       //setting the y-axis
             vBox.setSpacing(10);                                        //setting the spacing between each RB
@@ -100,10 +93,7 @@ public class CookController implements EventHandler<ActionEvent> {
             vBox.visibleProperty().bind(cookView.getPickupOrders().selectedProperty());//sets when Vbox is Visible
             tempVbox = vBox;                                                //setting the vbox to a temporary Vbox
             cookView.setPane(tempVbox);                                    //sending it to the Pane in view to be shown
-
-
         }
-
 
 
 
@@ -137,7 +127,7 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getToggleView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {              //this is a test case, will be changed
-                System.out.println("NOt hsidoaf");
+                System.out.println("Switching View...");
             }
         });
 
