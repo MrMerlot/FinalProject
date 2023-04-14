@@ -20,7 +20,6 @@ public class FileWriterController extends FileWriter {
 
     public void writeToFile(Order order,FileWriterController fileWriter) throws IOException {
         /**
-         * -HEADER-
          * ORDER TYPE
          * [ItemID, ItemID, ItemID]
          * [Quantity, Quantity, Quantity]
@@ -31,7 +30,6 @@ public class FileWriterController extends FileWriter {
          **/
         //Order storage template
         try {
-          //  fileWriter.write("HEADER"+String.format("%n"));
             fileWriter.write(order.getName()+String.format("%n"));
             //Writes in order name and then ends the line
             fileWriter.write(order.getOrderNumber()+String.format("%n"));
@@ -102,7 +100,8 @@ public class FileWriterController extends FileWriter {
             f.readInFile(file,orderData);
             Queue<Order> x = orderData.getPhoneQueue();
             for(int i=0;i<x.size();i++){
-                System.out.println(x.poll().getName());
+                System.out.println(x.peek().getName()+" "+x.peek().getOrderNumber()+" "+x.peek().getItemID()+" "+x.peek().getQuantities());
+                x.poll();
             }
         }
         catch (IOException e) {
