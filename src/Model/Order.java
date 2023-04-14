@@ -127,12 +127,6 @@ public class Order {
     public int getOrderType(){return orderType;}
 
     /**
-     * Checks if the order is complete or not.
-     * @return complete
-     */
-    public boolean checkComplete() { return complete; }
-
-    /**
      * Sets the order as complete
      */
     public void completeOrder() { complete = true; }
