@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class DoorDash extends Order {
 
-    public DoorDash( String name, int orderNumber, int orderType ) {
+    public DoorDash( String name, int orderNumber) {
 
-        super( name, orderNumber, orderType );
+        super( name, orderNumber, 4 );
     }
 }

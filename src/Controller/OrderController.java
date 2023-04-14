@@ -58,10 +58,10 @@ public class OrderController implements EventHandler<ActionEvent> {
                 Order order;
                 cv.addOrderNumber();
 
-                if( orderType == 4 ) order = new DoorDash( customerName, orderNumber, orderType);
-                else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber, orderType );
-                else if( orderType == 2 ) order = new Onsite( customerName, orderNumber, orderType);
-                else order = new Phone( customerName, orderNumber, orderType);
+                if( orderType == 4 ) order = new DoorDash( customerName, orderNumber);
+                else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber);
+                else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
+                else order = new Phone( customerName, orderNumber);
 
 
                 String items = "";//test
