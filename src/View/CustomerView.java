@@ -64,7 +64,7 @@ public class CustomerView extends Application {
     }
 
     /**
-     * Sets the positions of buttons or labels
+     * Sets the positions of buttons or labelsss
      */
     private void setPositions(){
 
