@@ -59,11 +59,10 @@ public class CustomerView extends Application {
         setSlider();
 
         group = addNodes();
-
-        scene = new Scene(group, 1000,600);
+        setScene();
 
         primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
+        toggle();
         System.out.println();
         primaryStage.setTitle("CustomerView");
         primaryStage.show();
@@ -504,12 +503,21 @@ public class CustomerView extends Application {
     public Scene getScene(){
         return firstScene;
     }
+
     public void toggle(){
         if( toggle ) scene = getScene();
         else scene = cookView.getSecondScene();
 
         stage.setScene(scene);
+
+        setToggle();
     }
+
+    public void setScene(){
+        firstScene = new Scene( group, 500,500 );
+    }
+
+    public void setToggle(){ toggle = !toggle; }
 
 
 }
