@@ -45,6 +45,13 @@ public class OrderController implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
+
+        cv.getCancel().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
         /**
          * When submit is hit, a new order is created
          */
