@@ -1,6 +1,7 @@
 package View;
 
 import Controller.OrderController;
+import Controller.OrderDataController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -22,6 +23,7 @@ public class CustomerView extends Application {
     private TextField cancelField = new TextField("");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
+    private Button cancelButton = new Button(" ");
     private TextField nameField = new TextField();
     private Label priceLabel = new Label("Price");
     private Label menuLabel = new Label("Menu:");
@@ -59,11 +61,10 @@ public class CustomerView extends Application {
         setSlider();
 
         group = addNodes();
-
-        scene = new Scene(group, 1000,600);
+        setScene();
 
         primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
+        toggle();
         System.out.println();
         primaryStage.setTitle("CustomerView");
         primaryStage.show();
@@ -79,6 +80,8 @@ public class CustomerView extends Application {
         promptLabel.setLayoutY(50);
         cancelLabel.setLayoutY(500);
         cancelLabel.setLayoutX(900);
+        cancelButton.setLayoutY(550);
+        cancelButton.setLayoutX(880);
         priceLabel.setLayoutX(470);
         priceLabel.setLayoutY(570);
         cancelField.setLayoutX(980);
@@ -157,7 +160,7 @@ public class CustomerView extends Application {
                 cancelField, toggleView, submitButton, cancelLabel, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
-                quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio);
+                quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton);
 
         return g;
     }
@@ -261,6 +264,7 @@ public class CustomerView extends Application {
     }
 
     private void setActions() {
+        cancelButton.setOnAction(orderController);
         submitButton.setOnAction(orderController);
         nameField.setOnAction(orderController);
         hotDrink.setOnAction(orderController);
@@ -289,6 +293,8 @@ public class CustomerView extends Application {
 
     }
 
+
+    public Button getCancel(){return cancelButton;}
     /**
      * Gets the submit button.
      *
@@ -504,12 +510,21 @@ public class CustomerView extends Application {
     public Scene getScene(){
         return firstScene;
     }
+
     public void toggle(){
         if( toggle ) scene = getScene();
         else scene = cookView.getSecondScene();
 
         stage.setScene(scene);
+
+        setToggle();
     }
 
+    public void setScene(){
+        firstScene = new Scene( group, 500,500 );
+    }
 
+    public void setToggle(){ toggle = !toggle; }
+
+    public String getCanceledOrder(){return cancelField.getText();}
 }

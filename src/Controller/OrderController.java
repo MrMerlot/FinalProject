@@ -21,6 +21,7 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int orderType;
     private int orderNumber;
     private boolean flip = false;
+    private OrderDataController orderDataController = new OrderDataController();
 
     private ArrayList<Order> ordersArrayList = new ArrayList<>();
 
@@ -46,6 +47,13 @@ public class OrderController implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
+
+        cv.getCancel().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                orderDataController.cancelOrder(cv.getCanceledOrder());
+            }
+        });
 
         /**
          * When submit is hit, a new order is created
