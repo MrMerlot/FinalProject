@@ -48,7 +48,6 @@ public class CustomerView extends Application {
 
     public CustomerView() {
         cookView = new CookView(this);
-
     }
 
 
