@@ -9,7 +9,14 @@ import java.util.Queue;
 
 public class OrderDataController {
     OrderData orderData = new OrderData();
-     public OrderDataController(){}
+    OrderController orderController;
+    CookController cookController;
+     public OrderDataController(OrderController orderController){
+         this.orderController = orderController;
+     }
+     public OrderDataController(CookController cookController){
+         this.cookController = cookController;
+     }
 
     /**
      * sets the current order to the next order and calls function to replace next order

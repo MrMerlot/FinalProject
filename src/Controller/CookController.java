@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 
 public class CookController implements EventHandler<ActionEvent> {
 
-    OrderDataController orderDataController = new OrderDataController();
+    OrderDataController orderDataController = new OrderDataController(this);
     OrderData orderData = new OrderData();      //new instance of OrderData
     CookView cookView;                          //instance of CookView
     ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
