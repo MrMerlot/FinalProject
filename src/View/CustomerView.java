@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class CustomerView extends Application {
+    public boolean toggle = true;
+
+    public Scene firstScene;
+
+    public Stage stage = new Stage();
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
@@ -40,7 +45,8 @@ public class CustomerView extends Application {
     private OrderController orderController = new OrderController(this);
 
     public CustomerView() {
-        cookView = new CookView();
+        cookView = new CookView(this);
+
     }
 
 
@@ -492,4 +498,18 @@ public class CustomerView extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
+
+
+
+    public Scene getScene(){
+        return firstScene;
+    }
+    public void toggle(){
+        if( toggle ) scene = getScene();
+        else scene = cookView.getSecondScene();
+
+        stage.setScene(scene);
+    }
+
+
 }

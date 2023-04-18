@@ -14,7 +14,8 @@ import javafx.stage.Stage;
 
 
 public class CookView extends Application {
-
+    CustomerView customerView1;
+    public Scene secondScene;
     private Label nextOrderLabel = new Label( "Test NO" );                         //shows next order
 
     private Button toggleView = new Button( "Switch to Customer View" );        //Switches back to the Customers View
@@ -36,7 +37,8 @@ public class CookView extends Application {
 
 
     CookController controller = new CookController(this);
-    public CookView(){
+    public CookView(CustomerView customerView){
+        customerView1 = customerView;
         setLayout();
     }
     public void setLayout(){
@@ -69,7 +71,9 @@ public class CookView extends Application {
         currentOrder.setLayoutY(150);               //setting the y-axis
 
     }
-
+    public void toggle(){
+        customerView1.toggle();
+    }
 
     /**
      * Allows the Cool Controller to access toggleView
@@ -157,6 +161,10 @@ public class CookView extends Application {
         primaryStage.setScene(scene);                           //setting the scene
         primaryStage.setResizable(false);                       //making sure the user can't resize the window
         primaryStage.show();                                    //calling show
+    }
+
+    public Scene getSecondScene(){
+        return secondScene;
     }
 
 

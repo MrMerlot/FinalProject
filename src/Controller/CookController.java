@@ -125,12 +125,7 @@ public class CookController implements EventHandler<ActionEvent> {
             }
         });
 
-        cookView.getToggleView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {              //this is a test case, will be changed
-                System.out.println("Switching View...");
-            }
-        });
+
 
 
         /**
