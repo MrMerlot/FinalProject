@@ -166,7 +166,12 @@ public class OrderController implements EventHandler<ActionEvent> {
             }
         });
 
-
+        cv.getToggleView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                cv.toggle();
+            }
+        });
     }
 
     /**

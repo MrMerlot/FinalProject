@@ -275,6 +275,7 @@ public class CustomerView extends Application {
         meals.setOnAction(orderController);
         sides.setOnAction(orderController);
         addToOrder.setOnAction(orderController);
+        toggleView.setOnAction(orderController);
     }
 
     /**
@@ -294,6 +295,7 @@ public class CustomerView extends Application {
 
 
     public Button getCancel(){return cancelButton;}
+
     /**
      * Gets the submit button.
      *
@@ -500,12 +502,6 @@ public class CustomerView extends Application {
      */
     public RadioButton getDriveRadio() { return driveRadio; }
 
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
-
-
-
     public Scene getScene(){
         return firstScene;
     }
@@ -526,4 +522,10 @@ public class CustomerView extends Application {
     public void setToggle(){ toggle = !toggle; }
 
     public String getCanceledOrder(){return cancelField.getText();}
+
+    public Button getToggleView() { return toggleView; }
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
 }
