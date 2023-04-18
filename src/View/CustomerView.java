@@ -1,6 +1,7 @@
 package View;
 
 import Controller.OrderController;
+import Controller.OrderDataController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -525,5 +526,5 @@ public class CustomerView extends Application {
 
     public void setToggle(){ toggle = !toggle; }
 
-
+    public String getCanceledOrder(){return cancelField.getText();}
 }
