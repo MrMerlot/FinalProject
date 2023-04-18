@@ -1,12 +1,17 @@
 package View;
 
+import Controller.FileWriterController;
 import Controller.OrderController;
 import Controller.OrderDataController;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CustomerView extends Application {
@@ -67,6 +72,22 @@ public class CustomerView extends Application {
         System.out.println();
         stage.setTitle("CustomerView");
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    FileWriterController fileWriterController = new FileWriterController();
+                    for(int i=0;i<orderController.getOrdersArrayListLength();i++){
+                        fileWriterController.writeToFile(orderController.getOrder(i), fileWriterController);
+                    }//commit
+                    fileWriterController.close();
+                } catch (IOException e) {
+                    System.out.println("ERROR");
+                    stage.close();
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     /**
