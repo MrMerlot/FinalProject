@@ -210,7 +210,7 @@ public class OrderController implements EventHandler<ActionEvent> {
     }
 
     public Order getOrder(int i){
-
+        return ordersArrayList.get(i);
     }
 
     public boolean hasCurrentOrder(){
