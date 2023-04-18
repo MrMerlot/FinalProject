@@ -1,21 +1,7 @@
-Order1 DD
+yg
 1
 4
-[2, 6]
-[3, 7]
-0
-true
-Order2 DT
-2
-2
-[3]
-[2]
-0
-false
-Order3 OS
-3
-1
-[1]
+[11]
 [1]
 0
 false

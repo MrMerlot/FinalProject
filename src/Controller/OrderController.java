@@ -97,7 +97,8 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 orderData.addOrder( order );
                 ordersArrayList.add(order);
-
+                orderDataController.checkQueue();
+                orderDataController.checkQueue();
             }
         });
 
