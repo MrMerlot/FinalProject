@@ -41,6 +41,16 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getHotMealGroup().setVisible(false);
     }
 
+    public Order orderNumToOrder(int orderNumber){
+        for(int i = 0; i < ordersArrayList.size(); i++){
+            if(ordersArrayList.get(i).getOrderNumber() == orderNumber)
+                return ordersArrayList.get(i);
+        }
+
+        //instead of returning null, throw an exception
+        return null;
+    }
+
     /**
      * Handles the buttons in CustomerView
      * @param event the event which occurred
@@ -51,7 +61,7 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getCancel().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                orderDataController.cancelOrder(cv.getCanceledOrder());
+                orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
             }
         });
 
@@ -210,7 +220,6 @@ public class OrderController implements EventHandler<ActionEvent> {
     }
 
     public Order getOrder(int i){
-
     }
 
     public boolean hasCurrentOrder(){
