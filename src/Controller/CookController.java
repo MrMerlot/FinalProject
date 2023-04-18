@@ -83,6 +83,7 @@ public class CookController implements EventHandler<ActionEvent> {
                 po.setToggleGroup(pickupOrdersTG);                      //setting each RB to the pickup ToggleGroup
                 vBox.getChildren().add(po);                             //adding each Radio Button to the vBox
 
+
             }
             vBox.setLayoutX(400);                                       //setting the x-axis
             vBox.setLayoutY(100);                                       //setting the y-axis
@@ -124,12 +125,7 @@ public class CookController implements EventHandler<ActionEvent> {
             }
         });
 
-        cookView.getToggleView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {              //this is a test case, will be changed
-                System.out.println("Switching View...");
-            }
-        });
+
 
 
         /**
