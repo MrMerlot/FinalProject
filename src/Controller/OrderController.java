@@ -227,15 +227,11 @@ public class OrderController implements EventHandler<ActionEvent> {
     }
 
     public Order getOrder(int i){
-        return null;
+        return ordersArrayList.get(i);
     }
 
-    public boolean hasCurrentOrder(){
-        if(orderData.getCurrentOrder().equals(null)){return true;}
-        else {return false;}
-    }
-    public Order getCurrentOrder(){
-        return orderData.getCurrentOrderObject();
+    public int getOrdersArrayListLength(){
+        return ordersArrayList.size();
     }
 
     private int getType(){
