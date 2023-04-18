@@ -84,6 +84,11 @@ public class OrderDataController {
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
+        if(orderData.getNextOrderObject() == null){
+            setNextOrder();
+            return;
+        }
+
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){            //if the next order is an O Object
             if(!orderData.getDriveThroughQueue().isEmpty()) {               //if the DT Queue has an object
                 temp.add(orderData.getNextOrderObject());
