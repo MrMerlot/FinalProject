@@ -21,7 +21,7 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int orderType;
     private int orderNumber;
     private boolean flip = false;
-    private OrderDataController orderDataController = new OrderDataController();
+    private OrderDataController orderDataController = new OrderDataController(this);
 
     private ArrayList<Order> ordersArrayList = new ArrayList<>();
 
