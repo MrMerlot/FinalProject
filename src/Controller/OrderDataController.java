@@ -153,7 +153,7 @@ public class OrderDataController {
      *
      * @param order
      */
-    public void remove(Order order){
+    public void cancelOrder(Order order){
         if(orderData.getNextOrderObject() == order){
             orderData.setNextOrder(null);
             setNextOrder();
