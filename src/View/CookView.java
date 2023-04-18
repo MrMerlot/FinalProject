@@ -39,7 +39,9 @@ public class CookView extends Application {
     CookController controller = new CookController(this);
     public CookView(CustomerView customerView){
         customerView1 = customerView;
+        pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
         setLayout();
+        setScene();
     }
     public void setLayout(){
         nextOrderLabel.setLayoutX(870);                  //setting the x-axis
@@ -71,9 +73,16 @@ public class CookView extends Application {
         currentOrder.setLayoutY(150);               //setting the y-axis
 
     }
+
     public void toggle(){
         customerView1.toggle();
     }
+
+    public void setScene(){
+        secondScene = new Scene( pane, 1000,600 );
+    }
+
+    public Scene getScene(){ return secondScene; }
 
     /**
      * Allows the Cool Controller to access toggleView

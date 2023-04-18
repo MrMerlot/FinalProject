@@ -125,7 +125,9 @@ public class CookController implements EventHandler<ActionEvent> {
             }
         });
 
-
+        cookView.getToggleView().setOnMouseClicked(event1 -> {
+            cookView.toggle();
+        });
 
 
         /**
