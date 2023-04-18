@@ -23,6 +23,8 @@ public class OrderController implements EventHandler<ActionEvent> {
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController();
 
+    private ArrayList<Order> ordersArrayList = new ArrayList<>();
+
     /**
      * Constructor that connects to CustomerView
      * @param cv
@@ -84,6 +86,8 @@ public class OrderController implements EventHandler<ActionEvent> {
                 cv.getItemQuantity().clear();
 
                 orderData.addOrder( order );
+                ordersArrayList.add(order);
+
             }
         });
 
@@ -203,6 +207,18 @@ public class OrderController implements EventHandler<ActionEvent> {
         }
 
         return id;
+    }
+
+    public Order getOrder(int i){
+
+    }
+
+    public boolean hasCurrentOrder(){
+        if(orderData.getCurrentOrder().equals(null)){return true;}
+        else {return false;}
+    }
+    public Order getCurrentOrder(){
+        return orderData.getCurrentOrderObject();
     }
 
     private int getType(){
