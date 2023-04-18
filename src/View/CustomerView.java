@@ -63,11 +63,11 @@ public class CustomerView extends Application {
         group = addNodes();
         setScene();
 
-        primaryStage.setResizable(false);
+        stage.setResizable(false);
         toggle();
         System.out.println();
-        primaryStage.setTitle("CustomerView");
-        primaryStage.show();
+        stage.setTitle("CustomerView");
+        stage.show();
     }
 
     /**
@@ -521,7 +521,7 @@ public class CustomerView extends Application {
     }
 
     public void setScene(){
-        firstScene = new Scene( group, 500,500 );
+        firstScene = new Scene( group, 1000,600 );
     }
 
     public void setToggle(){ toggle = !toggle; }
