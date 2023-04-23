@@ -102,7 +102,7 @@ public class CustomerView extends Application {
         orderNumberLabel.setLayoutX(550);
         promptLabel.setLayoutY(60);
         cancelButton.setLayoutY(495);
-        cancelButton.setLayoutX(480);
+        cancelButton.setLayoutX(460);
         priceLabel.setLayoutX(150);
         priceLabel.setLayoutY(365);
         cancelField.setLayoutX(580);
@@ -169,6 +169,8 @@ public class CustomerView extends Application {
         driveRadio.setLayoutX(100);
         driveRadio.setLayoutY(120);
     }
+
+
 
     /**
      * Adds all the nodes to a group.
@@ -283,6 +285,7 @@ public class CustomerView extends Application {
         coldMealGroup.setVisible(false);
         hotMealGroup.setVisible(false);
     }
+
 
     private void setActions() {
 
@@ -486,6 +489,9 @@ public class CustomerView extends Application {
      * @return  watermelonSalad
      */
     public RadioButton getWatermelonSalad() { return watermelonSalad; }
+    public void setCancelField(String text){
+        cancelField.setText(text);
+    }
 
     /**
      * @return  pineapplePizza

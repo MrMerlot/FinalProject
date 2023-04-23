@@ -187,6 +187,7 @@ public class OrderDataController {
         }
         else{
             //the customer requested to cancel an order that doesnt exist
+            //customer requests and order thats already completed
         }
     }
 }
