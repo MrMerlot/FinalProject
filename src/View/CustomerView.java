@@ -514,7 +514,7 @@ public class CustomerView extends Application {
     public RadioButton getDoorDRadio() { return doorDRadio; }
 
     /**
-     * @return  phoneRadio
+     * @return  phoneRadioo
      */
     public RadioButton getPhoneRadio() { return phoneRadio; }
 
