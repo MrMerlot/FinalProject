@@ -67,6 +67,12 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());
         cookView.setNextOrderLabel(orderData.getNextOrder());
     }
+    public String getCurrentOrder(){
+        return orderData.getCurrentOrder();
+    }
+    public String getNextOrder(){
+        return orderData.getNextOrder();
+    }
 
     @Override
     public void handle(ActionEvent event) {
@@ -137,26 +143,16 @@ public class CookController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 if(cookView.getCurrentOrder().getText() != "") {
-                    System.out.println("UNO");
                     orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
-
-
                     orderDataController.setCurrentOrder();                              //sets the current and next order V
-
                     cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
                     cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order
                     cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
                     cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
                 else{
-                    System.out.println("DOS");
-                    orderDataController.checkQueue();
-                    cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
-                    cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order
-                    cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
-                    cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
+                    cookView.initiateView();
                 }
-                System.out.println("CURRENT ORDER: " + orderData.getCurrentOrder());
             }
         });
 
