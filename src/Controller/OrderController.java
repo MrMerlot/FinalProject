@@ -22,8 +22,9 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int orderNumber;
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
-
     private ArrayList<Order> ordersArrayList = new ArrayList<>();
+    private HashTableID hashTableID = new HashTableID();
+
 
     /**
      * Constructor that connects to CustomerView
@@ -94,6 +95,8 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 cv.getItemID().clear();
                 cv.getItemQuantity().clear();
+
+                //cv.getPriceLabel().setText("" + getPrice(cv.getItemID(), cv.getItemQuantity()));
 
                 orderData.addOrder( order );
                 ordersArrayList.add(order);
@@ -245,4 +248,17 @@ public class OrderController implements EventHandler<ActionEvent> {
 
         return type;
     }
+//
+//    private double getPrice( ArrayList<Integer> item, ArrayList<Integer> quantity ){
+//
+//        double price = 0;
+//
+//        for( int i = 0; i < item.size(); i++ ){
+//
+//            int ID = item.get(i);
+//            price += quantity.get(i) * hashTableID.getItemPrice(ID);
+//        }
+//
+//        return price;
+//    }
 }

@@ -5,6 +5,7 @@ import Controller.OrderController;
 import Controller.OrderDataController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -22,13 +23,13 @@ public class CustomerView extends Application {
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
-    private Label promptLabel = new Label("Order Type? \n\n\n\n\nName?");
+    private Label promptLabel = new Label("Enter Order Type \n\n\n\n\nEnter Name");
     private TextField cancelField = new TextField("");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
     private Button cancelButton = new Button(" ");
     private TextField nameField = new TextField();
-    private Label priceLabel = new Label("Price");
+    private Label priceLabel = new Label("");
     private Label menuLabel = new Label("Menu:");
     private CookView cookView;
     private Scene scene;
@@ -99,30 +100,30 @@ public class CustomerView extends Application {
 
         orderLabel.setLayoutX(500);
         orderNumberLabel.setLayoutX(550);
-        promptLabel.setLayoutY(55);
+        promptLabel.setLayoutY(60);
         cancelButton.setLayoutY(495);
         cancelButton.setLayoutX(480);
-        priceLabel.setLayoutX(460);
-        priceLabel.setLayoutY(570);
+        priceLabel.setLayoutX(150);
+        priceLabel.setLayoutY(365);
         cancelField.setLayoutX(580);
         cancelField.setLayoutY(495);
         cancelField.setMaxWidth(20);
         nameField.setLayoutX(100);
-        nameField.setLayoutY(135);
+        nameField.setLayoutY(140);
         toggleView.setLayoutY(575);
         submitButton.setLayoutX(10);
-        submitButton.setLayoutY(350);
-        addToOrder.setLayoutY(300);
+        submitButton.setLayoutY(360);
+        addToOrder.setLayoutY(310);
         addToOrder.setLayoutX(160);
-        quantitySlider.setLayoutY(305);
+        quantitySlider.setLayoutY(315);
         quantitySlider.setLayoutX(10);
 
-        menuLabel.setLayoutY(200);
+        menuLabel.setLayoutY(210);
         menuLabel.setLayoutX(40);
-        drinks.setLayoutY(220);
-        meals.setLayoutY(240);
-        sides.setLayoutY(260);
-        done.setLayoutY(280);
+        drinks.setLayoutY(230);
+        meals.setLayoutY(250);
+        sides.setLayoutY(270);
+        done.setLayoutY(290);
 
         coldDrink.setLayoutY(230);
         hotDrink.setLayoutY(250);
@@ -134,39 +135,39 @@ public class CustomerView extends Application {
         coldMeal.setLayoutX(100);
         hotMeal.setLayoutX(100);
 
-        fries.setLayoutY(220);
-        friedOreos.setLayoutY(240);
-        pickles.setLayoutY(260);
+        fries.setLayoutY(230);
+        friedOreos.setLayoutY(250);
+        pickles.setLayoutY(270);
         fries.setLayoutX(100);
         friedOreos.setLayoutX(100);
         pickles.setLayoutX(100);
 
-        icedTea.setLayoutY(220);
-        water.setLayoutY(240);
+        icedTea.setLayoutY(230);
+        water.setLayoutY(250);
         icedTea.setLayoutX(200);
         water.setLayoutX(200);
-        hotCoffee.setLayoutY(220);
-        hotChoco.setLayoutY(240);
+        hotCoffee.setLayoutY(230);
+        hotChoco.setLayoutY(250);
         hotCoffee.setLayoutX(200);
         hotChoco.setLayoutX(200);
 
-        pineapplePizza.setLayoutY(220);
-        cheeseBurger.setLayoutY(240);
-        icedNoodles.setLayoutY(220);
-        watermelonSalad.setLayoutY(240);
+        pineapplePizza.setLayoutY(230);
+        cheeseBurger.setLayoutY(250);
+        icedNoodles.setLayoutY(230);
+        watermelonSalad.setLayoutY(250);
         pineapplePizza.setLayoutX(200);
         cheeseBurger.setLayoutX(200);
         watermelonSalad.setLayoutX(200);
         icedNoodles.setLayoutX(200);
 
-        onsiteRadio.setLayoutY(55);
+        onsiteRadio.setLayoutY(60);
         onsiteRadio.setLayoutX(100);
-        phoneRadio.setLayoutY(75);
+        phoneRadio.setLayoutY(80);
         phoneRadio.setLayoutX(100);
-        doorDRadio.setLayoutY(95);
+        doorDRadio.setLayoutY(100);
         doorDRadio.setLayoutX(100);
         driveRadio.setLayoutX(100);
-        driveRadio.setLayoutY(115);
+        driveRadio.setLayoutY(120);
     }
 
     /**
@@ -205,7 +206,7 @@ public class CustomerView extends Application {
         drinks = new RadioButton("Drinks");
         meals = new RadioButton("Meals");
         sides = new RadioButton("Sides");
-        done = new RadioButton("Done");
+        done = new RadioButton("Collapse");
 
         drinks.setToggleGroup(menuToggleG1);
         meals.setToggleGroup(menuToggleG1);
@@ -455,6 +456,11 @@ public class CustomerView extends Application {
      * @return  icedTea RadioButton
      */
     public RadioButton getIcedTea() { return icedTea; }
+
+    /**
+     * @return  priceLabel
+     */
+    public Label getPriceLabel() { return priceLabel; }
 
     /**
      * @return  water RadioButton
