@@ -95,23 +95,23 @@ public class CustomerView extends Application {
      */
     private void setPositions(){
 
-        orderLabel.setLayoutX(900);
-        orderNumberLabel.setLayoutX(950);
+        orderLabel.setLayoutX(500);
+        orderNumberLabel.setLayoutX(550);
         promptLabel.setLayoutY(50);
         cancelLabel.setLayoutY(500);
-        cancelLabel.setLayoutX(900);
+        cancelLabel.setLayoutX(490);
         cancelButton.setLayoutY(550);
-        cancelButton.setLayoutX(880);
-        priceLabel.setLayoutX(470);
+        cancelButton.setLayoutX(450);
+        priceLabel.setLayoutX(460);
         priceLabel.setLayoutY(570);
-        cancelField.setLayoutX(980);
-        cancelField.setLayoutY(500);
+        cancelField.setLayoutX(580);
+        cancelField.setLayoutY(495);
         cancelField.setMaxWidth(20);
         nameField.setLayoutX(100);
         nameField.setLayoutY(135);
-        toggleView.setLayoutY(570);
-        submitButton.setLayoutX(900);
-        submitButton.setLayoutY(570);
+        toggleView.setLayoutY(575);
+        submitButton.setLayoutX(10);
+        submitButton.setLayoutY(350);
         addToOrder.setLayoutY(300);
         addToOrder.setLayoutX(160);
         quantitySlider.setLayoutY(305);
@@ -514,7 +514,7 @@ public class CustomerView extends Application {
     public RadioButton getDoorDRadio() { return doorDRadio; }
 
     /**
-     * @return  phoneRadioo
+     * @return  phoneRadio
      */
     public RadioButton getPhoneRadio() { return phoneRadio; }
 
