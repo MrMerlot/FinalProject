@@ -1,6 +1,7 @@
 package View;
 
 import Controller.CookController;
+import Model.Order;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 public class CookView extends Application {
     CustomerView customerView1;
     public Scene secondScene;
-    private Label nextOrderLabel = new Label( "" );                         //shows next order
+    private Label nextOrderLabel = new Label("");                         //shows next order
 
     private Button toggleView = new Button( "Switch to Customer View" );        //Switches back to the Customers View
 
@@ -30,13 +31,13 @@ public class CookView extends Application {
 
     private final Label CV = new Label( "Cook View");                           //Label for what Vew you are in
 
-    private Label currentOrder = new Label( "" );                        //Label for the current Order
+    private Label currentOrder = new Label("");                        //Label for the current Order
 
     private Pane pane = new Pane();                                                 //Creating a new Pane
 
 
-
     CookController controller = new CookController(this);
+
     public CookView(CustomerView customerView){
         customerView1 = customerView;
         pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
@@ -163,16 +164,17 @@ public class CookView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
-
-
-
         Scene scene = new Scene(pane, 600, 600);     //instantiating scene and adding the pane & window size
         primaryStage.setScene(scene);                           //setting the scene
         primaryStage.setResizable(false);                       //making sure the user can't resize the window
         primaryStage.show();                                    //calling show
-
+        initiateView();
     }
 
+    public void initiateView(){
+        setCurrentOrderLabel(controller.getCurrentOrder());
+        setNextOrderLabel(controller.getNextOrder());
+    }
     public Scene getSecondScene(){
         return secondScene;
     }

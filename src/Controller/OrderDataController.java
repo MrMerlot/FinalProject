@@ -23,8 +23,6 @@ public class OrderDataController {
      * sets the current order to the next order and calls function to replace next order
      */
     public void setCurrentOrder(){
-        if(orderData.getNextOrderObject() == null)
-            setNextOrder();
         orderData.setCurrentOrderObject(orderData.getNextOrderObject());
         orderData.setCurrentOrder(orderData.getNextOrder());
         setNextOrder();
