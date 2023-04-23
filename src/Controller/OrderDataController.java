@@ -76,6 +76,9 @@ public class OrderDataController {
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
         orderData.setNextOrder(input);
+        if(orderData.getCurrentOrder().isEmpty()){
+            setCurrentOrder();
+        }
      }
 
     /**

@@ -99,12 +99,12 @@ public class CustomerView extends Application {
         orderNumberLabel.setLayoutX(950);
         promptLabel.setLayoutY(50);
         cancelLabel.setLayoutY(500);
-        cancelLabel.setLayoutX(900);
-        cancelButton.setLayoutY(550);
-        cancelButton.setLayoutX(880);
+        cancelLabel.setLayoutX(850);
+        cancelButton.setLayoutY(500);
+        cancelButton.setLayoutX(980);
         priceLabel.setLayoutX(470);
         priceLabel.setLayoutY(570);
-        cancelField.setLayoutX(980);
+        cancelField.setLayoutX(955);
         cancelField.setLayoutY(500);
         cancelField.setMaxWidth(20);
         nameField.setLayoutX(100);
