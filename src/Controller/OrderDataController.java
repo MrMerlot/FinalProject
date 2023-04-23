@@ -91,7 +91,6 @@ public class OrderDataController {
             setCurrentOrder();
             return;
         }
-        System.out.println("CURRENT ORDER: " + orderData.getCurrentOrder());
 
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){            //if the next order is an O Object
             if(!orderData.getDriveThroughQueue().isEmpty()) {               //if the DT Queue has an object
