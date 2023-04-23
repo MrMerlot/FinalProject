@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class CookView extends Application {
     CustomerView customerView1;
     public Scene secondScene;
-    private Label nextOrderLabel = new Label("");                         //shows next order
+    private Label nextOrderLabel = new Label("H");                         //shows next order
 
     private Button toggleView = new Button( "Switch to Customer View" );        //Switches back to the Customers View
 
@@ -168,14 +168,14 @@ public class CookView extends Application {
         primaryStage.setScene(scene);                           //setting the scene
         primaryStage.setResizable(false);                       //making sure the user can't resize the window
         primaryStage.show();                                    //calling show
-        initiateView();
     }
 
-    public void initiateView(){
+    public void setLabels(){
         setCurrentOrderLabel(controller.getCurrentOrder());
         setNextOrderLabel(controller.getNextOrder());
     }
     public Scene getSecondScene(){
+        setLabels();
         return secondScene;
     }
 

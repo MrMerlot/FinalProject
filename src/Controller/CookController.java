@@ -151,7 +151,8 @@ public class CookController implements EventHandler<ActionEvent> {
                     cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
                 else{
-                    cookView.initiateView();
+                    orderDataController.checkQueue();
+                    cookView.setLabels();
                 }
             }
         });
