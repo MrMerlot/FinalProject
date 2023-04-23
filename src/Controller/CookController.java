@@ -85,7 +85,7 @@ public class CookController implements EventHandler<ActionEvent> {
 
 
             }
-            vBox.setLayoutX(400);                                       //setting the x-axis
+            vBox.setLayoutX(200);                                       //setting the x-axis
             vBox.setLayoutY(100);                                       //setting the y-axis
             vBox.setSpacing(10);                                        //setting the spacing between each RB
             vBox.setPadding(new Insets(10));            //setting the padding(Intset)
