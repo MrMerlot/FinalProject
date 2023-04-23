@@ -79,6 +79,8 @@ public class OrderDataController {
      }
 
     /**
+     * Checks if there is a next order object and if not calls set next order
+     * Second it will make sure that the highest priority order is next up, and if
      * Checks that the next order up is the correct one, if not order is placed back into its queue
      *
      */

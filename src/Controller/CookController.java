@@ -144,6 +144,9 @@ public class CookController implements EventHandler<ActionEvent> {
                     cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
                     cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
+                else{
+                    orderDataController.checkQueue();
+                }
             }
         });
 
