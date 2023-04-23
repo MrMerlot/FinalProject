@@ -537,7 +537,7 @@ public class CustomerView extends Application {
     }
 
     public void setScene(){
-        firstScene = new Scene( group, 1000,600 );
+        firstScene = new Scene( group, 600,600 );
     }
 
     public void setToggle(){ toggle = !toggle; }
