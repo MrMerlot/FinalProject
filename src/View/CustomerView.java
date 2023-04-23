@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -16,15 +17,12 @@ import java.util.ArrayList;
 
 public class CustomerView extends Application {
     public boolean toggle = true;
-
     public Scene firstScene;
-
     public Stage stage = new Stage();
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
     private Label promptLabel = new Label("Order Type? \n\n\n\n\nName?");
-    private Label cancelLabel = new Label("Cancel Order #");
     private TextField cancelField = new TextField("");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
@@ -95,13 +93,15 @@ public class CustomerView extends Application {
      */
     private void setPositions(){
 
+        customerLabel.setFont(new Font("Arial",40));
+        customerLabel.setStyle("-fx-border-width: 2;");
+        customerLabel.setStyle("-fx-border-color: black;");
+
         orderLabel.setLayoutX(500);
         orderNumberLabel.setLayoutX(550);
-        promptLabel.setLayoutY(50);
-        cancelLabel.setLayoutY(500);
-        cancelLabel.setLayoutX(490);
-        cancelButton.setLayoutY(550);
-        cancelButton.setLayoutX(450);
+        promptLabel.setLayoutY(55);
+        cancelButton.setLayoutY(495);
+        cancelButton.setLayoutX(480);
         priceLabel.setLayoutX(460);
         priceLabel.setLayoutY(570);
         cancelField.setLayoutX(580);
@@ -159,14 +159,14 @@ public class CustomerView extends Application {
         watermelonSalad.setLayoutX(200);
         icedNoodles.setLayoutX(200);
 
-        onsiteRadio.setLayoutY(50);
+        onsiteRadio.setLayoutY(55);
         onsiteRadio.setLayoutX(100);
-        phoneRadio.setLayoutY(70);
+        phoneRadio.setLayoutY(75);
         phoneRadio.setLayoutX(100);
-        doorDRadio.setLayoutY(90);
+        doorDRadio.setLayoutY(95);
         doorDRadio.setLayoutX(100);
         driveRadio.setLayoutX(100);
-        driveRadio.setLayoutY(110);
+        driveRadio.setLayoutY(115);
     }
 
     /**
@@ -177,7 +177,7 @@ public class CustomerView extends Application {
     private Group addNodes(){
         Group g = new Group();
         g.getChildren().addAll(customerLabel, orderLabel, promptLabel,
-                cancelField, toggleView, submitButton, cancelLabel, nameField, priceLabel,
+                cancelField, toggleView, submitButton, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
                 quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton);
@@ -284,6 +284,9 @@ public class CustomerView extends Application {
     }
 
     private void setActions() {
+
+        cancelButton.setText( "Cancel Order #" );
+
         cancelButton.setOnAction(orderController);
         submitButton.setOnAction(orderController);
         nameField.setOnAction(orderController);
