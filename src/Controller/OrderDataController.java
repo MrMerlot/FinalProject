@@ -18,10 +18,13 @@ public class OrderDataController {
          this.cookController = cookController;
      }
 
+
     /**
      * sets the current order to the next order and calls function to replace next order
      */
     public void setCurrentOrder(){
+        if(orderData.getNextOrderObject() == null)
+            setNextOrder();
         orderData.setCurrentOrderObject(orderData.getNextOrderObject());
         orderData.setCurrentOrder(orderData.getNextOrder());
         setNextOrder();
@@ -76,9 +79,6 @@ public class OrderDataController {
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
         orderData.setNextOrder(input);
-        if(orderData.getCurrentOrder().isEmpty()){
-            setCurrentOrder();
-        }
      }
 
     /**
@@ -89,10 +89,11 @@ public class OrderDataController {
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
-        if(orderData.getNextOrderObject() == null){
-            setNextOrder();
+        if(orderData.getCurrentOrderObject() == null){
+            setCurrentOrder();
             return;
         }
+        System.out.println("CURRENT ORDER: " + orderData.getCurrentOrder());
 
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){            //if the next order is an O Object
             if(!orderData.getDriveThroughQueue().isEmpty()) {               //if the DT Queue has an object
