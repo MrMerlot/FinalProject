@@ -72,7 +72,7 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getSubmit().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                orderDataController.checkQueue();
+
                 customerName = cv.getNameButton().getText();
                 orderType = getType( );
                 orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
@@ -91,7 +91,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
                 }
 
-                System.out.println(customerName+" "+orderNumber+" "+orderType+ " "+items);//test
+                System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
 
                 cv.getItemID().clear();
                 cv.getItemQuantity().clear();
@@ -100,7 +100,8 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 orderData.addOrder( order );
                 ordersArrayList.add(order);
-                orderDataController.setCurrentOrder();
+                //orderDataController.setCurrentOrder();
+                orderDataController.checkQueue();
 
             }
         });
