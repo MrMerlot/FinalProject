@@ -5,9 +5,11 @@ import Controller.OrderController;
 import Controller.OrderDataController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -16,26 +18,23 @@ import java.util.ArrayList;
 
 public class CustomerView extends Application {
     public boolean toggle = true;
-
     public Scene firstScene;
-
     public Stage stage = new Stage();
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
-    private Label promptLabel = new Label("Order Type? \n\n\n\n\nName?");
-    private Label cancelLabel = new Label("Cancel Order #");
+    private Label promptLabel = new Label("Enter Order Type \n\n\n\n\nEnter Name");
     private TextField cancelField = new TextField("");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
     private Button cancelButton = new Button(" ");
     private TextField nameField = new TextField();
-    private Label priceLabel = new Label("Price");
+    private Label priceLabel = new Label("");
     private Label menuLabel = new Label("Menu:");
     private CookView cookView;
     private Scene scene;
     private Group group, drinkGroup, mealGroup, sideGroup, icedGroup,
-    hotDrinkGroup, coldMealGroup, hotMealGroup;
+            hotDrinkGroup, coldMealGroup, hotMealGroup;
     private RadioButton hotDrink, coldDrink, hotMeal, coldMeal, fries,
             pickles, friedOreos, drinks, meals, sides, done, icedTea, water,
             hotCoffee, hotChoco, cheeseBurger, pineapplePizza, icedNoodles, watermelonSalad;
@@ -95,34 +94,36 @@ public class CustomerView extends Application {
      */
     private void setPositions(){
 
-        orderLabel.setLayoutX(900);
-        orderNumberLabel.setLayoutX(950);
-        promptLabel.setLayoutY(50);
-        cancelLabel.setLayoutY(500);
-        cancelLabel.setLayoutX(900);
-        cancelButton.setLayoutY(550);
-        cancelButton.setLayoutX(880);
-        priceLabel.setLayoutX(470);
-        priceLabel.setLayoutY(570);
-        cancelField.setLayoutX(980);
-        cancelField.setLayoutY(500);
+        customerLabel.setFont(new Font("Arial",40));
+        customerLabel.setStyle("-fx-border-width: 2;");
+        customerLabel.setStyle("-fx-border-color: black;");
+
+        orderLabel.setLayoutX(500);
+        orderNumberLabel.setLayoutX(550);
+        promptLabel.setLayoutY(60);
+        cancelButton.setLayoutY(495);
+        cancelButton.setLayoutX(460);
+        priceLabel.setLayoutX(150);
+        priceLabel.setLayoutY(365);
+        cancelField.setLayoutX(580);
+        cancelField.setLayoutY(495);
         cancelField.setMaxWidth(20);
         nameField.setLayoutX(100);
-        nameField.setLayoutY(135);
-        toggleView.setLayoutY(570);
-        submitButton.setLayoutX(900);
-        submitButton.setLayoutY(570);
-        addToOrder.setLayoutY(300);
+        nameField.setLayoutY(140);
+        toggleView.setLayoutY(575);
+        submitButton.setLayoutX(10);
+        submitButton.setLayoutY(360);
+        addToOrder.setLayoutY(310);
         addToOrder.setLayoutX(160);
-        quantitySlider.setLayoutY(305);
+        quantitySlider.setLayoutY(315);
         quantitySlider.setLayoutX(10);
 
-        menuLabel.setLayoutY(200);
+        menuLabel.setLayoutY(210);
         menuLabel.setLayoutX(40);
-        drinks.setLayoutY(220);
-        meals.setLayoutY(240);
-        sides.setLayoutY(260);
-        done.setLayoutY(280);
+        drinks.setLayoutY(230);
+        meals.setLayoutY(250);
+        sides.setLayoutY(270);
+        done.setLayoutY(290);
 
         coldDrink.setLayoutY(230);
         hotDrink.setLayoutY(250);
@@ -134,40 +135,42 @@ public class CustomerView extends Application {
         coldMeal.setLayoutX(100);
         hotMeal.setLayoutX(100);
 
-        fries.setLayoutY(220);
-        friedOreos.setLayoutY(240);
-        pickles.setLayoutY(260);
+        fries.setLayoutY(230);
+        friedOreos.setLayoutY(250);
+        pickles.setLayoutY(270);
         fries.setLayoutX(100);
         friedOreos.setLayoutX(100);
         pickles.setLayoutX(100);
 
-        icedTea.setLayoutY(220);
-        water.setLayoutY(240);
+        icedTea.setLayoutY(230);
+        water.setLayoutY(250);
         icedTea.setLayoutX(200);
         water.setLayoutX(200);
-        hotCoffee.setLayoutY(220);
-        hotChoco.setLayoutY(240);
+        hotCoffee.setLayoutY(230);
+        hotChoco.setLayoutY(250);
         hotCoffee.setLayoutX(200);
         hotChoco.setLayoutX(200);
 
-        pineapplePizza.setLayoutY(220);
-        cheeseBurger.setLayoutY(240);
-        icedNoodles.setLayoutY(220);
-        watermelonSalad.setLayoutY(240);
+        pineapplePizza.setLayoutY(230);
+        cheeseBurger.setLayoutY(250);
+        icedNoodles.setLayoutY(230);
+        watermelonSalad.setLayoutY(250);
         pineapplePizza.setLayoutX(200);
         cheeseBurger.setLayoutX(200);
         watermelonSalad.setLayoutX(200);
         icedNoodles.setLayoutX(200);
 
-        onsiteRadio.setLayoutY(50);
+        onsiteRadio.setLayoutY(60);
         onsiteRadio.setLayoutX(100);
-        phoneRadio.setLayoutY(70);
+        phoneRadio.setLayoutY(80);
         phoneRadio.setLayoutX(100);
-        doorDRadio.setLayoutY(90);
+        doorDRadio.setLayoutY(100);
         doorDRadio.setLayoutX(100);
         driveRadio.setLayoutX(100);
-        driveRadio.setLayoutY(110);
+        driveRadio.setLayoutY(120);
     }
+
+
 
     /**
      * Adds all the nodes to a group.
@@ -177,7 +180,7 @@ public class CustomerView extends Application {
     private Group addNodes(){
         Group g = new Group();
         g.getChildren().addAll(customerLabel, orderLabel, promptLabel,
-                cancelField, toggleView, submitButton, cancelLabel, nameField, priceLabel,
+                cancelField, toggleView, submitButton, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
                 quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton);
@@ -205,7 +208,7 @@ public class CustomerView extends Application {
         drinks = new RadioButton("Drinks");
         meals = new RadioButton("Meals");
         sides = new RadioButton("Sides");
-        done = new RadioButton("Done");
+        done = new RadioButton("Collapse");
 
         drinks.setToggleGroup(menuToggleG1);
         meals.setToggleGroup(menuToggleG1);
@@ -283,7 +286,11 @@ public class CustomerView extends Application {
         hotMealGroup.setVisible(false);
     }
 
+
     private void setActions() {
+
+        cancelButton.setText( "Cancel Order #" );
+
         cancelButton.setOnAction(orderController);
         submitButton.setOnAction(orderController);
         nameField.setOnAction(orderController);
@@ -454,6 +461,11 @@ public class CustomerView extends Application {
     public RadioButton getIcedTea() { return icedTea; }
 
     /**
+     * @return  priceLabel
+     */
+    public Label getPriceLabel() { return priceLabel; }
+
+    /**
      * @return  water RadioButton
      */
     public RadioButton getWater() { return water; }
@@ -477,6 +489,9 @@ public class CustomerView extends Application {
      * @return  watermelonSalad
      */
     public RadioButton getWatermelonSalad() { return watermelonSalad; }
+    public void setCancelField(String text){
+        cancelField.setText(text);
+    }
 
     /**
      * @return  pineapplePizza
@@ -537,7 +552,7 @@ public class CustomerView extends Application {
     }
 
     public void setScene(){
-        firstScene = new Scene( group, 1000,600 );
+        firstScene = new Scene( group, 600,600 );
     }
 
     public void setToggle(){ toggle = !toggle; }

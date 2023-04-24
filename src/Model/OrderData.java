@@ -26,7 +26,6 @@ public class OrderData {
         else if (order instanceof DriveThrough) this.driveThroughQueue.add( order );
         else if (order instanceof  Onsite ) this.onSiteQueue.add( order );
         else this.phoneQueue.add( order );
-
     }
 
     /**

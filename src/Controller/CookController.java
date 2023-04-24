@@ -24,35 +24,35 @@ public class CookController implements EventHandler<ActionEvent> {
 
     public CookController(CookView view) {
         this.cookView = view;                   //how controller communicates with the view
-        test();
+        //test();
         resetVbox();
         setOrders();
     }
 
-    public void test() {
-        orderData.setPickupOrders("dd");
-        orderData.setPickupOrders("fsddf");
-        orderData.setPickupOrders("sdfsdfsdf");                 //this will be removed soon
-        orderData.setPickupOrders("falskdfj;alk");
-
-        orderData.setCurrentOrder("2 HotDogs 3 Burgers Hot Ice 7 Pizza 8 hot tea");
-        orderData.setNextOrder("9HotDogs 4Burgers Hot Ice 2 pizza 12 ham");
-
-        Order test = new Order("Steve",2,2);
-        test.addItem(2,6);
-        Order test2 = new Order("Billy",4,3);
-        test2.addItem(5,7);
-        Order test4 = new Order("Tom",4,3);
-        test4.addItem(8,2);
-        Order test3 = new Order("Miles",2,2);
-        test3.addItem(6,4);
-
-        orderData.setDriveThroughQueue(test);
-        orderData.setOnSiteQueue(test2);
-        orderData.setDriveThroughQueue(test3);
-        orderData.setOnSiteQueue(test4);
-
-    }
+//    public void test() {
+//        orderData.setPickupOrders("dd");
+//        orderData.setPickupOrders("fsddf");
+//        orderData.setPickupOrders("sdfsdfsdf");                 //this will be removed soon
+//        orderData.setPickupOrders("falskdfj;alk");
+//
+//        orderData.setCurrentOrder("2 HotDogs 3 Burgers Hot Ice 7 Pizza 8 hot tea");
+//        orderData.setNextOrder("9HotDogs 4Burgers Hot Ice 2 pizza 12 ham");
+//
+//        Order test = new Order("Steve",2,2);
+//        test.addItem(2,6);
+//        Order test2 = new Order("Billy",4,3);
+//        test2.addItem(5,7);
+//        Order test4 = new Order("Tom",4,3);
+//        test4.addItem(8,2);
+//        Order test3 = new Order("Miles",2,2);
+//        test3.addItem(6,4);
+//
+//        orderData.setDriveThroughQueue(test);
+//        orderData.setOnSiteQueue(test2);
+//        orderData.setDriveThroughQueue(test3);
+//        orderData.setOnSiteQueue(test4);
+//
+//    }
     /**
      * resets the Vbox
      */
@@ -66,6 +66,12 @@ public class CookController implements EventHandler<ActionEvent> {
     public void setOrders(){
         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());
         cookView.setNextOrderLabel(orderData.getNextOrder());
+    }
+    public String getCurrentOrder(){
+        return orderData.getCurrentOrder();
+    }
+    public String getNextOrder(){
+        return orderData.getNextOrder();
     }
 
     @Override
@@ -85,7 +91,7 @@ public class CookController implements EventHandler<ActionEvent> {
 
 
             }
-            vBox.setLayoutX(400);                                       //setting the x-axis
+            vBox.setLayoutX(200);                                       //setting the x-axis
             vBox.setLayoutY(100);                                       //setting the y-axis
             vBox.setSpacing(10);                                        //setting the spacing between each RB
             vBox.setPadding(new Insets(10));            //setting the padding(Intset)
@@ -136,7 +142,10 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getFinishOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(!orderData.getCurrentOrder().isEmpty()) {
+                if(cookView.getCurrentOrder().getText().equals("")){
+                    orderDataController.checkQueue();
+                }
+                else {
                     orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
                     orderDataController.setCurrentOrder();                              //sets the current and next order V
                     cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order

@@ -18,6 +18,7 @@ public class OrderDataController {
          this.cookController = cookController;
      }
 
+
     /**
      * sets the current order to the next order and calls function to replace next order
      */
@@ -79,11 +80,18 @@ public class OrderDataController {
      }
 
     /**
+     * Checks if there is a next order object and if not calls set next order
+     * Second it will make sure that the highest priority order is next up, and if
      * Checks that the next order up is the correct one, if not order is placed back into its queue
      *
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
+        if(orderData.getCurrentOrderObject() == null){
+            setCurrentOrder();
+            return;
+        }
+
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){            //if the next order is an O Object
             if(!orderData.getDriveThroughQueue().isEmpty()) {               //if the DT Queue has an object
                 temp.add(orderData.getNextOrderObject());
@@ -179,6 +187,7 @@ public class OrderDataController {
         }
         else{
             //the customer requested to cancel an order that doesnt exist
+            //customer requests and order thats already completed
         }
     }
 }

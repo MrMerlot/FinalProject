@@ -1,6 +1,7 @@
 package View;
 
 import Controller.CookController;
+import Model.Order;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 public class CookView extends Application {
     CustomerView customerView1;
     public Scene secondScene;
-    private Label nextOrderLabel = new Label( "Test NO" );                         //shows next order
+    private Label nextOrderLabel = new Label("H");                         //shows next order
 
     private Button toggleView = new Button( "Switch to Customer View" );        //Switches back to the Customers View
 
@@ -30,13 +31,13 @@ public class CookView extends Application {
 
     private final Label CV = new Label( "Cook View");                           //Label for what Vew you are in
 
-    private Label currentOrder = new Label( "test CO" );                        //Label for the current Order
+    private Label currentOrder = new Label("");                        //Label for the current Order
 
     private Pane pane = new Pane();                                                 //Creating a new Pane
 
 
-
     CookController controller = new CookController(this);
+
     public CookView(CustomerView customerView){
         customerView1 = customerView;
         pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
@@ -44,7 +45,7 @@ public class CookView extends Application {
         setScene();
     }
     public void setLayout(){
-        nextOrderLabel.setLayoutX(870);                  //setting the x-axis
+        nextOrderLabel.setLayoutX(470);                  //setting the x-axis
         nextOrderLabel.setLayoutY(10);                  //setting the y-axis
 
         toggleView.setLayoutX(0);                       //setting the x-axis
@@ -56,7 +57,7 @@ public class CookView extends Application {
         finishOrder.setLayoutY(350);                   //setting the y-axis
         finishOrder.setOnAction(controller);
 
-        showPickupOrders.setLayoutX(845);               //setting the x-axis
+        showPickupOrders.setLayoutX(445);               //setting the x-axis
         showPickupOrders.setLayoutY(350);               //setting the y-axis
         showPickupOrders.setOnAction(controller);       //sending to Cook Controller when Clicked
 
@@ -79,7 +80,7 @@ public class CookView extends Application {
     }
 
     public void setScene(){
-        secondScene = new Scene( pane, 1000,600 );
+        secondScene = new Scene( pane, 600,600 );
     }
 
     public Scene getScene(){ return secondScene; }
@@ -163,16 +164,18 @@ public class CookView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
-
-
-
-        Scene scene = new Scene(pane, 1000, 600);     //instantiating scene and adding the pane & window size
+        Scene scene = new Scene(pane, 600, 600);     //instantiating scene and adding the pane & window size
         primaryStage.setScene(scene);                           //setting the scene
         primaryStage.setResizable(false);                       //making sure the user can't resize the window
         primaryStage.show();                                    //calling show
     }
 
+    public void setLabels(){
+        setCurrentOrderLabel(controller.getCurrentOrder());
+        setNextOrderLabel(controller.getNextOrder());
+    }
     public Scene getSecondScene(){
+        setLabels();
         return secondScene;
     }
 

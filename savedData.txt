@@ -1,21 +1,35 @@
-Order1 DD
+
 1
-4
-[2, 6]
-[3, 7]
+2
+[1]
+[1]
 0
-true
-Order2 DT
+false
+
 2
 2
-[3]
+[1]
 [2]
 0
 false
-Order3 OS
+
 3
-1
+2
 [1]
+[3]
+0
+false
+
+4
+2
 [1]
+[4]
+0
+false
+
+5
+2
+[1]
+[5]
 0
 false

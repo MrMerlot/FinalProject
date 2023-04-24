@@ -22,8 +22,9 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int orderNumber;
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
-
     private ArrayList<Order> ordersArrayList = new ArrayList<>();
+    private HashTableID hashTableID = new HashTableID();
+
 
     /**
      * Constructor that connects to CustomerView
@@ -62,6 +63,7 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                cv.setCancelField("");
             }
         });
 
@@ -90,13 +92,17 @@ public class OrderController implements EventHandler<ActionEvent> {
                     items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
                 }
 
-                System.out.println(customerName+" "+orderNumber+" "+orderType+ " "+items);//test
+                System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
 
                 cv.getItemID().clear();
                 cv.getItemQuantity().clear();
 
+                //cv.getPriceLabel().setText("" + getPrice(cv.getItemID(), cv.getItemQuantity()));
+
                 orderData.addOrder( order );
                 ordersArrayList.add(order);
+                //orderDataController.setCurrentOrder();
+                orderDataController.checkQueue();
 
             }
         });
@@ -170,6 +176,7 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 cv.toggle();
+
             }
         });
     }
@@ -244,4 +251,17 @@ public class OrderController implements EventHandler<ActionEvent> {
 
         return type;
     }
+//
+//    private double getPrice( ArrayList<Integer> item, ArrayList<Integer> quantity ){
+//
+//        double price = 0;
+//
+//        for( int i = 0; i < item.size(); i++ ){
+//
+//            int ID = item.get(i);
+//            price += quantity.get(i) * hashTableID.getItemPrice(ID);
+//        }
+//
+//        return price;
+//    }
 }
