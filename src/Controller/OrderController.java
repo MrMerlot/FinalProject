@@ -94,10 +94,10 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
 
+                cv.getPriceLabel().setText( "$" + getPrice(cv.getItemID(), cv.getItemQuantity()));
+
                 cv.getItemID().clear();
                 cv.getItemQuantity().clear();
-
-                //cv.getPriceLabel().setText("" + getPrice(cv.getItemID(), cv.getItemQuantity()));
 
                 orderData.addOrder( order );
                 ordersArrayList.add(order);
@@ -251,17 +251,17 @@ public class OrderController implements EventHandler<ActionEvent> {
 
         return type;
     }
-//
-//    private double getPrice( ArrayList<Integer> item, ArrayList<Integer> quantity ){
-//
-//        double price = 0;
-//
-//        for( int i = 0; i < item.size(); i++ ){
-//
-//            int ID = item.get(i);
-//            price += quantity.get(i) * hashTableID.getItemPrice(ID);
-//        }
-//
-//        return price;
-//    }
+
+    private double getPrice( ArrayList<Integer> item, ArrayList<Integer> quantity ){
+
+        double price = 0;
+
+        for( int i = 0; i < item.size(); i++ ){
+
+            int ID = item.get(i);
+            price += quantity.get(i) * hashTableID.getItemPrice(ID);
+        }
+
+        return price;
+    }
 }

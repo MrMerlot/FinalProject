@@ -23,7 +23,7 @@ public class CustomerView extends Application {
     private Label customerLabel = new Label("Customer");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
-    private Label promptLabel = new Label("Enter Order Type \n\n\n\n\nEnter Name");
+    private Label promptLabel = new Label("Enter Order Type: \n\n\n\n\nEnter Name:");
     private TextField cancelField = new TextField("");
     private Button toggleView = new Button("Switch to Cook View");
     private Button submitButton = new Button("Submit Order");
@@ -46,6 +46,8 @@ public class CustomerView extends Application {
     private ArrayList<Integer> itemID = new ArrayList<>();
     private ArrayList<Integer> itemQuantity = new ArrayList<>();
     private RadioButton doorDRadio, driveRadio, onsiteRadio, phoneRadio;
+    private Label enterPhone = new Label("Enter Number: ");
+    private TextField getPhoneNumber = new TextField();
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
@@ -62,6 +64,7 @@ public class CustomerView extends Application {
         setPositions();
         setActions();
         setSlider();
+        setStyle();
 
         group = addNodes();
         setScene();
@@ -89,14 +92,19 @@ public class CustomerView extends Application {
         });
     }
 
-    /**
-     * Sets the positions of buttons or labelsss
-     */
-    private void setPositions(){
+    private void setStyle(){
 
         customerLabel.setFont(new Font("Arial",40));
         customerLabel.setStyle("-fx-border-width: 2;");
         customerLabel.setStyle("-fx-border-color: black;");
+
+        cancelField.setMinWidth(50);
+    }
+
+    /**
+     * Sets the positions of buttons or labelsss
+     */
+    private void setPositions(){
 
         orderLabel.setLayoutX(500);
         orderNumberLabel.setLayoutX(550);
@@ -104,8 +112,10 @@ public class CustomerView extends Application {
         cancelButton.setLayoutY(495);
         cancelButton.setLayoutX(460);
         priceLabel.setLayoutX(150);
+        cancelButton.setLayoutX(450);
+        priceLabel.setLayoutX(130);
         priceLabel.setLayoutY(365);
-        cancelField.setLayoutX(580);
+        cancelField.setLayoutX(549);
         cancelField.setLayoutY(495);
         cancelField.setMaxWidth(20);
         nameField.setLayoutX(100);
@@ -117,6 +127,8 @@ public class CustomerView extends Application {
         addToOrder.setLayoutX(160);
         quantitySlider.setLayoutY(315);
         quantitySlider.setLayoutX(10);
+        enterPhone.setLayoutY(170);
+        enterPhone.setLayoutX(0);
 
         menuLabel.setLayoutY(210);
         menuLabel.setLayoutX(40);
@@ -183,7 +195,7 @@ public class CustomerView extends Application {
                 cancelField, toggleView, submitButton, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
-                quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton);
+                quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton, enterPhone);
 
         return g;
     }
