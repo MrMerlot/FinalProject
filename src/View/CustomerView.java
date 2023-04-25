@@ -98,6 +98,9 @@ public class CustomerView extends Application {
         customerLabel.setStyle("-fx-border-color: black;");
 
         cancelField.setMinWidth(50);
+
+        orderLabel.setFont(new Font("Arial", 20));
+        orderNumberLabel.setFont(new Font("Arial", 20));
     }
 
     /**
@@ -105,7 +108,7 @@ public class CustomerView extends Application {
      */
     private void setPositions(){
 
-        orderLabel.setLayoutX(500);
+        orderLabel.setLayoutX(480);
         orderNumberLabel.setLayoutX(550);
         promptLabel.setLayoutY(60);
         cancelButton.setLayoutY(495);
@@ -128,6 +131,8 @@ public class CustomerView extends Application {
         quantitySlider.setLayoutX(10);
         enterPhone.setLayoutY(170);
         enterPhone.setLayoutX(0);
+        getPhoneNumber.setLayoutY(170);
+        getPhoneNumber.setLayoutX(100);
 
         menuLabel.setLayoutY(210);
         menuLabel.setLayoutX(40);
@@ -194,7 +199,8 @@ public class CustomerView extends Application {
                 cancelField, toggleView, submitButton, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
-                quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton, enterPhone);
+                quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton,
+                enterPhone, getPhoneNumber);
 
         return g;
     }
@@ -278,7 +284,6 @@ public class CustomerView extends Application {
 
         orderTypeToggle.selectToggle(onsiteRadio);
 
-
         //  Handles the groups
         drinkGroup = new Group(hotDrink, coldDrink);
         mealGroup = new Group( hotMeal, coldMeal );
@@ -315,6 +320,7 @@ public class CustomerView extends Application {
         sides.setOnAction(orderController);
         addToOrder.setOnAction(orderController);
         toggleView.setOnAction(orderController);
+        getPhoneNumber.setOnAction(orderController);
     }
 
     /**
