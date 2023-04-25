@@ -12,6 +12,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Queue;
+
 public class CookController implements EventHandler<ActionEvent> {
 
     OrderDataController orderDataController = new OrderDataController(this);
@@ -53,6 +57,15 @@ public class CookController implements EventHandler<ActionEvent> {
 //        orderData.setOnSiteQueue(test4);
 //
 //    }
+    public void initializeOrders(){
+        try {
+            FileWriterController fileWriterController = new FileWriterController();
+            fileWriterController.readInFile(fileWriterController.file,orderData);
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * resets the Vbox
      */
@@ -156,7 +169,8 @@ public class CookController implements EventHandler<ActionEvent> {
                     cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
                 else {
-                    orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
+                    orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                    orderData.getCurrentOrderObject().setComplete("true");
                     orderDataController.setCurrentOrder();                              //sets the current and next order V
                     cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
                     cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order

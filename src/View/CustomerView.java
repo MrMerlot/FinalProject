@@ -76,17 +76,7 @@ public class CustomerView extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                try {
-                    FileWriterController fileWriterController = new FileWriterController();
-                    for(int i=0;i<orderController.getOrdersArrayListLength();i++){
-                        fileWriterController.writeToFile(orderController.getOrder(i), fileWriterController);
-                    }//commit
-                    fileWriterController.close();
-                } catch (IOException e) {
-                    System.out.println("ERROR");
-                    stage.close();
-                    throw new RuntimeException(e);
-                }
+                orderController.closeFileAction();
             }
         });
     }

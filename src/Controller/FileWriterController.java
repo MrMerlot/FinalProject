@@ -18,6 +18,11 @@ public class FileWriterController extends FileWriter {
     }
     //constructor
 
+    public File getFile(){
+        return file;
+    }
+
+
     public void writeToFile(Order order,FileWriterController fileWriter) throws IOException {
         /**
          * CUSTOMER NAME
@@ -30,20 +35,20 @@ public class FileWriterController extends FileWriter {
          **/
         //Order storage template
         try {
-            fileWriter.write(order.getName()+String.format("%n"));
-            //Writes in order name and then ends the line
-            fileWriter.write(order.getOrderNumber()+String.format("%n"));
-            //Writes in order number and then ends the line
-        fileWriter.write(order.getOrderType()+String.format("%n"));
-            //Writes in order type and then ends the line
-        fileWriter.write(String.valueOf(order.getItemID())+String.format("%n"));
-            //Writes in order items as an array and then ends the line
-        fileWriter.write(String.valueOf(order.getQuantities())+String.format("%n"));
-            //Writes in order quantities as an array and then ends the line
-        fileWriter.write(order.getIfSkipped()+String.format("%n"));
-            //Writes in order times skipped and then ends the line
-            fileWriter.write((order.getIsComplete()+String.format("%n")));
-            //Writes in order completion status and then ends the line
+                fileWriter.write(order.getName()+String.format("%n"));
+                //Writes in order name and then ends the line
+                fileWriter.write(order.getOrderNumber()+String.format("%n"));
+                //Writes in order number and then ends the line
+            fileWriter.write(order.getOrderType()+String.format("%n"));
+                //Writes in order type and then ends the line
+            fileWriter.write(String.valueOf(order.getItemID())+String.format("%n"));
+                //Writes in order items as an array and then ends the line
+            fileWriter.write(String.valueOf(order.getQuantities())+String.format("%n"));
+                //Writes in order quantities as an array and then ends the line
+            fileWriter.write(order.getIfSkipped()+String.format("%n"));
+                //Writes in order times skipped and then ends the line
+                fileWriter.write((order.getIsComplete()+String.format("%n")));
+                //Writes in order completion status and then ends the line
         }
         catch(IOException e){
             e.getStackTrace();
@@ -87,9 +92,9 @@ public class FileWriterController extends FileWriter {
         order.addItem(6,7);
         order1.addItem(3,2);
         order2.addItem(1,1);
-        orderData.addOrder(order);
-        orderData.addOrder(order1);
-        orderData.addOrder(order2);
+        //orderData.addOrder(order);
+       // orderData.addOrder(order1);
+       // orderData.addOrder(order2);
 
         try {
             f.writeToFile(order, f);
@@ -97,8 +102,9 @@ public class FileWriterController extends FileWriter {
             f.writeToFile(order2,f);
             f.close();
 
-            f.readInFile(file,orderData);
+            f.readInFile(file, orderData);
             Queue<Order> x = orderData.getPhoneQueue();
+            System.out.println(orderData.getPhoneQueue().peek().getName());
             for(int i=0;i<x.size();i++){
                 System.out.println(x.peek().getName()+" "+x.peek().getOrderNumber()+" "+x.peek().getItemID()+" "+x.peek().getQuantities());
                 x.poll();
