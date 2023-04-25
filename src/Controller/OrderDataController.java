@@ -93,7 +93,11 @@ public class OrderDataController {
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
-        if(orderData.getCurrentOrder().equals("")){
+        if(orderData.getNextOrder().equals("")){
+            setNextOrder();
+            return;
+        }
+        else if(orderData.getCurrentOrder().equals("")){
             setCurrentOrder();
             return;
         }
