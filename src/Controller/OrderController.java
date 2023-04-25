@@ -54,13 +54,20 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getEnterPhone().setVisible(false);
     }
 
+
+    /**
+     * Takes in an order number(int) and returns its corresponding order object(Object)
+     *
+     * @param orderNumber
+     * @return
+     */
     public Order orderNumToOrder(int orderNumber){
         for(int i = 0; i < ordersArrayList.size(); i++){
             if(ordersArrayList.get(i).getOrderNumber() == orderNumber)
                 return ordersArrayList.get(i);
         }
 
-        //instead of returning null, throw an exception
+        //instead of returning null, throw an exception                     //EXCEPTION
         return null;
     }
 
