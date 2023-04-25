@@ -71,7 +71,6 @@ public class CustomerView extends Application {
 
         stage.setResizable(false);
         toggle();
-        System.out.println();
         stage.setTitle("CustomerView");
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
