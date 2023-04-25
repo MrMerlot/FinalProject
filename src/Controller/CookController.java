@@ -155,8 +155,11 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getFinishOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(cookView.getCurrentOrder().getText().equals("")){
-                    orderDataController.checkQueue();
+                if(cookView.getNextOrderLabel().getText().equals("")){
+                    orderDataController.setNextOrder();
+                }
+                else if(cookView.getCurrentOrder().getText().equals("")){
+                    orderDataController.setCurrentOrder();
                 }
                 else {
                     orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup

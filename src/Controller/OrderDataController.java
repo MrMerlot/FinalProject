@@ -18,7 +18,10 @@ public class OrderDataController {
          this.cookController = cookController;
      }
 
-
+     /*public void initialize(){
+         setNextOrder();
+         setCurrentOrder();
+     }*/
     /**
      * sets the current order to the next order and calls function to replace next order
      */
@@ -77,6 +80,9 @@ public class OrderDataController {
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
         orderData.setNextOrder(input);
+        if(orderData.getCurrentOrder().equals("")){
+            setCurrentOrder();
+        }
      }
 
     /**
@@ -87,7 +93,11 @@ public class OrderDataController {
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
-        if(orderData.getCurrentOrderObject() == null){
+        if(orderData.getNextOrder().equals("")){
+            setNextOrder();
+            return;
+        }
+        else if(orderData.getCurrentOrder().equals("")){
             setCurrentOrder();
             return;
         }
@@ -158,8 +168,9 @@ public class OrderDataController {
                 }
                 orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
             }
-            if(orderData.getNextOrderObject() == null)
+            if(orderData.getNextOrderObject().equals("")) {
                 setNextOrder();
+            }
         }
      }
 

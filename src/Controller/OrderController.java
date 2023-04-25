@@ -12,6 +12,7 @@ import sun.font.TrueTypeFont;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EventListener;
 
 public class OrderController implements EventHandler<ActionEvent> {
     private CustomerView cv;
@@ -32,7 +33,10 @@ public class OrderController implements EventHandler<ActionEvent> {
      */
     public OrderController( CustomerView cv ){ this.cv = cv; }
 
-    public void clearMenu(){
+    /**
+     * Sets the visibility of menu to false.
+     */
+    private void clearMenu(){
         cv.getMealGroup().setVisible(false);
         cv.getDrinkGroup().setVisible(false);
         cv.getSideGroup().setVisible(false);
@@ -40,6 +44,14 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getHotDrinkGroup().setVisible(false);
         cv.getColdMealGroup().setVisible(false);
         cv.getHotMealGroup().setVisible(false);
+    }
+
+    /**
+     * Sets phone inquiries to false.
+     */
+    private void clearPhone(){
+        cv.getGetPhoneNumber().setVisible(false);
+        cv.getEnterPhone().setVisible(false);
     }
 
     public Order orderNumToOrder(int orderNumber){
@@ -77,13 +89,14 @@ public class OrderController implements EventHandler<ActionEvent> {
                 customerName = cv.getNameButton().getText();
                 orderType = getType( );
                 orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
+                String phone = cv.getGetPhoneNumber().getText();
                 Order order;
                 cv.addOrderNumber();
 
                 if( orderType == 4 ) order = new DoorDash( customerName, orderNumber);
                 else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber);
                 else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
-                else order = new Phone( customerName, orderNumber);
+                else order = new Phone( customerName, orderNumber, phone);
 
 
                 String items = "";//test
@@ -179,6 +192,23 @@ public class OrderController implements EventHandler<ActionEvent> {
 
             }
         });
+
+        cv.getPhoneRadio().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+                cv.getGetPhoneNumber().setVisible(true);
+                cv.getEnterPhone().setVisible(true);
+            }});
+        cv.getOnsiteRadio().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) { clearPhone(); }});
+        cv.getDoorDRadio().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) { clearPhone(); }});
+        cv.getDriveRadio().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) { clearPhone(); }});
     }
 
     /**

@@ -101,6 +101,9 @@ public class CustomerView extends Application {
 
         orderLabel.setFont(new Font("Arial", 20));
         orderNumberLabel.setFont(new Font("Arial", 20));
+
+        getPhoneNumber.setVisible(false);
+        enterPhone.setVisible(false);
     }
 
     /**
@@ -321,6 +324,7 @@ public class CustomerView extends Application {
         addToOrder.setOnAction(orderController);
         toggleView.setOnAction(orderController);
         getPhoneNumber.setOnAction(orderController);
+        phoneRadio.setOnAction(orderController);
     }
 
     /**
@@ -554,6 +558,16 @@ public class CustomerView extends Application {
      * @return  driveRadio
      */
     public RadioButton getDriveRadio() { return driveRadio; }
+
+    /**
+     * @return  getPhoneNumber
+     */
+    public TextField getGetPhoneNumber() { return getPhoneNumber; }
+
+    /**
+     * @return  enterPhone
+     */
+    public Label getEnterPhone() { return enterPhone; }
 
     public Scene getScene(){
         return firstScene;
