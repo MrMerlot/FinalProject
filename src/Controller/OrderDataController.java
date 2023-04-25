@@ -2,6 +2,8 @@ package Controller;
 import Model.HashTableID;
 import Model.Order;
 import Model.OrderData;
+import View.CookView;
+import View.CustomerView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -18,10 +20,6 @@ public class OrderDataController {
          this.cookController = cookController;
      }
 
-     /*public void initialize(){
-         setNextOrder();
-         setCurrentOrder();
-     }*/
     /**
      * sets the current order to the next order and calls function to replace next order
      */
@@ -200,5 +198,13 @@ public class OrderDataController {
             //the customer requested to cancel an order that doesnt exist
             //customer requests and order thats already completed
         }
+    }
+
+    public boolean isEmpty(){
+        if(orderData.getDriveThroughQueue().isEmpty() && orderData.getOnSiteQueue().isEmpty()
+                && orderData.getPhoneQueue().isEmpty() && orderData.getDoorDashQueue().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

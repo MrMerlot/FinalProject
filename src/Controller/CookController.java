@@ -142,11 +142,18 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getFinishOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(cookView.getNextOrderLabel().getText().equals("")){
+                if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
                     orderDataController.setNextOrder();
                 }
                 else if(cookView.getCurrentOrder().getText().equals("")){
                     orderDataController.setCurrentOrder();
+                }
+                else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
+                    orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
+                    cookView.setCurrentOrderLabel("");            //Sets the Label to the new Order
+                    orderData.setCurrentOrder("");
+                    cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
+                    cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
                 else {
                     orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
@@ -156,7 +163,9 @@ public class CookController implements EventHandler<ActionEvent> {
                     cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
                     cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
+
             }
+
         });
 
     }//end of handler
