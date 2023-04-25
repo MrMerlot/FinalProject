@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.WindowEvent;
 import sun.font.TrueTypeFont;
 
 import java.io.IOException;
@@ -293,5 +294,19 @@ public class OrderController implements EventHandler<ActionEvent> {
         }
 
         return price;
+    }
+
+    public void closeFileAction(){
+            try {
+                FileWriterController fileWriterController = new FileWriterController();
+                for(int i=0;i<getOrdersArrayListLength();i++){
+                    fileWriterController.writeToFile(getOrder(i), fileWriterController);
+                }//commit
+                fileWriterController.close();
+            } catch (IOException e) {
+                System.out.println("ERROR");
+                cv.stage.close();
+                throw new RuntimeException(e);
+            }
     }
 }
