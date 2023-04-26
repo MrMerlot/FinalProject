@@ -155,6 +155,15 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getFinishOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                try {
+                    if(cookView.getCurrentOrder().equals("")){
+                        throw new FinishOrderException();
+                    }
+                }
+                catch (FinishOrderException e){
+                    e.getStackTrace();
+                }
+
                 if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
                     orderDataController.setNextOrder();
                 }
@@ -181,6 +190,8 @@ public class CookController implements EventHandler<ActionEvent> {
                     cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
                     cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
+
+
 
             }
 
