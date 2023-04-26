@@ -82,17 +82,17 @@ public class FileWriterController extends FileWriter {
         }
         return array;
     }
-    public void readInFile(File file, OrderData o) throws FileNotFoundException {
+    public void readInFile(File file) throws FileNotFoundException {
         Scanner s = new Scanner(file); //Read in from file
         while(s.hasNextLine()) {
             Order order = new Order(s.nextLine(), //Creates an order object based on the first 3 lines of
-                    Integer.parseInt(s.nextLine()), // the file read in
-                    Integer.parseInt(s.nextLine())); //name, number, type
+            Integer.parseInt(s.nextLine()), // the file read in
+            Integer.parseInt(s.nextLine())); //name, number, type
             order.setItemID(toIntArray(s.nextLine())); //adds ItemID's to order
             order.setQuantities(toIntArray(s.nextLine())); //adds Quantities to order
             order.setSkipped(Integer.parseInt(s.nextLine())); //sets skipped count to order
             order.setComplete(s.nextLine());//sets the order completion status
-            o.addOrder(order); //adds order to static order data
+            ordersArrayList.add(order);
         }
     }
 
@@ -136,12 +136,9 @@ public class FileWriterController extends FileWriter {
             f.writeToFile(order2,f);
             f.close();
 
-            f.readInFile(file, orderData);
-            Queue<Order> x = orderData.getPhoneQueue();
-            System.out.println(orderData.getPhoneQueue().peek().getName());
-            for(int i=0;i<x.size();i++){
-                System.out.println(x.peek().getName()+" "+x.peek().getOrderNumber()+" "+x.peek().getItemID()+" "+x.peek().getQuantities());
-                x.poll();
+            f.readInFile(file);
+            for(int i=0;i<ordersArrayList.size();i++){
+                System.out.println(ordersArrayList.get(i).getName());
             }
         }
         catch (IOException e) {

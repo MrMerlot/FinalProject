@@ -17,7 +17,6 @@ import java.util.EventListener;
 
 public class OrderController implements EventHandler<ActionEvent> {
     private CustomerView cv;
-
     private OrderData orderData = new OrderData();
     private String customerName;
     private int orderType;
@@ -25,13 +24,23 @@ public class OrderController implements EventHandler<ActionEvent> {
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
     private HashTableID hashTableID = new HashTableID();
+    private FileWriterController fileWriterController;
+
+    {
+        try {
+            fileWriterController = new FileWriterController();
+        } catch (IOException e) {
+            System.out.println("ERROR");
+            throw new RuntimeException(e);
+        }
+    }
 
 
     /**
      * Constructor that connects to CustomerView
      * @param cv
      */
-    public OrderController( CustomerView cv ){ this.cv = cv; }
+    public OrderController( CustomerView cv ){this.cv = cv;}
 
     /**
      * Sets the visibility of menu to false.
@@ -118,7 +127,6 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 cv.getItemID().clear();
                 cv.getItemQuantity().clear();
-
                 orderData.addOrder( order );
                 FileWriterController.ordersArrayList.add(order);
                 //orderDataController.setCurrentOrder();
@@ -196,7 +204,6 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 cv.toggle();
-
             }
         });
 
@@ -294,4 +301,10 @@ public class OrderController implements EventHandler<ActionEvent> {
         return price;
     }
 
+    public void setOrders() {
+        for(int i=0;i<fileWriterController.ordersArrayList.size();i++) {
+            orderData.addOrder(FileWriterController.ordersArrayList.get(i));
+            orderDataController.checkQueue();
+        }
+    }
 }

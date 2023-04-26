@@ -16,6 +16,8 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static Controller.FileWriterController.file;
+
 public class CustomerView extends Application {
     public boolean toggle = true;
     public Scene firstScene;
@@ -51,6 +53,16 @@ public class CustomerView extends Application {
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
+    private FileWriterController fileWriterController;
+
+    {
+        try {
+            fileWriterController = new FileWriterController();
+        } catch (IOException e) {
+            System.out.println("ERROR");
+            throw new RuntimeException(e);
+        }
+    }
 
     public CustomerView() {
         cookView = new CookView(this);
@@ -60,6 +72,8 @@ public class CustomerView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        fileWriterController.readInFile(file);
+        orderController.setOrders();
         setMenu();
         setPositions();
         setActions();
@@ -580,7 +594,7 @@ public class CustomerView extends Application {
 
     public String getCanceledOrder(){return cancelField.getText();}
 
-    public Button getToggleView() { return toggleView; }
+    public Button getToggleView() {return toggleView; }
 
     public static void main(String[] args) {
         Application.launch(args);

@@ -26,6 +26,7 @@ public class CookController implements EventHandler<ActionEvent> {
         try {
             fileWriterController = new FileWriterController();
         } catch (IOException e) {
+            System.out.println("ERROR");
             throw new RuntimeException(e);
         }
     }
@@ -43,6 +44,7 @@ public class CookController implements EventHandler<ActionEvent> {
         resetVbox();
         setOrders();
     }
+
 
 //    public void test() {
 //        orderData.setPickupOrders("dd");
@@ -68,15 +70,6 @@ public class CookController implements EventHandler<ActionEvent> {
 //        orderData.setOnSiteQueue(test4);
 //
 //    }
-    public void initializeOrders(){
-        try {
-            FileWriterController fileWriterController = new FileWriterController();
-            fileWriterController.readInFile(fileWriterController.file,orderData);
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     /**
      * resets the Vbox
      */
@@ -88,6 +81,9 @@ public class CookController implements EventHandler<ActionEvent> {
     }
 
     public void setOrders(){
+        for (int i=0;i<fileWriterController.getOrdersArrayListLength();i++){
+            orderData.addOrder(FileWriterController.ordersArrayList.get(i));
+        }
         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());
         cookView.setNextOrderLabel(orderData.getNextOrder());
     }
