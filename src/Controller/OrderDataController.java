@@ -31,6 +31,7 @@ public class OrderDataController {
 
     /**
      * Sets nextOrder to its appropriate value (only use when NULL, call checkQueue otherwise)
+     * Checks to see if current order is empty and sets it
      */
     public void setNextOrder(){
         HashTableID hashTable = new HashTableID();
@@ -84,23 +85,23 @@ public class OrderDataController {
      }
 
     /**
-     * Checks if there is a next order object and if not calls set next order
+     * Makes sure next and current orde
      * Second it will make sure that the highest priority order is next up, and if
      * Checks that the next order up is the correct one, if not order is placed back into its queue
      *
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
-        if(orderData.getNextOrder().equals("")){
+        if(orderData.getNextOrder().equals("")){   //checks for a next order object, if none set the next order
             setNextOrder();
             return;
         }
-        else if(orderData.getCurrentOrder().equals("")){
+        else if(orderData.getCurrentOrder().equals("")){ //checks for a current order object, if none set the current order
             setCurrentOrder();
             return;
         }
 
-        if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){            //if the next order is an O Object
+        if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an O Object and has been skipped less than 3 times
             if(!orderData.getDriveThroughQueue().isEmpty()) {               //if the DT Queue has an object
                 temp.add(orderData.getNextOrderObject());
                 while(!orderData.getOnSiteQueue().isEmpty()){
@@ -173,7 +174,7 @@ public class OrderDataController {
      }
 
     /**
-     * Removes the requested order from OrderData
+     * Removes the requested order from OrderData unless its complete or in progress
      *
      * @param order
      */
@@ -200,6 +201,11 @@ public class OrderDataController {
         }
     }
 
+    /**
+     * Returns true if all four queues are empty, false otherwise
+     *
+     * @return boolean
+     */
     public boolean isEmpty(){
         if(orderData.getDriveThroughQueue().isEmpty() && orderData.getOnSiteQueue().isEmpty()
                 && orderData.getPhoneQueue().isEmpty() && orderData.getDoorDashQueue().isEmpty()) {
