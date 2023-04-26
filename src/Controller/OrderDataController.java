@@ -24,8 +24,10 @@ public class OrderDataController {
      * sets the current order to the next order and calls function to replace next order
      */
     public void setCurrentOrder(){
-        orderData.setCurrentOrderObject(orderData.getNextOrderObject());
-        orderData.setCurrentOrder(orderData.getNextOrder());
+        if(!orderData.getNextOrder().equals("")) {
+            orderData.setCurrentOrderObject(orderData.getNextOrderObject());
+            orderData.setCurrentOrder(orderData.getNextOrder());
+        }
         setNextOrder();
      }
 
@@ -79,7 +81,7 @@ public class OrderDataController {
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
         orderData.setNextOrder(input);
-        if(orderData.getCurrentOrder().equals("")){
+        if(orderData.getCurrentOrder().equals("") && orderData.getNextOrder().equals("")){
             setCurrentOrder();
         }
      }
