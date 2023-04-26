@@ -100,7 +100,6 @@ public class CustomerView extends Application {
      * Sets the positions of buttons or labelsss
      */
     private void setPositions(){
-
         orderLabel.setLayoutX(480);
         orderNumberLabel.setLayoutX(550);
         promptLabel.setLayoutY(60);
