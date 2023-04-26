@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Order;
 import Model.OrderData;
+import View.CustomerView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class FileWriterController extends FileWriter {
+    static CustomerView cv;
+    static ArrayList<Order> ordersArrayList = new ArrayList<>();
     public static File file = new File("savedData.txt");
     //Creates a static file to save the orders in
 
@@ -22,6 +25,19 @@ public class FileWriterController extends FileWriter {
         return file;
     }
 
+    public static void closeFileAction(){
+        try {
+            FileWriterController fileWriterController = new FileWriterController();
+            for(int i=0;i<ordersArrayList.size();i++){
+                fileWriterController.writeToFile(ordersArrayList.get(i), fileWriterController);
+            }//commit
+            fileWriterController.close();
+        } catch (IOException e) {
+            System.out.println("ERROR");
+            //cv.stage.close();
+            throw new RuntimeException(e);
+        }
+    }
 
     public void writeToFile(Order order,FileWriterController fileWriter) throws IOException {
         /**
@@ -78,6 +94,24 @@ public class FileWriterController extends FileWriter {
             order.setComplete(s.nextLine());//sets the order completion status
             o.addOrder(order); //adds order to static order data
         }
+    }
+
+    public Order getOrder(int i){
+        return ordersArrayList.get(i);
+    }
+
+    public int getOrdersArrayListLength(){
+        return ordersArrayList.size();
+    }
+
+    public void removeOrder(String s){
+        for(int i=0;i<ordersArrayList.size();i++){
+            if (ordersArrayList.get(i).getName().equals(s)) {
+                ordersArrayList.remove(i);
+            }
+            System.out.println(s);
+        }
+
     }
 
     public static void main(String[] args) throws IOException {

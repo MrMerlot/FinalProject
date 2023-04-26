@@ -24,7 +24,6 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int orderNumber;
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
-    private ArrayList<Order> ordersArrayList = new ArrayList<>();
     private HashTableID hashTableID = new HashTableID();
 
 
@@ -63,9 +62,9 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @return
      */
     public Order orderNumToOrder(int orderNumber){
-        for(int i = 0; i < ordersArrayList.size(); i++){
-            if(ordersArrayList.get(i).getOrderNumber() == orderNumber)
-                return ordersArrayList.get(i);
+        for(int i = 0; i < FileWriterController.ordersArrayList.size(); i++){
+            if(FileWriterController.ordersArrayList.get(i).getOrderNumber() == orderNumber)
+                return FileWriterController.ordersArrayList.get(i);
         }
 
         //instead of returning null, throw an exception                     //EXCEPTION
@@ -121,7 +120,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                 cv.getItemQuantity().clear();
 
                 orderData.addOrder( order );
-                ordersArrayList.add(order);
+                FileWriterController.ordersArrayList.add(order);
                 //orderDataController.setCurrentOrder();
                 orderDataController.checkQueue();
 
@@ -271,14 +270,6 @@ public class OrderController implements EventHandler<ActionEvent> {
         return id;
     }
 
-    public Order getOrder(int i){
-        return ordersArrayList.get(i);
-    }
-
-    public int getOrdersArrayListLength(){
-        return ordersArrayList.size();
-    }
-
     private int getType(){
         int type = 0;
 
@@ -303,17 +294,4 @@ public class OrderController implements EventHandler<ActionEvent> {
         return price;
     }
 
-    public void closeFileAction(){
-            try {
-                FileWriterController fileWriterController = new FileWriterController();
-                for(int i=0;i<getOrdersArrayListLength();i++){
-                    fileWriterController.writeToFile(getOrder(i), fileWriterController);
-                }//commit
-                fileWriterController.close();
-            } catch (IOException e) {
-                System.out.println("ERROR");
-                cv.stage.close();
-                throw new RuntimeException(e);
-            }
-    }
 }

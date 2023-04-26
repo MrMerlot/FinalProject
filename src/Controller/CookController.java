@@ -15,10 +15,21 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.io.IOException;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class CookController implements EventHandler<ActionEvent> {
 
     OrderDataController orderDataController = new OrderDataController(this);
+    FileWriterController fileWriterController;
+
+    {
+        try {
+            fileWriterController = new FileWriterController();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     OrderData orderData = new OrderData();      //new instance of OrderData
     CookView cookView;                          //instance of CookView
     ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
@@ -138,6 +149,7 @@ public class CookController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
                 RadioButton temp = (RadioButton) pickupOrdersTG.getSelectedToggle(); //setting the selected RP to a temp
                 String tempS = temp.getText();                            //getting the text(Order) from the selected RB
+                fileWriterController.removeOrder(temp.getText().substring(0,temp.getText().indexOf("\n")));
                 orderData.getPickupOrders().remove(tempS);                //removing the order from Pick up orders
                 cookView.getPickupOrders().setSelected(false);            //unselecting the checkbox
                 resetVbox();                                              //resetting everything in the CheckBox Handler
@@ -163,6 +175,7 @@ public class CookController implements EventHandler<ActionEvent> {
                 }
                 else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
                     orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
+                    orderData.getCurrentOrderObject().setComplete("true");  //Sets the current order to complete
                     cookView.setCurrentOrderLabel("");            //Sets the Label to the new Order
                     orderData.setCurrentOrder("");
                     cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
@@ -170,7 +183,7 @@ public class CookController implements EventHandler<ActionEvent> {
                 }
                 else {
                     orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
-                    orderData.getCurrentOrderObject().setComplete("true");
+                    orderData.getCurrentOrderObject().setComplete("true");  //Sets the current order to complete
                     orderDataController.setCurrentOrder();                              //sets the current and next order V
                     cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
                     cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order
