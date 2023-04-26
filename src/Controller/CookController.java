@@ -162,14 +162,18 @@ public class CookController implements EventHandler<ActionEvent> {
                     orderDataController.setCurrentOrder();
                 }
                 else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
-                    orderData.setPickupOrders(orderData.getCurrentOrder());             //Adds the Finished Order to Pickup
+                    if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
+                        orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                    }
                     cookView.setCurrentOrderLabel("");            //Sets the Label to the new Order
                     orderData.setCurrentOrder("");
                     cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
                     cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                 }
                 else {
-                    orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                    if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
+                        orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                    }
                     orderData.getCurrentOrderObject().setComplete("true");
                     orderDataController.setCurrentOrder();                              //sets the current and next order V
                     cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order

@@ -60,7 +60,7 @@ public class OrderController implements EventHandler<ActionEvent> {
      * Takes in an order number(int) and returns its corresponding order object(Object)
      *
      * @param orderNumber
-     * @return
+     * @return order
      */
     public Order orderNumToOrder(int orderNumber){
         for(int i = 0; i < ordersArrayList.size(); i++){
