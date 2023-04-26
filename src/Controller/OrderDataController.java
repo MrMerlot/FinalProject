@@ -30,7 +30,7 @@ public class OrderDataController {
      }
 
     /**
-     * Sets nextOrder to its appropriate value (only use when NULL, call checkQueue otherwise)
+     * Sets nextOrder to its appropriate value
      * Checks to see if current order is empty and sets it
      */
     public void setNextOrder(){
@@ -85,10 +85,9 @@ public class OrderDataController {
      }
 
     /**
-     * Makes sure next and current orde
-     * Second it will make sure that the highest priority order is next up, and if
-     * Checks that the next order up is the correct one, if not order is placed back into its queue
-     *
+     * Makes sure next and current order have an object, calls respective setter if not
+     * If both do, makes sure the next order is the highest priority order
+     * If not, puts next order back into respective queue and sets next order
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
@@ -106,7 +105,7 @@ public class OrderDataController {
                 temp.add(orderData.getNextOrderObject());
                 while(!orderData.getOnSiteQueue().isEmpty()){
                     temp.add(orderData.getOnSiteQueue().remove());         //puts the next order back into O queue
-                }
+                }                                                          //
                 while(!temp.isEmpty()){
                     orderData.setOnSiteQueue(temp.remove());
                 }
@@ -167,7 +166,7 @@ public class OrderDataController {
                 }
                 orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
             }
-            if(orderData.getNextOrderObject().equals("")) {
+            if(orderData.getNextOrder().equals("")) {
                 setNextOrder();
             }
         }
