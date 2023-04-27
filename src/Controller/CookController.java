@@ -23,6 +23,11 @@ public class CookController implements EventHandler<ActionEvent> {
     ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
 
     VBox tempVbox = new VBox();                 //New vBox
+    FileWriterController fileWriterController;
+
+    {
+        fileWriterController = new FileWriterController();
+    }
 
 
     public CookController(CookView view) {
@@ -56,15 +61,7 @@ public class CookController implements EventHandler<ActionEvent> {
 //        orderData.setOnSiteQueue(test4);
 //
 //    }
-    public void initializeOrders(){
-        try {
-            FileWriterController fileWriterController = new FileWriterController();
-            fileWriterController.readInFile(fileWriterController.file,orderData);
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
     /**
      * resets the Vbox
      */

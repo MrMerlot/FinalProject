@@ -3,6 +3,7 @@ package View;
 import Controller.FileWriterController;
 import Controller.OrderController;
 import Controller.OrderDataController;
+import Model.OrderData;
 import com.sun.prism.paint.Color;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -19,7 +20,6 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static Controller.FileWriterController.file;
 
 public class CustomerView extends Application {
     public boolean toggle = true;
@@ -57,18 +57,9 @@ public class CustomerView extends Application {
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
-    private FileWriterController fileWriterController;
+    private FileWriterController fileWriterController = new FileWriterController();
 
-    {
-        try {
-            fileWriterController = new FileWriterController();
-        } catch (IOException e) {
-            System.out.println("ERROR");
-            throw new RuntimeException(e);
-        }
-    }
-
-    public CustomerView() {
+    public CustomerView(){
         cookView = new CookView(this);
     }
 
@@ -76,7 +67,8 @@ public class CustomerView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        fileWriterController.readInFile(file);
+        OrderData orderData = new OrderData();
+        fileWriterController.readInFile();
         orderController.setOrders();
         setMenu();
         setPositions();
@@ -95,7 +87,7 @@ public class CustomerView extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                FileWriterController.closeFileAction();
+                FileWriterController.closeFileAction(fileWriterController);
             }
         });
     }
