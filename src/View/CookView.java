@@ -71,8 +71,8 @@ public class CookView extends Application {
         currentRec = new Rectangle(175,200, Paint.valueOf( "#b6d8ff" ));
         currentRec.setArcWidth(30);           //setting rounded edges
         currentRec.setArcHeight(30);           //setting rounded edges
-        currentRec.setX(25);
-        currentRec.setY(150);
+        currentRec.setX(25);                  //setting the x-axis
+        currentRec.setY(150);                  //setting the y-axis
 
         currentRec2 = new Rectangle(185,210, Paint.valueOf( "#6987ff" ));
         currentRec2.setArcWidth(30);           //setting rounded edges
