@@ -2,9 +2,6 @@ package Controller;
 import Model.HashTableID;
 import Model.Order;
 import Model.OrderData;
-import View.CookView;
-import View.CustomerView;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -24,13 +21,15 @@ public class OrderDataController {
      * sets the current order to the next order and calls function to replace next order
      */
     public void setCurrentOrder(){
-        orderData.setCurrentOrderObject(orderData.getNextOrderObject());
-        orderData.setCurrentOrder(orderData.getNextOrder());
+        if(!orderData.getNextOrder().equals("")) {
+            orderData.setCurrentOrderObject(orderData.getNextOrderObject());
+            orderData.setCurrentOrder(orderData.getNextOrder());
+        }
         setNextOrder();
      }
 
     /**
-     * Sets nextOrder to its appropriate value (only use when NULL, call checkQueue otherwise)
+     * Sets nextOrder to its appropriate value
      * Checks to see if current order is empty and sets it
      */
     public void setNextOrder(){
@@ -79,16 +78,15 @@ public class OrderDataController {
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
         orderData.setNextOrder(input);
-        if(orderData.getCurrentOrder().equals("")){
+        if(orderData.getCurrentOrder().equals("") && !orderData.getNextOrder().equals("")){
             setCurrentOrder();
         }
      }
 
     /**
-     * Makes sure next and current orde
-     * Second it will make sure that the highest priority order is next up, and if
-     * Checks that the next order up is the correct one, if not order is placed back into its queue
-     *
+     * Makes sure next and current order have an object, calls respective setter if not
+     * If both do, makes sure the next order is the highest priority order
+     * If not, puts next order back into respective queue and sets next order
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
@@ -106,7 +104,7 @@ public class OrderDataController {
                 temp.add(orderData.getNextOrderObject());
                 while(!orderData.getOnSiteQueue().isEmpty()){
                     temp.add(orderData.getOnSiteQueue().remove());         //puts the next order back into O queue
-                }
+                }                                                          //
                 while(!temp.isEmpty()){
                     orderData.setOnSiteQueue(temp.remove());
                 }
@@ -167,7 +165,7 @@ public class OrderDataController {
                 }
                 orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
             }
-            if(orderData.getNextOrderObject().equals("")) {
+            if(orderData.getNextOrder().equals("")) {
                 setNextOrder();
             }
         }

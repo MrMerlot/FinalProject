@@ -1,4 +1,8 @@
 package Controller;
+import Exceptions.AddToOrderException;
+import Exceptions.CustomerNameException;
+import Exceptions.PhoneNumberException;
+import Exceptions.SubmitOrderException;
 import Model.*;
 import View.CustomerView;
 import javafx.event.ActionEvent;
@@ -17,30 +21,22 @@ import java.util.EventListener;
 
 public class OrderController implements EventHandler<ActionEvent> {
     private CustomerView cv;
+
     private OrderData orderData = new OrderData();
     private String customerName;
     private int orderType;
     private int orderNumber;
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
+    private ArrayList<Order> ordersArrayList = new ArrayList<>();
     private HashTableID hashTableID = new HashTableID();
-    private FileWriterController fileWriterController;
-
-    {
-        try {
-            fileWriterController = new FileWriterController();
-        } catch (IOException e) {
-            System.out.println("ERROR");
-            throw new RuntimeException(e);
-        }
-    }
 
 
     /**
      * Constructor that connects to CustomerView
      * @param cv
      */
-    public OrderController( CustomerView cv ){this.cv = cv;}
+    public OrderController( CustomerView cv ){ this.cv = cv; }
 
     /**
      * Sets the visibility of menu to false.
@@ -63,6 +59,22 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getEnterPhone().setVisible(false);
     }
 
+    /**
+     * Checks if the inputted String is an accepted phone number or not
+     * @param num
+     * @return boolean
+     */
+    private boolean isPhoneNumber(String num){
+        if(num.equals(""))
+            return false;
+        for(int i=0; i < num.length(); i++){
+            if(num.charAt(i) < 48 || num.charAt(i) > 57){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Takes in an order number(int) and returns its corresponding order object(Object)
@@ -71,9 +83,9 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @return order
      */
     public Order orderNumToOrder(int orderNumber){
-        for(int i = 0; i < FileWriterController.ordersArrayList.size(); i++){
-            if(FileWriterController.ordersArrayList.get(i).getOrderNumber() == orderNumber)
-                return FileWriterController.ordersArrayList.get(i);
+        for(int i = 0; i < ordersArrayList.size(); i++){
+            if(ordersArrayList.get(i).getOrderNumber() == orderNumber)
+                return ordersArrayList.get(i);
         }
 
         //instead of returning null, throw an exception                     //EXCEPTION
@@ -102,35 +114,49 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
 
-                customerName = cv.getNameButton().getText();
-                orderType = getType( );
-                orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
-                String phone = cv.getGetPhoneNumber().getText();
-                Order order;
-                cv.addOrderNumber();
+                try{
+                    if(cv.getNameButton().getText().equals("")){
+                        throw new CustomerNameException();
+                    }
+                    if(getType() == 3 && !isPhoneNumber(cv.getGetPhoneNumber().getText()))
+                        throw new PhoneNumberException();
+                    if(cv.getItemID().isEmpty())
+                        throw new SubmitOrderException();
 
-                if( orderType == 4 ) order = new DoorDash( customerName, orderNumber);
-                else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber);
-                else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
-                else order = new Phone( customerName, orderNumber, phone);
+                    customerName = cv.getNameButton().getText();
+                    orderType = getType( );
+                    orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
+                    String phone = cv.getGetPhoneNumber().getText();
+                    Order order;
+                    cv.addOrderNumber();
 
+                    if( orderType == 4 ) order = new DoorDash( customerName, orderNumber);
+                    else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber);
+                    else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
+                    else order = new Phone( customerName, orderNumber, phone);
 
-                String items = "";//test
-                for( int i = 0; i < cv.getItemID().size(); i++ ){
-                    order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
-                    items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
+                    String items = "";//test
+                    for( int i = 0; i < cv.getItemID().size(); i++ ){
+                        order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
+                        items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
+                    }
+                    System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
+
+                    if( orderType == 4 ) {
+                        cv.getPriceLabel().setText( "$" + (1.05 * getPrice(cv.getItemID(), cv.getItemQuantity()) ));
+                    }
+                    else{
+                        cv.getPriceLabel().setText( "$" + getPrice(cv.getItemID(), cv.getItemQuantity()));
+                    }
+                    cv.getItemID().clear();
+                    cv.getItemQuantity().clear();
+                    orderData.addOrder( order );
+                    ordersArrayList.add(order);
+                    orderDataController.checkQueue();
                 }
-
-                System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
-
-                cv.getPriceLabel().setText( "$" + getPrice(cv.getItemID(), cv.getItemQuantity()));
-
-                cv.getItemID().clear();
-                cv.getItemQuantity().clear();
-                orderData.addOrder( order );
-                FileWriterController.ordersArrayList.add(order);
-                //orderDataController.setCurrentOrder();
-                orderDataController.checkQueue();
+                catch(CustomerNameException e){}
+                catch (PhoneNumberException e){}
+                catch(SubmitOrderException e){}
 
             }
         });
@@ -195,8 +221,13 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getAddToOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
-                cv.addItemID( getItemID() );
+                try{
+                    if(getItemID() == 0)
+                        throw new AddToOrderException();
+                    cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
+                    cv.addItemID( getItemID() );
+                }
+                catch(AddToOrderException e){}
             }
         });
 
@@ -204,6 +235,7 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 cv.toggle();
+
             }
         });
 
@@ -277,6 +309,14 @@ public class OrderController implements EventHandler<ActionEvent> {
         return id;
     }
 
+    public Order getOrder(int i){
+        return ordersArrayList.get(i);
+    }
+
+    public int getOrdersArrayListLength(){
+        return ordersArrayList.size();
+    }
+
     private int getType(){
         int type = 0;
 
@@ -301,10 +341,17 @@ public class OrderController implements EventHandler<ActionEvent> {
         return price;
     }
 
-    public void setOrders() {
-        for(int i=0;i<fileWriterController.ordersArrayList.size();i++) {
-            orderData.addOrder(FileWriterController.ordersArrayList.get(i));
-            orderDataController.checkQueue();
-        }
+    public void closeFileAction(){
+            try {
+                FileWriterController fileWriterController = new FileWriterController();
+                for(int i=0;i<getOrdersArrayListLength();i++){
+                    fileWriterController.writeToFile(getOrder(i), fileWriterController);
+                }//commit
+                fileWriterController.close();
+            } catch (IOException e) {
+                System.out.println("ERROR");
+                cv.stage.close();
+                throw new RuntimeException(e);
+            }
     }
 }
