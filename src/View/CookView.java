@@ -34,6 +34,10 @@ public class CookView extends Application {
 
     private final Label CV = new Label( "Cook View");                           //Label for what Vew you are in
 
+    private final Label CO = new Label( "Current Order" );
+
+    private final Label NO = new Label( "Next Order" );
+
     private Label currentOrder = new Label("");                        //Label for the current Order
 
     private Pane pane = new Pane();                                                 //Creating a new Pane
@@ -63,24 +67,39 @@ public class CookView extends Application {
         currentRec.setX(25);
         currentRec.setY(150);
 
-        currentRec2 = new Rectangle();
+        currentRec2 = new Rectangle(185,210, Paint.valueOf( "#6987ff" ));
+        currentRec2.setArcWidth(30);
+        currentRec2.setArcHeight(30);
+        currentRec2.setX(20);
+        currentRec2.setY(145);
 
-        currentRecShadow = new Rectangle();
+        currentRecShadow = new Rectangle(185,210, Paint.valueOf( "#3b3b3b" ));
+        currentRecShadow.setArcWidth(30);
+        currentRecShadow.setArcHeight(30);
+        currentRecShadow.setX(30);
+        currentRecShadow.setY(155);
 
         nextRec = new Rectangle(175,200, Paint.valueOf( "#b6d8ff" ));
         nextRec.setArcWidth(30);
         nextRec.setArcHeight(30);
-        nextRec.setX(420);
+        nextRec.setX(410);
         nextRec.setY(10);
 
-        nextRec2 = new Rectangle();
+        nextRec2 = new Rectangle(185,210, Paint.valueOf( "#6987ff" ));
+        nextRec2.setArcWidth(30);
+        nextRec2.setArcHeight(30);
+        nextRec2.setX(405);
+        nextRec2.setY(5);
 
-        nextRecShadow = new Rectangle();
-
+        nextRecShadow = new Rectangle(185,210, Paint.valueOf( "#3b3b3b" ));
+        nextRecShadow.setArcWidth(30);
+        nextRecShadow.setArcHeight(30);
+        nextRecShadow.setX(415);
+        nextRecShadow.setY(15);
 
     }
     public void setLayout(){
-        nextOrderLabel.setLayoutX(445);                  //setting the x-axis
+        nextOrderLabel.setLayoutX(435);                  //setting the x-axis
         nextOrderLabel.setLayoutY(10);                  //setting the y-axis
 
         toggleView.setLayoutX(0);                       //setting the x-axis
@@ -89,7 +108,7 @@ public class CookView extends Application {
 
 
         finishOrder.setLayoutX(40);                     //setting the x-axis
-        finishOrder.setLayoutY(360);                   //setting the y-axis
+        finishOrder.setLayoutY(370);                   //setting the y-axis
         finishOrder.setOnAction(controller);
 
         showPickupOrders.setLayoutX(445);               //setting the x-axis
@@ -107,6 +126,12 @@ public class CookView extends Application {
 
         currentOrder.setLayoutX(50);                //setting the x-axis
         currentOrder.setLayoutY(150);               //setting the y-axis
+
+        CO.setLayoutX(50);                //setting the x-axis
+        CO.setLayoutY(150);               //setting the y-axis
+
+        NO.setLayoutX(50);                //setting the x-axis
+        NO.setLayoutY(150);               //setting the y-axis
 
     }
 
