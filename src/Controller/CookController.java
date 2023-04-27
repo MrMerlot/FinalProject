@@ -75,13 +75,27 @@ public class CookController implements EventHandler<ActionEvent> {
         }
     }
 
+
+    /**
+     * sets the current and next order labels
+     */
     public void setOrders(){
         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());
         cookView.setNextOrderLabel(orderData.getNextOrder());
     }
+
+    /**
+     * gets the current order
+     * @return String
+     */
     public String getCurrentOrder(){
         return orderData.getCurrentOrder();
     }
+
+    /**
+     * gets the next order
+     * @return String
+     */
     public String getNextOrder(){
         return orderData.getNextOrder();
     }
