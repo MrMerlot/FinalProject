@@ -18,7 +18,7 @@ public class OrderData {
     private static HashMap<Integer,String> itemIDNames = new HashMap<>();               //Hashmap for Item Names
     private static HashMap<Integer,Double> itemIDPrice = new HashMap<>();              //Hashmap for Item Prices
 
-
+    private ArrayList<Order> ordersArrayList = new ArrayList<>();
     private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
 
     public void addOrder( Order order ) {
@@ -35,6 +35,8 @@ public class OrderData {
     public void setDoorDashQueue(Order DDOrder){
         doorDashQueue.add(DDOrder);
     }
+
+    public ArrayList<Order> getOrderList(){return ordersArrayList;}
 
     /**
      * Gets the Door Dash Queue
@@ -127,6 +129,8 @@ public class OrderData {
     public void setNextOrder(String nxtOrder){
         nextOrder = nxtOrder;
     }
+
+
 
     /**
      * Gets the next order

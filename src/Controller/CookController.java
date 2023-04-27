@@ -158,6 +158,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         orderDataController.setNextOrder();
                     }
                     else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
+                        orderData.getOrderList().remove(orderData.getNextOrderObject());
                         if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
                             orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
                         }
@@ -170,6 +171,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
                             orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
                         }
+                        orderData.getOrderList().remove(orderData.getNextOrderObject());
                         orderData.getCurrentOrderObject().setComplete("true");
                         orderDataController.setCurrentOrder();                              //sets the current and next order V
                         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order

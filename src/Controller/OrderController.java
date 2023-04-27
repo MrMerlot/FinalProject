@@ -1,8 +1,5 @@
 package Controller;
-import Exceptions.AddToOrderException;
-import Exceptions.CustomerNameException;
-import Exceptions.PhoneNumberException;
-import Exceptions.SubmitOrderException;
+import Exceptions.*;
 import Model.*;
 import View.CustomerView;
 import javafx.event.ActionEvent;
@@ -20,7 +17,6 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int orderNumber;
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
-    private ArrayList<Order> ordersArrayList = new ArrayList<>();
     private HashTableID hashTableID = new HashTableID();
 
 
@@ -56,7 +52,7 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @param num
      * @return boolean
      */
-    private boolean isPhoneNumber(String num){
+    private boolean isNumber(String num){
         if(num.equals(""))
             return false;
         for(int i=0; i < num.length(); i++){
@@ -75,12 +71,10 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @return order
      */
     public Order orderNumToOrder(int orderNumber){
-        for(int i = 0; i < ordersArrayList.size(); i++){
-            if(ordersArrayList.get(i).getOrderNumber() == orderNumber)
-                return ordersArrayList.get(i);
+        for(int i = 0; i < orderData.getOrderList().size(); i++){
+            if(orderData.getOrderList().get(i).getOrderNumber() == orderNumber)
+                return orderData.getOrderList().get(i);
         }
-
-        //instead of returning null, throw an exception                     //EXCEPTION
         return null;
     }
 
@@ -94,7 +88,20 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getCancel().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                try{
+                    if(!isNumber(cv.getCanceledOrder()) || Integer.parseInt(cv.getCanceledOrder()) == 1){   //if request isnt a number or is the number 1
+                        System.out.println("UNO");
+                        throw new CancelException();
+                    }
+                    else if(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())) == null){
+                        System.out.println("DOS");
+                        throw new CancelException();
+                    }
+                    System.out.println("TRES");
+                    orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                    orderData.getOrderList().remove(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                }
+                catch(CancelException e){}
                 cv.setCancelField("");
             }
         });
@@ -110,7 +117,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     if(cv.getNameButton().getText().equals("")){
                         throw new CustomerNameException();
                     }
-                    if(getType() == 3 && !isPhoneNumber(cv.getGetPhoneNumber().getText()))
+                    if(getType() == 3 && !isNumber(cv.getGetPhoneNumber().getText()))
                         throw new PhoneNumberException();
                     if(cv.getItemID().isEmpty())
                         throw new SubmitOrderException();
@@ -144,7 +151,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     cv.getItemQuantity().clear();
                     orderData.addOrder( order );
                     FileWriterController.fileOrderArrayList.add(order);
-                    ordersArrayList.add(order);
+                    orderData.getOrderList().add(order);
                     orderDataController.checkQueue();
                 }
                 catch(CustomerNameException e){}
@@ -303,11 +310,11 @@ public class OrderController implements EventHandler<ActionEvent> {
     }
 
     public Order getOrder(int i){
-        return ordersArrayList.get(i);
+        return orderData.getOrderList().get(i);
     }
 
     public int getOrdersArrayListLength(){
-        return ordersArrayList.size();
+        return orderData.getOrderList().size();
     }
 
     private int getType(){
