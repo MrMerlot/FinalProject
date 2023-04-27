@@ -1,6 +1,7 @@
 package Controller;
 
 import Exceptions.FinishOrderException;
+import Exceptions.PickupOrderException;
 import Model.OrderData;
 import View.CookView;
 import javafx.event.ActionEvent;
@@ -134,11 +135,18 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getPickup().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                RadioButton temp = (RadioButton) pickupOrdersTG.getSelectedToggle(); //setting the selected RP to a temp
-                String tempS = temp.getText();                            //getting the text(Order) from the selected RB
-                orderData.getPickupOrders().remove(tempS);                //removing the order from Pick up orders
-                cookView.getPickupOrders().setSelected(false);            //unselecting the checkbox
-                resetVbox();                                              //resetting everything in the CheckBox Handler
+                try{
+                    if(pickupOrdersTG.getSelectedToggle() == null) {
+                        throw new PickupOrderException();
+                    }
+                    RadioButton temp = (RadioButton) pickupOrdersTG.getSelectedToggle(); //setting the selected RP to a temp
+                    String tempS = temp.getText();                            //getting the text(Order) from the selected RB
+                    orderData.getPickupOrders().remove(tempS);                //removing the order from Pick up orders
+                    cookView.getPickupOrders().setSelected(false);            //unselecting the checkbox
+                    resetVbox();                                              //resetting everything in the CheckBox Handler
+                    pickupOrdersTG.selectToggle(null);
+                }
+                catch(PickupOrderException e){}
             }
         });
 
@@ -157,41 +165,31 @@ public class CookController implements EventHandler<ActionEvent> {
                     if(cookView.getCurrentOrder().getText().equals("")){
                         throw new FinishOrderException();
                     }
-                }
-                catch (FinishOrderException e){
-                    //e.getStackTrace();
-                }
-
-
-                if(cookView.getCurrentOrder().getText().equals("")){
-                    orderDataController.setCurrentOrder();    //throw exception for empty current order
-                }
-                else if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
-                    orderDataController.setNextOrder();
-                }
-                else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
-                    if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
-                        orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                    if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
+                        orderDataController.setNextOrder();
                     }
-                    cookView.setCurrentOrderLabel("");            //Sets the Label to the new Order
-                    orderData.setCurrentOrder("");
-                    cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
-                    cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
-                }
-                else {
-                    if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
-                        orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                    else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
+                        if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
+                            orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                        }
+                        cookView.setCurrentOrderLabel("");            //Sets the Label to the new Order
+                        orderData.setCurrentOrder("");
+                        cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
+                        cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                     }
-                    orderData.getCurrentOrderObject().setComplete("true");
-                    orderDataController.setCurrentOrder();                              //sets the current and next order V
-                    cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
-                    cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order
-                    cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
-                    cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
+                    else {
+                        if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
+                            orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                        }
+                        orderData.getCurrentOrderObject().setComplete("true");
+                        orderDataController.setCurrentOrder();                              //sets the current and next order V
+                        cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
+                        cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order
+                        cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane
+                        cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
+                    }
                 }
-
-
-
+                catch (FinishOrderException e){}
             }
 
         });

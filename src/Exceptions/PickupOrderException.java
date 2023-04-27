@@ -3,6 +3,6 @@ package Exceptions;
 public class PickupOrderException extends Exception{
     public PickupOrderException(){
         super();
-        System.out.println( "There are no orders to be picked up." );
+        System.out.println( "No selected pickup order" );
     }
 }
