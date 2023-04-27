@@ -3,12 +3,15 @@ package View;
 import Controller.FileWriterController;
 import Controller.OrderController;
 import Controller.OrderDataController;
+import com.sun.prism.paint.Color;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -48,6 +51,7 @@ public class CustomerView extends Application {
     private RadioButton doorDRadio, driveRadio, onsiteRadio, phoneRadio;
     private Label enterPhone = new Label("Enter Number: ");
     private TextField getPhoneNumber = new TextField();
+    private Rectangle centerRec, outlineRec, shadowRec;
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
@@ -64,6 +68,7 @@ public class CustomerView extends Application {
         setPositions();
         setActions();
         setSlider();
+        setBackGround();
         setStyle();
 
         group = addNodes();
@@ -81,6 +86,35 @@ public class CustomerView extends Application {
         });
     }
 
+    private void setBackGround(){
+
+        // #fffa00 is yellow
+        // #ff0f2b is red
+        // #74ff8c is green
+
+        centerRec = new Rectangle(370,400, Paint.valueOf("#74ff8c"));
+        centerRec.setArcHeight(30);
+        centerRec.setArcWidth(30);
+        centerRec.setX(130);
+        centerRec.setY(100);
+        centerRec.toBack();
+
+        outlineRec = new Rectangle(380, 410, Paint.valueOf("#fffa00"));
+        outlineRec.setArcWidth(30);
+        outlineRec.setArcHeight(30);
+        outlineRec.setX(125);
+        outlineRec.setY(95);
+
+        shadowRec = new Rectangle(380, 410, Paint.valueOf("#760003"));
+        shadowRec.setArcWidth(30);
+        shadowRec.setArcHeight(30);
+        shadowRec.setX(135);
+        shadowRec.setY(105);
+    }
+
+    /**
+     * Sets the font style and other UI styles
+     */
     private void setStyle(){
 
         customerLabel.setFont(new Font("Arial",40));
@@ -194,7 +228,7 @@ public class CustomerView extends Application {
      */
     private Group addNodes(){
         Group g = new Group();
-        g.getChildren().addAll(customerLabel, orderLabel, promptLabel,
+        g.getChildren().addAll( shadowRec, outlineRec, centerRec, customerLabel, orderLabel, promptLabel,
                 cancelField, toggleView, submitButton, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
@@ -580,6 +614,7 @@ public class CustomerView extends Application {
 
     public void setScene(){
         firstScene = new Scene( group, 600,600 );
+        firstScene.setFill(Paint.valueOf("#ff0f2b"));
     }
 
     public void setToggle(){ toggle = !toggle; }
