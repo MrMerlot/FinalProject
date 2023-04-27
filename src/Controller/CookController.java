@@ -135,9 +135,10 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getPickup().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try{
-                    if(pickupOrdersTG.getSelectedToggle() == null) {
-                        throw new PickupOrderException();
+                try{     //exception handling for PickupOrder button
+                    //checking to see if pickupOrder Arraylist is empty or if the user didn't select an order
+                    if(pickupOrdersTG.getSelectedToggle() == null || pickupOrdersTG.getSelectedToggle() == null) {
+                        throw new PickupOrderException();   //throwing the exception
                     }
                     RadioButton temp = (RadioButton) pickupOrdersTG.getSelectedToggle(); //setting the selected RP to a temp
                     String tempS = temp.getText();                            //getting the text(Order) from the selected RB
