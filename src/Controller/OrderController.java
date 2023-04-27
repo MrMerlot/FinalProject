@@ -1,4 +1,7 @@
 package Controller;
+import Exceptions.CustomerNameException;
+import Exceptions.PhoneNumberException;
+import Exceptions.SubmitOrderException;
 import Model.*;
 import View.CustomerView;
 import javafx.event.ActionEvent;
@@ -55,6 +58,22 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getEnterPhone().setVisible(false);
     }
 
+    /**
+     * Checks if the inputted String is an accepted phone number or not
+     * @param num
+     * @return boolean
+     */
+    private boolean isPhoneNumber(String num){
+        if(num.equals(""))
+            return false;
+        for(int i=0; i < num.length(); i++){
+            if(num.charAt(i) < 48 || num.charAt(i) > 57){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Takes in an order number(int) and returns its corresponding order object(Object)
@@ -94,41 +113,49 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
 
-                customerName = cv.getNameButton().getText();
-                orderType = getType( );
-                orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
-                String phone = cv.getGetPhoneNumber().getText();
-                Order order;
-                cv.addOrderNumber();
+                try{
+                    if(cv.getNameButton().getText().equals("")){
+                        throw new CustomerNameException();
+                    }
+                    if(getType() == 3 && !isPhoneNumber(cv.getGetPhoneNumber().getText()))
+                        throw new PhoneNumberException();
+                    if(cv.getItemID().isEmpty())
+                        throw new SubmitOrderException();
 
-                if( orderType == 4 ) order = new DoorDash( customerName, orderNumber);
-                else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber);
-                else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
-                else order = new Phone( customerName, orderNumber, phone);
+                    customerName = cv.getNameButton().getText();
+                    orderType = getType( );
+                    orderNumber = Integer.parseInt( cv.getOrderNumber().getText() );
+                    String phone = cv.getGetPhoneNumber().getText();
+                    Order order;
+                    cv.addOrderNumber();
 
-                String items = "";//test
+                    if( orderType == 4 ) order = new DoorDash( customerName, orderNumber);
+                    else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber);
+                    else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
+                    else order = new Phone( customerName, orderNumber, phone);
 
-                for( int i = 0; i < cv.getItemID().size(); i++ ){
-                    order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
-                    items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
+                    String items = "";//test
+                    for( int i = 0; i < cv.getItemID().size(); i++ ){
+                        order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
+                        items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
+                    }
+                    System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
+
+                    if( orderType == 4 ) {
+                        cv.getPriceLabel().setText( "$" + (1.05 * getPrice(cv.getItemID(), cv.getItemQuantity()) ));
+                    }
+                    else{
+                        cv.getPriceLabel().setText( "$" + getPrice(cv.getItemID(), cv.getItemQuantity()));
+                    }
+                    cv.getItemID().clear();
+                    cv.getItemQuantity().clear();
+                    orderData.addOrder( order );
+                    ordersArrayList.add(order);
+                    orderDataController.checkQueue();
                 }
-
-                System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
-
-                if( orderType == 4 ) {
-                    cv.getPriceLabel().setText( "$" + (1.05 * getPrice(cv.getItemID(), cv.getItemQuantity()) ));
-                }
-                else{
-                    cv.getPriceLabel().setText( "$" + getPrice(cv.getItemID(), cv.getItemQuantity()));
-                }
-
-                cv.getItemID().clear();
-                cv.getItemQuantity().clear();
-
-                orderData.addOrder( order );
-                ordersArrayList.add(order);
-                //orderDataController.setCurrentOrder();
-                orderDataController.checkQueue();
+                catch(CustomerNameException e){}
+                catch (PhoneNumberException e){}
+                catch(SubmitOrderException e){}
 
             }
         });
