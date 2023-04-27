@@ -88,24 +88,25 @@ public class CustomerView extends Application {
 
     private void setBackGround(){
 
-        // #fffa00 is yellow
-        // #ff0f2b is red
-        // #74ff8c is green
+        // #ececec is light grey
+        // #6987ff is blue
+        // #b6d8ff is silver
+        // #3b3b3b is shadow
 
-        centerRec = new Rectangle(370,400, Paint.valueOf("#74ff8c"));
+        centerRec = new Rectangle(370,400, Paint.valueOf("#b6d8ff"));
         centerRec.setArcHeight(30);
         centerRec.setArcWidth(30);
         centerRec.setX(130);
         centerRec.setY(100);
         centerRec.toBack();
 
-        outlineRec = new Rectangle(380, 410, Paint.valueOf("#fffa00"));
+        outlineRec = new Rectangle(380, 410, Paint.valueOf("#6987ff"));
         outlineRec.setArcWidth(30);
         outlineRec.setArcHeight(30);
         outlineRec.setX(125);
         outlineRec.setY(95);
 
-        shadowRec = new Rectangle(380, 410, Paint.valueOf("#760003"));
+        shadowRec = new Rectangle(380, 410, Paint.valueOf("#3b3b3b"));
         shadowRec.setArcWidth(30);
         shadowRec.setArcHeight(30);
         shadowRec.setX(135);
@@ -614,7 +615,7 @@ public class CustomerView extends Application {
 
     public void setScene(){
         firstScene = new Scene( group, 600,600 );
-        firstScene.setFill(Paint.valueOf("#ff0f2b"));
+        firstScene.setFill(Paint.valueOf("#ececec"));
     }
 
     public void setToggle(){ toggle = !toggle; }
