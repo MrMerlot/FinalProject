@@ -55,7 +55,7 @@ public class CookView extends Application {
         background.getChildren().addAll(currentRecShadow,currentRec2,currentRec,
                 nextRecShadow,nextRec2,nextRec);
         pane.getChildren().addAll(background,currentRec,nextOrderLabel, toggleView, finishOrder, showPickupOrders,
-                CV, currentOrder);
+                CV, currentOrder,CO,NO);
         setLayout();
         setScene();
     }
@@ -83,24 +83,24 @@ public class CookView extends Application {
         nextRec.setArcWidth(30);
         nextRec.setArcHeight(30);
         nextRec.setX(410);
-        nextRec.setY(10);
+        nextRec.setY(30);
 
         nextRec2 = new Rectangle(185,210, Paint.valueOf( "#6987ff" ));
         nextRec2.setArcWidth(30);
         nextRec2.setArcHeight(30);
         nextRec2.setX(405);
-        nextRec2.setY(5);
+        nextRec2.setY(25);
 
         nextRecShadow = new Rectangle(185,210, Paint.valueOf( "#3b3b3b" ));
         nextRecShadow.setArcWidth(30);
         nextRecShadow.setArcHeight(30);
         nextRecShadow.setX(415);
-        nextRecShadow.setY(15);
+        nextRecShadow.setY(35);
 
     }
     public void setLayout(){
         nextOrderLabel.setLayoutX(435);                  //setting the x-axis
-        nextOrderLabel.setLayoutY(10);                  //setting the y-axis
+        nextOrderLabel.setLayoutY(20);                  //setting the y-axis
 
         toggleView.setLayoutX(0);                       //setting the x-axis
         toggleView.setLayoutY(575);                     //setting the y-axis
@@ -128,10 +128,10 @@ public class CookView extends Application {
         currentOrder.setLayoutY(150);               //setting the y-axis
 
         CO.setLayoutX(50);                //setting the x-axis
-        CO.setLayoutY(150);               //setting the y-axis
+        CO.setLayoutY(130);               //setting the y-axis
 
-        NO.setLayoutX(50);                //setting the x-axis
-        NO.setLayoutY(150);               //setting the y-axis
+        NO.setLayoutX(435);                //setting the x-axis
+        NO.setLayoutY(10);               //setting the y-axis
 
     }
 
