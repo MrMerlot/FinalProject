@@ -137,7 +137,7 @@ public class CookController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
                 try{     //exception handling for PickupOrder button
                     //checking to see if pickupOrder Arraylist is empty or if the user didn't select an order
-                    if(pickupOrdersTG.getSelectedToggle() == null || pickupOrdersTG.getSelectedToggle() == null) {
+                    if(pickupOrdersTG.getSelectedToggle() == null) {
                         throw new PickupOrderException();   //throwing the exception
                     }
                     RadioButton temp = (RadioButton) pickupOrdersTG.getSelectedToggle(); //setting the selected RP to a temp
