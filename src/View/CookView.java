@@ -19,14 +19,14 @@ import javafx.stage.Stage;
 
 public class CookView extends Application {
     CustomerView customerView1;
-    public Scene secondScene;
-    private Label nextOrderLabel = new Label("H");                         //shows next order
+    public Scene secondScene;                                                         //Scene for CookView
+    private Label nextOrderLabel = new Label("H");                              //shows next order
 
     private Button toggleView = new Button( "Switch to Customer View" );        //Switches back to the Customers View
 
     private Button finishOrder = new Button( "Finish Current Order" );          //adds order to be picked up, updates current and next order Labels
 
-    private CheckBox showPickupOrders = new CheckBox( "List all Pickup Orders");    //displays all orders to be picked up
+    private CheckBox showPickupOrders = new CheckBox( "List all Pickup Orders"); //displays all orders to be picked up
 
     private Button backPickUP = new Button( "Back" );                           //Back Button
 
@@ -34,32 +34,39 @@ public class CookView extends Application {
 
     private final Label CV = new Label( "Cook View");                           //Label for what Vew you are in
 
-    private final Label CO = new Label( "Current Order" );
+    private final Label CO = new Label( "Current Order" );                      //Label for Current Order
 
-    private final Label NO = new Label( "Next Order" );
+    private final Label NO = new Label( "Next Order" );                         //Label for Next Order
 
-    private Label currentOrder = new Label("");                        //Label for the current Order
+    private Label currentOrder = new Label("");                                 //Label for the current Order
 
     private Pane pane = new Pane();                                                 //Creating a new Pane
 
-    private Rectangle currentRec,currentRec2,currentRecShadow,nextRec,nextRec2,nextRecShadow;
+    private Rectangle currentRec,currentRec2,currentRecShadow,nextRec,nextRec2,nextRecShadow;   //for background
+
+    CookController controller = new CookController(this);                       //Object of Cook Controller
 
 
-
-    CookController controller = new CookController(this);
-
+    /**
+     * Custructor for Cookview
+     * initializes all methods for the view
+     * @param customerView view
+     */
     public CookView(CustomerView customerView){
         customerView1 = customerView;
-        setBackgroundLayout();
-        Group background = new Group();
+        setBackgroundLayout();                                                //initializing the background
+        Group background = new Group();                                       //creating a new group for the background
         background.getChildren().addAll(currentRecShadow,currentRec2,currentRec,
-                nextRecShadow,nextRec2,nextRec);
+                nextRecShadow,nextRec2,nextRec);                             //adding everything to the background
         pane.getChildren().addAll(background,currentRec,nextOrderLabel, toggleView, finishOrder, showPickupOrders,
-                CV, currentOrder,CO,NO);
-        setLayout();
-        setScene();
+                CV, currentOrder,CO,NO);                                    //adding everything to the Pane for scene
+        setLayout();                                                //initializing the scene layout
+        setScene();                                                //initializing the scene
     }
 
+    /**
+     * Sets the background up for the view
+     */
     public void setBackgroundLayout(){
         currentRec = new Rectangle(175,200, Paint.valueOf( "#b6d8ff" ));
         currentRec.setArcWidth(30);           //setting rounded edges
@@ -99,6 +106,10 @@ public class CookView extends Application {
         nextRecShadow.setY(35);                  //setting the y-axis
 
     }
+
+    /**
+     * Sets the layout of Buttons/Labels for view up
+     */
     public void setLayout(){
         nextOrderLabel.setLayoutX(435);                  //setting the x-axis
         nextOrderLabel.setLayoutY(30);                  //setting the y-axis
@@ -121,20 +132,20 @@ public class CookView extends Application {
         CV.setLayoutX(0);                            //setting the x-axis
         CV.setLayoutY(0);                            //setting the y-axis
         CV.setFont(new Font("Arial",40));  //using CSS sets the font and size of the Label
-        CV.setStyle("-fx-border-width: 2;");
-        CV.setStyle("-fx-border-color: black;");
+        CV.setStyle("-fx-border-width: 2;");        //sets the boarder width
+        CV.setStyle("-fx-border-color: black;");    //sets the boarder color
 
 
         currentOrder.setLayoutX(50);                //setting the x-axis
         currentOrder.setLayoutY(150);               //setting the y-axis
 
-        CO.setLayoutX(65);                //setting the x-axis
-        CO.setLayoutY(125);               //setting the y-axis
-        CO.setStyle("-fx-font-size: 16px;");
+        CO.setLayoutX(65);                          //setting the x-axis
+        CO.setLayoutY(125);                         //setting the y-axis
+        CO.setStyle("-fx-font-size: 16px;");        //sets the font size
 
-        NO.setLayoutX(460);                //setting the x-axis
-        NO.setLayoutY(5);               //setting the y-axis
-        NO.setStyle("-fx-font-size: 16px;");
+        NO.setLayoutX(460);                         //setting the x-axis
+        NO.setLayoutY(5);                           //setting the y-axis
+        NO.setStyle("-fx-font-size: 16px;");        //sets the font size
 
     }
 
