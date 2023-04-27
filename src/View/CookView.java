@@ -149,14 +149,25 @@ public class CookView extends Application {
 
     }
 
+
+    /**
+     * calls the view toggle
+     */
     public void toggle(){
         customerView1.toggle();
     }
 
+    /**
+     * Sets the scene
+     */
     public void setScene(){
         secondScene = new Scene( pane, 600,600 );
     }
 
+    /**
+     * Gets the cookView Scene
+     * @return scene
+     */
     public Scene getScene(){ return secondScene; }
 
     /**
@@ -174,6 +185,11 @@ public class CookView extends Application {
     public CheckBox getPickupOrders(){
         return showPickupOrders;
     }
+
+    /**
+     * gets the pickup order button
+     * @return Button
+     */
     public Button getPickup(){
         return pickup;
     }
@@ -185,6 +201,11 @@ public class CookView extends Application {
     public void setPane(Node node){
         this.pane.getChildren().add(node);
     }
+
+    /**
+     * gets the Pane
+     * @return Pane
+     */
     public Pane getPane(){
         return pane;
     }
@@ -200,6 +221,11 @@ public class CookView extends Application {
     public Button getBackPickup(){
         return backPickUP;
     }
+
+    /**
+     * Gets the Finish Order Button
+     * @return Button
+     */
     public Button getFinishOrder(){return finishOrder;}
 
     /**
@@ -245,10 +271,19 @@ public class CookView extends Application {
         primaryStage.show();                                    //calling show
     }
 
+
+    /**
+     * Sets the current and next order Labels
+     */
     public void setLabels(){
         setCurrentOrderLabel(controller.getCurrentOrder());
         setNextOrderLabel(controller.getNextOrder());
     }
+
+    /**
+     * gets the scene and sets the Labels
+     * @return
+     */
     public Scene getSecondScene(){
         setLabels();
         return secondScene;
