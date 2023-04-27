@@ -3,12 +3,15 @@ package View;
 import Controller.CookController;
 import Model.Order;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -35,14 +38,28 @@ public class CookView extends Application {
 
     private Pane pane = new Pane();                                                 //Creating a new Pane
 
+    private Rectangle currentRec,nectRec;
+
+
 
     CookController controller = new CookController(this);
 
     public CookView(CustomerView customerView){
         customerView1 = customerView;
-        pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
+        setBackgroundLayout();
+        Group background = new Group();
+        background.getChildren().addAll(currentRec);
+        pane.getChildren().addAll(background,currentRec,nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
         setLayout();
         setScene();
+    }
+
+    public void setBackgroundLayout(){
+        currentRec = new Rectangle(175,200, Paint.valueOf( "#74ff8c" ));
+        currentRec.setArcWidth(30);
+        currentRec.setArcHeight(30);
+        currentRec.setX(25);
+        currentRec.setY(150);
     }
     public void setLayout(){
         nextOrderLabel.setLayoutX(470);                  //setting the x-axis
@@ -53,7 +70,7 @@ public class CookView extends Application {
         toggleView.setOnAction(controller);            //sending to Cook Controller when Clicked
 
 
-        finishOrder.setLayoutX(0);                     //setting the x-axis
+        finishOrder.setLayoutX(40);                     //setting the x-axis
         finishOrder.setLayoutY(350);                   //setting the y-axis
         finishOrder.setOnAction(controller);
 
@@ -163,7 +180,8 @@ public class CookView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
+
+        //pane.getChildren().addAll(nextOrderLabel, toggleView, finishOrder, showPickupOrders, CV, currentOrder);
         Scene scene = new Scene(pane, 600, 600);     //instantiating scene and adding the pane & window size
         primaryStage.setScene(scene);                           //setting the scene
         primaryStage.setResizable(false);                       //making sure the user can't resize the window
