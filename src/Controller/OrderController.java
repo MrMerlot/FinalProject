@@ -90,14 +90,11 @@ public class OrderController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
                 try{
                     if(!isNumber(cv.getCanceledOrder()) || Integer.parseInt(cv.getCanceledOrder()) == 1){   //if request isnt a number or is the number 1
-                        System.out.println("UNO");
                         throw new CancelException();
                     }
                     else if(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())) == null){
-                        System.out.println("DOS");
                         throw new CancelException();
                     }
-                    System.out.println("TRES");
                     orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
                     orderData.getOrderList().remove(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
                 }
