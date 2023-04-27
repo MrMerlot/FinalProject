@@ -1,4 +1,5 @@
 package Controller;
+import Exceptions.AddToOrderException;
 import Exceptions.CustomerNameException;
 import Exceptions.PhoneNumberException;
 import Exceptions.SubmitOrderException;
@@ -220,8 +221,13 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getAddToOrder().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
-                cv.addItemID( getItemID() );
+                try{
+                    if(getItemID() == 0)
+                        throw new AddToOrderException();
+                    cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
+                    cv.addItemID( getItemID() );
+                }
+                catch(AddToOrderException e){}
             }
         });
 
