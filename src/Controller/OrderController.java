@@ -7,17 +7,9 @@ import Model.*;
 import View.CustomerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.WindowEvent;
-import sun.font.TrueTypeFont;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.EventListener;
 
 public class OrderController implements EventHandler<ActionEvent> {
     private CustomerView cv;
@@ -151,6 +143,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     cv.getItemID().clear();
                     cv.getItemQuantity().clear();
                     orderData.addOrder( order );
+                    FileWriterController.fileOrderArrayList.add(order);
                     ordersArrayList.add(order);
                     orderDataController.checkQueue();
                 }
@@ -341,17 +334,10 @@ public class OrderController implements EventHandler<ActionEvent> {
         return price;
     }
 
-    public void closeFileAction(){
-            try {
-                FileWriterController fileWriterController = new FileWriterController();
-                for(int i=0;i<getOrdersArrayListLength();i++){
-                    fileWriterController.writeToFile(getOrder(i), fileWriterController);
-                }//commit
-                fileWriterController.close();
-            } catch (IOException e) {
-                System.out.println("ERROR");
-                cv.stage.close();
-                throw new RuntimeException(e);
-            }
+    public void setOrders() {
+        for (int i=0; i<FileWriterController.fileOrderArrayList.size();i++){
+            orderData.addOrder(FileWriterController.fileOrderArrayList.get(i));
+        }
+        orderDataController.setCurrentOrder();
     }
 }
