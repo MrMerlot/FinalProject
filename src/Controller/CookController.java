@@ -23,6 +23,11 @@ public class CookController implements EventHandler<ActionEvent> {
     ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
 
     VBox tempVbox = new VBox();                 //New vBox
+    FileWriterController fileWriterController;
+
+    {
+        fileWriterController = new FileWriterController();
+    }
 
 
     public CookController(CookView view) {
@@ -32,39 +37,8 @@ public class CookController implements EventHandler<ActionEvent> {
         setOrders();
     }
 
-//    public void test() {
-//        orderData.setPickupOrders("dd");
-//        orderData.setPickupOrders("fsddf");
-//        orderData.setPickupOrders("sdfsdfsdf");                 //this will be removed soon
-//        orderData.setPickupOrders("falskdfj;alk");
-//
-//        orderData.setCurrentOrder("2 HotDogs 3 Burgers Hot Ice 7 Pizza 8 hot tea");
-//        orderData.setNextOrder("9HotDogs 4Burgers Hot Ice 2 pizza 12 ham");
-//
-//        Order test = new Order("Steve",2,2);
-//        test.addItem(2,6);
-//        Order test2 = new Order("Billy",4,3);
-//        test2.addItem(5,7);
-//        Order test4 = new Order("Tom",4,3);
-//        test4.addItem(8,2);
-//        Order test3 = new Order("Miles",2,2);
-//        test3.addItem(6,4);
-//
-//        orderData.setDriveThroughQueue(test);
-//        orderData.setOnSiteQueue(test2);
-//        orderData.setDriveThroughQueue(test3);
-//        orderData.setOnSiteQueue(test4);
-//
-//    }
-    public void initializeOrders(){
-        try {
-            FileWriterController fileWriterController = new FileWriterController();
-            fileWriterController.readInFile(fileWriterController.file,orderData);
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+
     /**
      * resets the Vbox
      */
@@ -75,13 +49,27 @@ public class CookController implements EventHandler<ActionEvent> {
         }
     }
 
+
+    /**
+     * sets the current and next order labels
+     */
     public void setOrders(){
         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());
         cookView.setNextOrderLabel(orderData.getNextOrder());
     }
+
+    /**
+     * gets the current order
+     * @return String
+     */
     public String getCurrentOrder(){
         return orderData.getCurrentOrder();
     }
+
+    /**
+     * gets the next order
+     * @return String
+     */
     public String getNextOrder(){
         return orderData.getNextOrder();
     }
@@ -103,7 +91,7 @@ public class CookController implements EventHandler<ActionEvent> {
 
 
             }
-            vBox.setLayoutX(200);                                       //setting the x-axis
+            vBox.setLayoutX(225);                                       //setting the x-axis
             vBox.setLayoutY(100);                                       //setting the y-axis
             vBox.setSpacing(10);                                        //setting the spacing between each RB
             vBox.setPadding(new Insets(10));            //setting the padding(Intset)
@@ -170,6 +158,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         orderDataController.setNextOrder();
                     }
                     else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
+                        orderData.getOrderList().remove(orderData.getNextOrderObject());
                         if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
                             orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
                         }
@@ -182,6 +171,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
                             orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
                         }
+                        orderData.getOrderList().remove(orderData.getNextOrderObject());
                         orderData.getCurrentOrderObject().setComplete("true");
                         orderDataController.setCurrentOrder();                              //sets the current and next order V
                         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order

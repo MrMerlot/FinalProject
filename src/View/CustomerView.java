@@ -3,6 +3,7 @@ package View;
 import Controller.FileWriterController;
 import Controller.OrderController;
 import Controller.OrderDataController;
+import Model.OrderData;
 import com.sun.prism.paint.Color;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -18,6 +19,7 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class CustomerView extends Application {
     public boolean toggle = true;
@@ -55,8 +57,9 @@ public class CustomerView extends Application {
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
+    private FileWriterController fileWriterController = new FileWriterController();
 
-    public CustomerView() {
+    public CustomerView(){
         cookView = new CookView(this);
     }
 
@@ -64,6 +67,9 @@ public class CustomerView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        OrderData orderData = new OrderData();
+        fileWriterController.readInFile();
+        orderController.setOrders();
         setMenu();
         setPositions();
         setActions();
@@ -81,7 +87,7 @@ public class CustomerView extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                orderController.closeFileAction();
+                FileWriterController.closeFileAction(fileWriterController);
             }
         });
     }
@@ -622,7 +628,7 @@ public class CustomerView extends Application {
 
     public String getCanceledOrder(){return cancelField.getText();}
 
-    public Button getToggleView() { return toggleView; }
+    public Button getToggleView() {return toggleView; }
 
     public static void main(String[] args) {
         Application.launch(args);

@@ -1,23 +1,12 @@
 package Controller;
-import Exceptions.AddToOrderException;
-import Exceptions.CustomerNameException;
-import Exceptions.PhoneNumberException;
-import Exceptions.SubmitOrderException;
+import Exceptions.*;
 import Model.*;
 import View.CustomerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.WindowEvent;
-import sun.font.TrueTypeFont;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.EventListener;
 
 public class OrderController implements EventHandler<ActionEvent> {
     private CustomerView cv;
@@ -28,7 +17,6 @@ public class OrderController implements EventHandler<ActionEvent> {
     private int orderNumber;
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
-    private ArrayList<Order> ordersArrayList = new ArrayList<>();
     private HashTableID hashTableID = new HashTableID();
 
 
@@ -64,7 +52,7 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @param num
      * @return boolean
      */
-    private boolean isPhoneNumber(String num){
+    private boolean isNumber(String num){
         if(num.equals(""))
             return false;
         for(int i=0; i < num.length(); i++){
@@ -83,12 +71,10 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @return order
      */
     public Order orderNumToOrder(int orderNumber){
-        for(int i = 0; i < ordersArrayList.size(); i++){
-            if(ordersArrayList.get(i).getOrderNumber() == orderNumber)
-                return ordersArrayList.get(i);
+        for(int i = 0; i < orderData.getOrderList().size(); i++){
+            if(orderData.getOrderList().get(i).getOrderNumber() == orderNumber)
+                return orderData.getOrderList().get(i);
         }
-
-        //instead of returning null, throw an exception                     //EXCEPTION
         return null;
     }
 
@@ -102,7 +88,17 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.getCancel().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                try{
+                    if(!isNumber(cv.getCanceledOrder()) || Integer.parseInt(cv.getCanceledOrder()) == 1){   //if request isnt a number or is the number 1
+                        throw new CancelException();
+                    }
+                    else if(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())) == null){
+                        throw new CancelException();
+                    }
+                    orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                    orderData.getOrderList().remove(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                }
+                catch(CancelException e){}
                 cv.setCancelField("");
             }
         });
@@ -118,7 +114,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     if(cv.getNameButton().getText().equals("")){
                         throw new CustomerNameException();
                     }
-                    if(getType() == 3 && !isPhoneNumber(cv.getGetPhoneNumber().getText()))
+                    if(getType() == 3 && !isNumber(cv.getGetPhoneNumber().getText()))
                         throw new PhoneNumberException();
                     if(cv.getItemID().isEmpty())
                         throw new SubmitOrderException();
@@ -151,7 +147,8 @@ public class OrderController implements EventHandler<ActionEvent> {
                     cv.getItemID().clear();
                     cv.getItemQuantity().clear();
                     orderData.addOrder( order );
-                    ordersArrayList.add(order);
+                    FileWriterController.fileOrderArrayList.add(order);
+                    orderData.getOrderList().add(order);
                     orderDataController.checkQueue();
                 }
                 catch(CustomerNameException e){}
@@ -310,11 +307,11 @@ public class OrderController implements EventHandler<ActionEvent> {
     }
 
     public Order getOrder(int i){
-        return ordersArrayList.get(i);
+        return orderData.getOrderList().get(i);
     }
 
     public int getOrdersArrayListLength(){
-        return ordersArrayList.size();
+        return orderData.getOrderList().size();
     }
 
     private int getType(){
@@ -341,17 +338,10 @@ public class OrderController implements EventHandler<ActionEvent> {
         return price;
     }
 
-    public void closeFileAction(){
-            try {
-                FileWriterController fileWriterController = new FileWriterController();
-                for(int i=0;i<getOrdersArrayListLength();i++){
-                    fileWriterController.writeToFile(getOrder(i), fileWriterController);
-                }//commit
-                fileWriterController.close();
-            } catch (IOException e) {
-                System.out.println("ERROR");
-                cv.stage.close();
-                throw new RuntimeException(e);
-            }
+    public void setOrders() {
+        for (int i=0; i<FileWriterController.fileOrderArrayList.size();i++){
+            orderData.addOrder(FileWriterController.fileOrderArrayList.get(i));
+        }
+        orderDataController.setCurrentOrder();
     }
 }
