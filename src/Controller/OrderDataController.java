@@ -2,9 +2,6 @@ package Controller;
 import Model.HashTableID;
 import Model.Order;
 import Model.OrderData;
-import View.CookView;
-import View.CustomerView;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -81,7 +78,7 @@ public class OrderDataController {
             orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
         orderData.setNextOrder(input);
-        if(orderData.getCurrentOrder().equals("") && orderData.getNextOrder().equals("")){
+        if(orderData.getCurrentOrder().equals("") && !orderData.getNextOrder().equals("")){
             setCurrentOrder();
         }
      }

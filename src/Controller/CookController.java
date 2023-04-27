@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Order;
+import Exceptions.FinishOrderException;
 import Model.OrderData;
 import View.CookView;
 import javafx.event.ActionEvent;
@@ -12,9 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Queue;
 
 public class CookController implements EventHandler<ActionEvent> {
 
@@ -156,19 +154,20 @@ public class CookController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    if(cookView.getCurrentOrder().equals("")){
+                    if(cookView.getCurrentOrder().getText().equals("")){
                         throw new FinishOrderException();
                     }
                 }
                 catch (FinishOrderException e){
-                    e.getStackTrace();
+                    //e.getStackTrace();
                 }
 
-                if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
-                    orderDataController.setNextOrder();
+
+                if(cookView.getCurrentOrder().getText().equals("")){
+                    orderDataController.setCurrentOrder();    //throw exception for empty current order
                 }
-                else if(cookView.getCurrentOrder().getText().equals("")){
-                    orderDataController.setCurrentOrder();
+                else if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
+                    orderDataController.setNextOrder();
                 }
                 else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
                     if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
