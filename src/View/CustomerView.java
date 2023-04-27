@@ -228,8 +228,8 @@ public class CustomerView extends Application {
      */
     private Group addNodes(){
         Group g = new Group();
-        g.getChildren().addAll( shadowRec, outlineRec, centerRec, customerLabel, orderLabel, promptLabel,
-                cancelField, toggleView, submitButton, nameField, priceLabel,
+        g.getChildren().addAll( shadowRec, outlineRec, centerRec, customerLabel, orderLabel,
+                promptLabel, cancelField, toggleView, submitButton, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
                 quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton,
