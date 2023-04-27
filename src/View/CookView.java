@@ -62,45 +62,46 @@ public class CookView extends Application {
 
     public void setBackgroundLayout(){
         currentRec = new Rectangle(175,200, Paint.valueOf( "#b6d8ff" ));
-        currentRec.setArcWidth(30);
-        currentRec.setArcHeight(30);
+        currentRec.setArcWidth(30);           //setting rounded edges
+        currentRec.setArcHeight(30);           //setting rounded edges
         currentRec.setX(25);
         currentRec.setY(150);
 
         currentRec2 = new Rectangle(185,210, Paint.valueOf( "#6987ff" ));
-        currentRec2.setArcWidth(30);
-        currentRec2.setArcHeight(30);
-        currentRec2.setX(20);
-        currentRec2.setY(145);
+        currentRec2.setArcWidth(30);           //setting rounded edges
+        currentRec2.setArcHeight(30);           //setting rounded edges
+        currentRec2.setX(20);                  //setting the x-axis
+        currentRec2.setY(145);                  //setting the y-axis
 
         currentRecShadow = new Rectangle(185,210, Paint.valueOf( "#3b3b3b" ));
-        currentRecShadow.setArcWidth(30);
-        currentRecShadow.setArcHeight(30);
-        currentRecShadow.setX(30);
-        currentRecShadow.setY(155);
+        currentRecShadow.setArcWidth(30);           //setting rounded edges
+        currentRecShadow.setArcHeight(30);           //setting rounded edges
+        currentRecShadow.setX(30);                  //setting the x-axis
+        currentRecShadow.setY(155);                  //setting the y-axis
+
 
         nextRec = new Rectangle(175,200, Paint.valueOf( "#b6d8ff" ));
-        nextRec.setArcWidth(30);
-        nextRec.setArcHeight(30);
-        nextRec.setX(410);
-        nextRec.setY(30);
+        nextRec.setArcWidth(30);           //setting rounded edges
+        nextRec.setArcHeight(30);           //setting rounded edges
+        nextRec.setX(410);                  //setting the x-axis
+        nextRec.setY(30);                  //setting the y-axis
 
         nextRec2 = new Rectangle(185,210, Paint.valueOf( "#6987ff" ));
-        nextRec2.setArcWidth(30);
-        nextRec2.setArcHeight(30);
-        nextRec2.setX(405);
-        nextRec2.setY(25);
+        nextRec2.setArcWidth(30);           //setting rounded edges
+        nextRec2.setArcHeight(30);           //setting rounded edges
+        nextRec2.setX(405);                  //setting the x-axis
+        nextRec2.setY(25);                  //setting the y-axis
 
         nextRecShadow = new Rectangle(185,210, Paint.valueOf( "#3b3b3b" ));
-        nextRecShadow.setArcWidth(30);
-        nextRecShadow.setArcHeight(30);
-        nextRecShadow.setX(415);
-        nextRecShadow.setY(35);
+        nextRecShadow.setArcWidth(30);           //setting rounded edges
+        nextRecShadow.setArcHeight(30);           //setting rounded edges
+        nextRecShadow.setX(415);                  //setting the x-axis
+        nextRecShadow.setY(35);                  //setting the y-axis
 
     }
     public void setLayout(){
         nextOrderLabel.setLayoutX(435);                  //setting the x-axis
-        nextOrderLabel.setLayoutY(20);                  //setting the y-axis
+        nextOrderLabel.setLayoutY(30);                  //setting the y-axis
 
         toggleView.setLayoutX(0);                       //setting the x-axis
         toggleView.setLayoutY(575);                     //setting the y-axis
