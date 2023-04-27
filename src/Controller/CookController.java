@@ -37,30 +37,7 @@ public class CookController implements EventHandler<ActionEvent> {
         setOrders();
     }
 
-//    public void test() {
-//        orderData.setPickupOrders("dd");
-//        orderData.setPickupOrders("fsddf");
-//        orderData.setPickupOrders("sdfsdfsdf");                 //this will be removed soon
-//        orderData.setPickupOrders("falskdfj;alk");
-//
-//        orderData.setCurrentOrder("2 HotDogs 3 Burgers Hot Ice 7 Pizza 8 hot tea");
-//        orderData.setNextOrder("9HotDogs 4Burgers Hot Ice 2 pizza 12 ham");
-//
-//        Order test = new Order("Steve",2,2);
-//        test.addItem(2,6);
-//        Order test2 = new Order("Billy",4,3);
-//        test2.addItem(5,7);
-//        Order test4 = new Order("Tom",4,3);
-//        test4.addItem(8,2);
-//        Order test3 = new Order("Miles",2,2);
-//        test3.addItem(6,4);
-//
-//        orderData.setDriveThroughQueue(test);
-//        orderData.setOnSiteQueue(test2);
-//        orderData.setDriveThroughQueue(test3);
-//        orderData.setOnSiteQueue(test4);
-//
-//    }
+
 
     /**
      * resets the Vbox
