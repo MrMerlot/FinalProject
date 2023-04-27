@@ -127,11 +127,13 @@ public class CookView extends Application {
         currentOrder.setLayoutX(50);                //setting the x-axis
         currentOrder.setLayoutY(150);               //setting the y-axis
 
-        CO.setLayoutX(50);                //setting the x-axis
-        CO.setLayoutY(130);               //setting the y-axis
+        CO.setLayoutX(65);                //setting the x-axis
+        CO.setLayoutY(125);               //setting the y-axis
+        CO.setStyle("-fx-font-size: 16px;");
 
-        NO.setLayoutX(435);                //setting the x-axis
-        NO.setLayoutY(10);               //setting the y-axis
+        NO.setLayoutX(460);                //setting the x-axis
+        NO.setLayoutY(5);               //setting the y-axis
+        NO.setStyle("-fx-font-size: 16px;");
 
     }
 
