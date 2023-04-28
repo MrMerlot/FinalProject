@@ -94,12 +94,6 @@ public class CookController implements EventHandler<ActionEvent> {
                     vBox.getChildren().add(po);
                 }
             }
-            /*for(int i = 0; i < orderData.getPickupOrders().size();i++){ //iterates through ArrayList(pickupOrders)
-                String temp = orderData.getPickupOrders().get(i);       //stores each index in a temp String
-                RadioButton po = new RadioButton(temp);                 //each index is then made into a RadioButton
-                po.setToggleGroup(pickupOrdersTG);                      //setting each RB to the pickup ToggleGroup
-                vBox.getChildren().add(po);                             //adding each Radio Button to the vBox
-            }*/
             vBox.setLayoutX(225);                                       //setting the x-axis
             vBox.setLayoutY(100);                                       //setting the y-axis
             vBox.setSpacing(10);                                        //setting the spacing between each RB
