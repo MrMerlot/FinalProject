@@ -2,6 +2,8 @@ package Controller;
 import Model.HashTableID;
 import Model.Order;
 import Model.OrderData;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -50,6 +52,52 @@ public class OrderDataController {
         }
     }
 
+    public String checkMaxSkipped(String input){
+        HashTableID hashTable = new HashTableID();
+        ArrayList<Integer> itemID = new ArrayList<>();
+        ArrayList<Integer> quantities = new ArrayList<>();
+        if(!orderData.getOnSiteQueue().isEmpty()) {
+            if (orderData.getOnSiteQueue().peek().getIfSkipped() > 3) {//onsite order has been skipped max times
+                input += orderData.getOnSiteQueue().peek().getName() + "\n";
+                itemID = orderData.getOnSiteQueue().peek().getItemID();
+                quantities = orderData.getOnSiteQueue().peek().getQuantities();
+                for (int i = 0; i < itemID.size(); i++) {      //read nessesary information into input string and assign to nextOrder
+                    input += quantities.get(i) + " ";
+                    input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+                }
+                orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());    //removes the object from queue and
+            }
+            return input;
+        }
+        if(!orderData.getPhoneQueue().isEmpty()) {
+            if (orderData.getPhoneQueue().peek().getIfSkipped() > 3) {
+                input += orderData.getPhoneQueue().peek().getName() + "\n";
+                itemID = orderData.getPhoneQueue().peek().getItemID();
+                quantities = orderData.getPhoneQueue().peek().getQuantities();
+                for (int i = 0; i < itemID.size(); i++) {      //read nessesary information into input string and assign to nextOrder
+                    input += quantities.get(i) + " ";
+                    input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+                }
+                orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());    //removes the object from queue and
+            }
+            return input;
+        }
+        if(!orderData.getDoorDashQueue().isEmpty()) {
+            if (orderData.getDoorDashQueue().peek().getIfSkipped() > 3) {
+                input += orderData.getDoorDashQueue().peek().getName() + "\n";
+                itemID = orderData.getDoorDashQueue().peek().getItemID();
+                quantities = orderData.getDoorDashQueue().peek().getQuantities();
+                for (int i = 0; i < itemID.size(); i++) {      //read nessesary information into input string and assign to nextOrder
+                    input += quantities.get(i) + " ";
+                    input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+                }
+                orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());    //removes the object from queue and
+            }
+            return input;
+        }
+        return input;
+    }
+
     /**
      * Sets nextOrder to its appropriate value
      * Checks to see if current order is empty and sets it
@@ -60,45 +108,49 @@ public class OrderDataController {
         String input = "";
         ArrayList<Integer> itemID = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
-        if(!orderData.getDriveThroughQueue().isEmpty()){        //if the DT queue is empty
-            input += orderData.getDriveThroughQueue().peek().getName() + "\n";
-            itemID = orderData.getDriveThroughQueue().peek().getItemID();
-            quantities = orderData.getDriveThroughQueue().peek().getQuantities();
-            for(int i = 0;i < itemID.size(); i++){      //read nessesary information into input string and assign to nextOrder
-                input += quantities.get(i) + " " ;
-                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+        input = checkMaxSkipped(input);
+        if(input.equals("")) {
+            if (!orderData.getDriveThroughQueue().isEmpty()) {        //if the DT queue is empty
+                input += orderData.getDriveThroughQueue().peek().getName() + "\n";
+                itemID = orderData.getDriveThroughQueue().peek().getItemID();
+                quantities = orderData.getDriveThroughQueue().peek().getQuantities();
+                for (int i = 0; i < itemID.size(); i++) {      //read nessesary information into input string and assign to nextOrder
+                    input += quantities.get(i) + " ";
+                    input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+                }
+                orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());    //removes the object from queue and assigns it to next order object
+                checkSkipped();
+            } else if (!orderData.getOnSiteQueue().isEmpty()) {     //if O queue is empty
+                input += orderData.getOnSiteQueue().peek().getName() + "\n";
+                itemID = orderData.getOnSiteQueue().peek().getItemID();
+                quantities = orderData.getOnSiteQueue().peek().getQuantities();
+                for (int i = 0; i < itemID.size(); i++) {
+                    input += quantities.get(i) + " ";
+                    input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+                }
+                orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());
+                checkSkipped();
+            } else if (!orderData.getPhoneQueue().isEmpty()) {      //if P queue is empty
+                input += orderData.getPhoneQueue().peek().getName() + "\n";
+                itemID = orderData.getPhoneQueue().peek().getItemID();
+                quantities = orderData.getPhoneQueue().peek().getQuantities();
+                for (int i = 0; i < itemID.size(); i++) {
+                    input += quantities.get(i) + " ";
+                    input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+                }
+                orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
+                checkSkipped();
+            } else if (!orderData.getDoorDashQueue().isEmpty()) {  //if DD queue is empty
+                input += orderData.getDoorDashQueue().peek().getName() + "\n";
+                itemID = orderData.getDoorDashQueue().peek().getItemID();
+                quantities = orderData.getDoorDashQueue().peek().getQuantities();
+                for (int i = 0; i < itemID.size(); i++) {
+                    input += quantities.get(i) + " ";
+                    input += hashTable.getItemIDName(itemID.get(i)) + "\n";
+                }
+                orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
+                checkSkipped();
             }
-            orderData.setNextOrderObject(orderData.getDriveThroughQueue().remove());    //removes the object from queue and assigns it to next order object
-        }
-        else if(!orderData.getOnSiteQueue().isEmpty()){     //if O queue is empty
-            input += orderData.getOnSiteQueue().peek().getName() + "\n";
-            itemID = orderData.getOnSiteQueue().peek().getItemID();
-            quantities = orderData.getOnSiteQueue().peek().getQuantities();
-            for(int i = 0;i < itemID.size(); i++){
-                input += quantities.get(i) + " " ;
-                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
-            }
-            orderData.setNextOrderObject(orderData.getOnSiteQueue().remove());
-        }
-        else if(!orderData.getPhoneQueue().isEmpty()){      //if P queue is empty
-            input += orderData.getPhoneQueue().peek().getName() + "\n";
-            itemID = orderData.getPhoneQueue().peek().getItemID();
-            quantities = orderData.getPhoneQueue().peek().getQuantities();
-            for(int i = 0;i < itemID.size(); i++){
-                input += quantities.get(i) + " " ;
-                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
-            }
-            orderData.setNextOrderObject(orderData.getPhoneQueue().remove());
-        }
-        else if(!orderData.getDoorDashQueue().isEmpty()){  //if DD queue is empty
-            input += orderData.getDoorDashQueue().peek().getName() + "\n";
-            itemID = orderData.getDoorDashQueue().peek().getItemID();
-            quantities = orderData.getDoorDashQueue().peek().getQuantities();
-            for(int i = 0;i < itemID.size(); i++){
-                input += quantities.get(i) + " " ;
-                input += hashTable.getItemIDName(itemID.get(i)) + "\n";
-            }
-            orderData.setNextOrderObject(orderData.getDoorDashQueue().remove());
         }
         orderData.setNextOrder(input);
         if(orderData.getCurrentOrder().equals("") && !orderData.getNextOrder().equals("")){
