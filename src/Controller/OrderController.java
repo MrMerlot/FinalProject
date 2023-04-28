@@ -153,7 +153,10 @@ public class OrderController implements EventHandler<ActionEvent> {
                     System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
 
                     if( orderType == 4 ) {
-                        cv.getPriceLabel().setText( "$" + (1.05 * getPrice(cv.getItemID(), cv.getItemQuantity()) ));
+
+                        String price = String.format("%.2f", 1.05 * getPrice(cv.getItemID(), cv.getItemQuantity()));
+
+                        cv.getPriceLabel().setText( price );
                     }
                     else{
                         cv.getPriceLabel().setText( "$" + getPrice(cv.getItemID(), cv.getItemQuantity()));
@@ -380,7 +383,7 @@ public class OrderController implements EventHandler<ActionEvent> {
         cv.setExceptionLabel( text );
         cv.setVisibleException(true);
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(10));
+        PauseTransition pause = new PauseTransition(Duration.seconds(5));
         pause.setOnFinished( event -> cv.setVisibleException(false) );
         pause.playFromStart();
     }

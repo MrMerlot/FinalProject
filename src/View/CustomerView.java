@@ -26,7 +26,7 @@ public class CustomerView extends Application {
     public boolean toggle = true;
     public Scene firstScene;
     public Stage stage = new Stage();
-    private Label customerLabel = new Label("Bouzhey");
+    private Label customerLabel = new Label("Bou-shei");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
     private Label promptLabel = new Label("Enter Order Type: \n\n\n\n\nEnter Name:");
@@ -61,18 +61,28 @@ public class CustomerView extends Application {
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
+
+    //  Allows for reading the preview data
     private FileWriterController fileWriterController = new FileWriterController();
 
     public CustomerView(){
         cookView = new CookView(this);
     }
 
-
+    /**
+     * Starts the program
+     *
+     * @param primaryStage the primary stage for this application, onto which
+     * the application scene can be set. The primary stage will be embedded in
+     * the browser if the application was launched as an applet.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages and will not be embedded in the browser.
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-       // OrderData orderData = new OrderData();
-        //fileWriterController.readInFile();
+        fileWriterController.readInFile();
         orderController.setOrders();
         setMenu();
         setPositions();
@@ -96,6 +106,9 @@ public class CustomerView extends Application {
         });
     }
 
+    /**
+     * Creates the background UI elements
+     */
     private void setBackGround(){
 
         // #c6c6c6 is light grey
@@ -188,16 +201,18 @@ public class CustomerView extends Application {
     }
 
     /**
-     * Sets the positions of buttons or labelsss
+     * Sets the positions of buttons or labels
      */
     private void setPositions(){
 
         exceptionLabel.setLayoutX(175);
         exceptionLabel.setLayoutY(520);
         customerLabel.setLayoutY(30);
-        customerLabel.setLayoutX(200);
-        orderLabel.setLayoutX(480);
-        orderNumberLabel.setLayoutX(550);
+        customerLabel.setLayoutX(230);
+        orderLabel.setLayoutX(400);
+        orderLabel.setLayoutY(100);
+        orderNumberLabel.setLayoutX(470);
+        orderNumberLabel.setLayoutY(100);
         promptLabel.setLayoutY(110);
         promptLabel.setLayoutX(150);
         cancelButton.setLayoutY(450);
@@ -393,6 +408,9 @@ public class CustomerView extends Application {
     }
 
 
+    /**
+     * Sets the action for the buttons
+     */
     private void setActions() {
 
         cancelButton.setText( "Cancel Order #" );
@@ -429,24 +447,22 @@ public class CustomerView extends Application {
 
     }
 
-
+    /**
+     * @return  the cancel Button
+     */
     public Button getCancel(){return cancelButton;}
 
     /**
-     * Gets the submit button.
-     *
      * @return  Submit button
      */
     public Button getSubmit(){ return submitButton; }
 
     /**
-     * Gets the nameField
      * @return  nameField
      */
     public TextField getNameButton(){ return nameField; }
 
     /**
-     * Gets the order number
      * @return  the order number
      */
     public Label getOrderNumber(){ return orderNumberLabel; }
@@ -469,6 +485,9 @@ public class CustomerView extends Application {
      */
     public RadioButton getColdDrink(){ return coldDrink; }
 
+    /**
+     * @return  the icedGroup
+     */
     public Group getIcedGroup(){ return icedGroup; }
 
     /**
@@ -656,10 +675,16 @@ public class CustomerView extends Application {
      */
     public Label getEnterPhone() { return enterPhone; }
 
+    /**
+     * @return  the firstScene, which is the scene for CustomerView
+     */
     public Scene getScene(){
         return firstScene;
     }
 
+    /**
+     * Toggles the view between CookView and CustomerScene
+     */
     public void toggle(){
 
         Scene sc;
@@ -676,11 +701,16 @@ public class CustomerView extends Application {
         setToggle();
     }
 
+    /**
+     * Sets the firstScene with all buttons and UI elements
+     */
     public void setScene(){
         firstScene = new Scene( group, 600,600 );
-        firstScene.setFill(Paint.valueOf("#c6c6c6"));
     }
 
+    /**
+     * Sets the toggle to opposite boolean value
+     */
     public void setToggle(){ toggle = !toggle; }
 
     /**
@@ -703,8 +733,14 @@ public class CustomerView extends Application {
         xTopShadow.setVisible( vis );
     }
 
+    /**
+     * @return  the cancelField text
+     */
     public String getCanceledOrder(){return cancelField.getText();}
 
+    /**
+     * @return  toggleView
+     */
     public Button getToggleView() {return toggleView; }
 
     public static void main(String[] args) {
