@@ -160,12 +160,12 @@ public class CookController implements EventHandler<ActionEvent> {
                     }
                     if (orderData.getCurrentOrderObject().getOrderType() == 1 || orderData.getCurrentOrderObject().getOrderType() == 2) {
                         fileWriterController.removeOrder(orderData.getCurrentOrder().substring(0,orderData.getCurrentOrder().indexOf("\n")));
-                        //If order isnt a pickup order, delete if from the array list
+                        //If order is not a pickup order, delete if from the array list
                     }
-                    if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
+                    if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.ifEmpty()){
                         orderDataController.setNextOrder();
                     }
-                    else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.isEmpty()){
+                    else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.ifEmpty()){
                         orderData.getOrderList().remove(orderData.getNextOrderObject());
                         if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
                             orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
