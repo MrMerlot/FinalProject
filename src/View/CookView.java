@@ -323,6 +323,11 @@ public class CookView extends Application {
         return secondScene;
     }
 
+
+    /**
+     * sets the Exception Text popup
+     * @param text String
+     */
     public void setExceptionText( String text ){
         this.exceptionText.setText(text);
     }
