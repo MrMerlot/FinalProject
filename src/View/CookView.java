@@ -108,27 +108,27 @@ public class CookView extends Application {
 
 
         xCenterRec = new Rectangle(300, 60, Paint.valueOf("fec1ff") );
-        xCenterRec.setArcWidth(30);
-        xCenterRec.setArcHeight(30);
-        xCenterRec.setX(150);
-        xCenterRec.setY(495);
+        xCenterRec.setArcWidth(30);            //setting rounded edges
+        xCenterRec.setArcHeight(30);           //setting rounded edges
+        xCenterRec.setX(150);                  //setting the x-axis
+        xCenterRec.setY(495);                  //setting the y-axis
 
         xOutlineRec = new Rectangle( 305, 65, Paint.valueOf("ff616f"));
-        xOutlineRec.setArcHeight(30);
-        xOutlineRec.setArcWidth(30);
-        xOutlineRec.setX(147.5);
-        xOutlineRec.setY(492.5);
+        xOutlineRec.setArcHeight(30);           //setting rounded edges
+        xOutlineRec.setArcWidth(30);           //setting rounded edges
+        xOutlineRec.setX(147.5);                  //setting the x-axis
+        xOutlineRec.setY(492.5);                  //setting the y-axis
 
         xShadowRec = new Rectangle( 305, 65, Paint.valueOf("3b3b3b"));
-        xShadowRec.setArcHeight(30);
-        xShadowRec.setArcWidth(30);
-        xShadowRec.setX(152.5);
-        xShadowRec.setY(497.5);
+        xShadowRec.setArcHeight(30);           //setting rounded edges
+        xShadowRec.setArcWidth(30);           //setting rounded edges
+        xShadowRec.setX(152.5);                  //setting the x-axis
+        xShadowRec.setY(497.5);                  //setting the y-axis
 
 
-//        xCenterRec.setVisible(false);
-//        xOutlineRec.setVisible(false);
-//        xShadowRec.setVisible(false);
+        xCenterRec.setVisible(false);           //setting visibility
+        xOutlineRec.setVisible(false);           //setting visibility
+        xShadowRec.setVisible(false);           //setting visibility
 
     }
 
