@@ -31,9 +31,8 @@ public class CookController implements EventHandler<ActionEvent> {
 
     public CookController(CookView view) {
         this.cookView = view;                   //how controller communicates with the view
-        //test();
-        resetVbox();
-        setOrders();
+        resetVbox();                            //initializes vbox
+        setOrders();                            //initializes setOrders
     }
 
 
@@ -84,14 +83,15 @@ public class CookController implements EventHandler<ActionEvent> {
             HBox hBox = new HBox();                                 //creating a new hBox
             for(int j=0;j< fileWriterController.getOrdersArrayListLength();j++){
                 if(FileWriterController.fileOrderArrayList.get(j).getIsComplete()==true){
-                    String temp = FileWriterController.fileOrderArrayList.get(j).getName();
+                    String temp = FileWriterController.fileOrderArrayList.get(j).getName();     //sets temp string
                     for(int x=0;x<FileWriterController.fileOrderArrayList.get(j).getItemID().size();x++) {
-                       temp+="\n"+FileWriterController.fileOrderArrayList.get(j).getItemQuantity(x) +" "+
+                       temp+="\n"+FileWriterController.fileOrderArrayList.get(j).getItemQuantity(x) +" "+  //adding to temp
+                               //getting item name from hashtable using the ID
                                 hashTableID.getItemIDName(FileWriterController.fileOrderArrayList.get(j).getItemID(x));
                     }
-                    RadioButton po = new RadioButton(temp);
-                    po.setToggleGroup(pickupOrdersTG);
-                    vBox.getChildren().add(po);
+                    RadioButton po = new RadioButton(temp); //creating a new radio button for the temp
+                    po.setToggleGroup(pickupOrdersTG);      //adding RB to toggle group
+                    vBox.getChildren().add(po);             //adding them to the pickup orders vbox
                 }
             }
             vBox.setLayoutX(225);                                       //setting the x-axis
@@ -145,7 +145,7 @@ public class CookController implements EventHandler<ActionEvent> {
         });
 
         cookView.getToggleView().setOnMouseClicked(event1 -> {
-            cookView.toggle();
+            cookView.toggle();          //toggles the view
         });
 
 
@@ -156,16 +156,16 @@ public class CookController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    if(cookView.getCurrentOrder().getText().equals("")){
-                        cookView.showException( "There are no orders to finish" );
-                        throw new FinishOrderException();
+                    if(cookView.getCurrentOrder().getText().equals("")){       //checking if current order label is empty
+                        cookView.showException( "There are no orders to finish" );      //setting pop up label
+                        throw new FinishOrderException();                               //throwing exception
                     }
                     if (orderData.getCurrentOrderObject().getOrderType() == 1 || orderData.getCurrentOrderObject().getOrderType() == 2) {
                         fileWriterController.removeOrder(orderData.getCurrentOrder().substring(0,orderData.getCurrentOrder().indexOf("\n")));
                         //If order is not a pickup order, delete if from the array list
                     }
                     if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.ifEmpty()){
-                        orderDataController.setNextOrder();
+                        orderDataController.setNextOrder();     //setting the next order
                     }
                     else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.ifEmpty()){
                         orderData.getOrderList().remove(orderData.getNextOrderObject());
@@ -191,7 +191,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                     }
                 }
-                catch (FinishOrderException e){}
+                catch (FinishOrderException e){}                //catching exception
             }
 
         });
