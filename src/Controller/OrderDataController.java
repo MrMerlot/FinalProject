@@ -90,13 +90,14 @@ public class OrderDataController {
      */
     public void checkQueue(){
         Queue<Order> temp = new LinkedList<>();
-        if(orderData.getNextOrder().equals("")){   //checks for a next order object, if none set the next order
-            setNextOrder();
-            return;
-        }
-        else if(orderData.getCurrentOrder().equals("")){ //checks for a current order object, if none set the current order
-            setCurrentOrder();
-            return;
+        if(!orderData.getCurrentOrder().equals("")) {
+            if (orderData.getNextOrder().equals("")) {   //checks for a next order object, if none set the next order
+                setNextOrder();
+                return;
+            } else if (orderData.getCurrentOrder().equals("")) { //checks for a current order object, if none set the current order
+                setCurrentOrder();
+                return;
+            }
         }
 
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an O Object and has been skipped less than 3 times
