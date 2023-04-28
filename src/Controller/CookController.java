@@ -156,8 +156,8 @@ public class CookController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    if(cookView.getCurrentOrder().getText().equals("")){
-                        cookView.showException( "There are no orders to finish" );
+                    if(cookView.getCurrentOrder().getText().equals("")){       //checking if current order label is empty
+                        cookView.showException( "There are no orders to finish" );      //setting pop up label
                         throw new FinishOrderException();                               //throwing exception
                     }
                     if (orderData.getCurrentOrderObject().getOrderType() == 1 || orderData.getCurrentOrderObject().getOrderType() == 2) {
@@ -165,7 +165,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         //If order is not a pickup order, delete if from the array list
                     }
                     if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.ifEmpty()){
-                        orderDataController.setNextOrder();
+                        orderDataController.setNextOrder();     //setting the next order
                     }
                     else if(cookView.getNextOrderLabel().getText().equals("") && orderDataController.ifEmpty()){
                         orderData.getOrderList().remove(orderData.getNextOrderObject());
@@ -191,7 +191,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         cookView.getPane().getChildren().addAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());   //Adds new Label to the pane
                     }
                 }
-                catch (FinishOrderException e){}
+                catch (FinishOrderException e){}                //catching exception
             }
 
         });
