@@ -11,6 +11,7 @@ import java.util.*;
 public class FileWriterController{
 
         static ArrayList<Order> fileOrderArrayList = new ArrayList<>();
+        //Creates a static array list to store orders in
         protected static File file = new File("savedData.txt");
         //Creates a static file to save the orders in
 
@@ -21,21 +22,23 @@ public class FileWriterController{
         public static void closeFileAction(FileWriterController fileWriterController) {
             try {
                 FileWriter fileWriter = new FileWriter(file);
-                    fileWriterController.writeToFile();
-                //commit
+                //Creates a new file writer object
+                fileWriterController.writeToFile();
+                //Writes all orders in the system to the file
                 fileWriter.close();
+                //Closes file
             } catch (IOException e) {
                 System.out.println("ERROR");
-                //cv.stage.close();
                 throw new RuntimeException(e);
             }
         }
 
         public void writeToFile() throws IOException {
             /**
+             * ORDER TYPE
              * CUSTOMER NAME
              * ORDER NUMBER
-             * ORDER TYPE
+             * PHONE NUMBER (IF APPLICABLE)
              * [ItemID, ItemID, ItemID]
              * [Quantity, Quantity, Quantity]
              * TIMES SKIPPED
@@ -43,10 +46,10 @@ public class FileWriterController{
              **/
             //Order storage template
             FileWriter fileWriter = new FileWriter(file);
-
+            //Creates file writer to write orders to file
             try {
                 for (int i=0;i<fileOrderArrayList.size();i++) {
-                    //FileWriter fileWriter = new FileWriter(file);
+                    //Loops through all orders in the array list
                     fileWriter.write(fileOrderArrayList.get(i).getOrderType() + String.format("%n"));
                     //Writes in order type and then ends the line
                     fileWriter.write(fileOrderArrayList.get(i).getName() + String.format("%n"));
@@ -72,6 +75,7 @@ public class FileWriterController{
                 //Catches exception
             }
             fileWriter.close();
+            //Closes file
         }
 
         public List<Integer> toIntArray(String x) { //Converts the string line to int array
@@ -88,44 +92,53 @@ public class FileWriterController{
 
         public void readInFile() throws FileNotFoundException {
             Scanner s = new Scanner(file); //Read in from file
-            System.out.println("Loop");
             while (s.hasNextLine()) {
+                //Loops while there are still orders in file
                 Order order;
+                //Creates order object
                 int type = Integer.parseInt(s.nextLine());
+                //Stores order type in variable
                 if (type == 4) {
                     order = new DoorDash(s.nextLine(), Integer.parseInt(s.nextLine()));
+                    //Makes order a DoorDash order
                 } else if (type == 1) {
                     order = new DriveThrough(s.nextLine(), Integer.parseInt(s.nextLine()));
+                    //Makes order a drive through order
                 } else if (type == 2) {
                     order = new Onsite(s.nextLine(), Integer.parseInt(s.nextLine()));
+                    //Makes order an onsite order
                 } else {
                     order = new Phone(s.nextLine(), Integer.parseInt(s.nextLine()), s.nextLine());
+                    //Makes order a phone order
                 }
                 order.setItemID(toIntArray(s.nextLine())); //adds ItemID's to order
                 order.setQuantities(toIntArray(s.nextLine())); //adds Quantities to order
                 order.setSkipped(Integer.parseInt(s.nextLine())); //sets skipped count to order
                 order.setComplete(s.nextLine());//sets the order completion status
-                fileOrderArrayList.add(order);
+                fileOrderArrayList.add(order); //adds order to array list
             }
             try {
                 new FileWriter(file,false).close();
+                //Clears file and closes it
             } catch (IOException e) {
                 System.out.println("Cant delete");
                 throw new RuntimeException(e);
             }
         }
 
-        public Order getOrder(int i) {
+        /*public Order getOrder(int i) {
             return fileOrderArrayList.get(i);
-        }
+        }*/
 
         public int getOrdersArrayListLength() {
             return fileOrderArrayList.size();
-        }
+        }  //Returns size of array list
 
         public void removeOrder(String s) {
             for (int i = 0; i < fileOrderArrayList.size(); i++) {
+                //Loops through the array list
                 if (fileOrderArrayList.get(i).getName().equals(s)) {
+                    //If the name of the order equal the name to remove, remove it
                     fileOrderArrayList.remove(i);
                     System.out.println("Remove");
                 }
@@ -158,7 +171,7 @@ public class FileWriterController{
              System.out.println(fileOrderArrayList.get(i).getName());
          }
 
-/*            Scanner s = new Scanner(file);
+          /*  Scanner s = new Scanner(file);
             while (s.hasNextLine()) {
                 System.out.println(s.nextLine());
             }*/
