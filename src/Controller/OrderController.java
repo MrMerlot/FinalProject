@@ -358,7 +358,9 @@ public class OrderController implements EventHandler<ActionEvent> {
 
     public void setOrders() {
         for (int i=0; i<FileWriterController.fileOrderArrayList.size();i++){
-            orderData.addOrder(FileWriterController.fileOrderArrayList.get(i));
+            if(FileWriterController.fileOrderArrayList.get(i).getIsComplete()==false) {
+                orderData.addOrder(FileWriterController.fileOrderArrayList.get(i));
+            }
         }
         orderDataController.setCurrentOrder();
     }

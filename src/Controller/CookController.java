@@ -2,6 +2,7 @@ package Controller;
 
 import Exceptions.FinishOrderException;
 import Exceptions.PickupOrderException;
+import Model.HashTableID;
 import Model.OrderData;
 import View.CookView;
 import javafx.event.ActionEvent;
@@ -23,11 +24,9 @@ public class CookController implements EventHandler<ActionEvent> {
     ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
 
     VBox tempVbox = new VBox();                 //New vBox
-    FileWriterController fileWriterController;
+    FileWriterController fileWriterController = new FileWriterController();
 
-    {
-        fileWriterController = new FileWriterController();
-    }
+    HashTableID hashTableID = new HashTableID();
 
 
     public CookController(CookView view) {
@@ -83,14 +82,24 @@ public class CookController implements EventHandler<ActionEvent> {
             VBox vBox = new VBox();                                //creating a new vBox
             cookView.getPane().getChildren().remove(tempVbox);    //in case user doesn't use back button or pickup order
             HBox hBox = new HBox();                                 //creating a new hBox
-            for(int i = 0; i < orderData.getPickupOrders().size();i++){ //iterates through ArrayList(pickupOrders)
+            for(int j=0;j< fileWriterController.getOrdersArrayListLength();j++){
+                if(FileWriterController.fileOrderArrayList.get(j).getIsComplete()==true){
+                    String temp = FileWriterController.fileOrderArrayList.get(j).getName();
+                    for(int x=0;x<FileWriterController.fileOrderArrayList.get(j).getItemID().size();x++) {
+                       temp+="\n"+FileWriterController.fileOrderArrayList.get(j).getItemQuantity(x) +" "+
+                                hashTableID.getItemIDName(FileWriterController.fileOrderArrayList.get(j).getItemID(x));
+                    }
+                    RadioButton po = new RadioButton(temp);
+                    po.setToggleGroup(pickupOrdersTG);
+                    vBox.getChildren().add(po);
+                }
+            }
+            /*for(int i = 0; i < orderData.getPickupOrders().size();i++){ //iterates through ArrayList(pickupOrders)
                 String temp = orderData.getPickupOrders().get(i);       //stores each index in a temp String
                 RadioButton po = new RadioButton(temp);                 //each index is then made into a RadioButton
                 po.setToggleGroup(pickupOrdersTG);                      //setting each RB to the pickup ToggleGroup
                 vBox.getChildren().add(po);                             //adding each Radio Button to the vBox
-
-
-            }
+            }*/
             vBox.setLayoutX(225);                                       //setting the x-axis
             vBox.setLayoutY(100);                                       //setting the y-axis
             vBox.setSpacing(10);                                        //setting the spacing between each RB
@@ -165,6 +174,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         orderData.getOrderList().remove(orderData.getNextOrderObject());
                         if(orderData.getCurrentOrderObject().getOrderType() == 3 || orderData.getCurrentOrderObject().getOrderType() == 4){
                             orderData.setPickupOrders(orderData.getCurrentOrder());//Adds the Finished Order to Pickup
+                            orderData.getCurrentOrderObject().setComplete("true");
                         }
                         cookView.setCurrentOrderLabel("");            //Sets the Label to the new Order
                         orderData.setCurrentOrder("");
