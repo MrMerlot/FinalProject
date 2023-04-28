@@ -22,7 +22,7 @@ public class OrderController implements EventHandler<ActionEvent> {
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
     private HashTableID hashTableID = new HashTableID();
-    FileWriterController fileWriterController = new FileWriterController();
+    private FileWriterController fileWriterController = new FileWriterController();
 
 
     /**
@@ -320,14 +320,6 @@ public class OrderController implements EventHandler<ActionEvent> {
         }
 
         return id;
-    }
-
-    public Order getOrder(int i){
-        return orderData.getOrderList().get(i);
-    }
-
-    public int getOrdersArrayListLength(){
-        return orderData.getOrderList().size();
     }
 
     public int findOrderNumber(){
