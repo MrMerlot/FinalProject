@@ -67,7 +67,7 @@ public class CustomerView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        OrderData orderData = new OrderData();
+       // OrderData orderData = new OrderData();
         fileWriterController.readInFile();
         orderController.setOrders();
         setMenu();
