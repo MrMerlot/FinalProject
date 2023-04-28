@@ -176,9 +176,9 @@ public class CookView extends Application {
         NO.setStyle("-fx-font-size: 16px;");        //sets the font size
 
 
-        exceptionText.setLayoutX( 175 );
-        exceptionText.setLayoutY( 520 );
-        exceptionText.setVisible( false );
+        exceptionText.setLayoutX( 160 );             //setting the x-axis
+        exceptionText.setLayoutY( 520 );             //setting the y-axis
+        exceptionText.setVisible( false );           //setting the visibility
 
     }
 
