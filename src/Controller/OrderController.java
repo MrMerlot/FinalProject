@@ -2,9 +2,12 @@ package Controller;
 import Exceptions.*;
 import Model.*;
 import View.CustomerView;
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -160,6 +163,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                 catch (PhoneNumberException e){}
                 catch(SubmitOrderException e){}
 
+                showException("Testing");
             }
         });
 
@@ -366,5 +370,19 @@ public class OrderController implements EventHandler<ActionEvent> {
             }
         }
         orderDataController.setCurrentOrder();
+    }
+
+    /**
+     * Shows the exception label for 10 seconds
+     * @param text contains the error text
+     */
+    private void showException( String text ){
+
+        cv.setExceptionLabel( text );
+        cv.setVisibleException(true);
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(10));
+        pause.setOnFinished( event -> cv.setVisibleException(false) );
+        pause.playFromStart();
     }
 }

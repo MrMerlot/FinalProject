@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,8 +53,11 @@ public class CustomerView extends Application {
     private ArrayList<Integer> itemQuantity = new ArrayList<>();
     private RadioButton doorDRadio, driveRadio, onsiteRadio, phoneRadio;
     private Label enterPhone = new Label("Enter Number: ");
+    private static Label exceptionLabel = new Label("");
     private TextField getPhoneNumber = new TextField();
-    private Rectangle centerRec, outlineRec, shadowRec;
+    private Rectangle xCenterRec, xOutlineRec, xShadowRec, xTopShadow,
+            xTopLeftShadow, xTopRightShadow;
+    private Group rectGroup;
 
     //  Connects CustomerView to OrderController
     private OrderController orderController = new OrderController(this);
@@ -68,7 +72,7 @@ public class CustomerView extends Application {
     public void start(Stage primaryStage) throws Exception {
 
        // OrderData orderData = new OrderData();
-        fileWriterController.readInFile();
+        //fileWriterController.readInFile();
         orderController.setOrders();
         setMenu();
         setPositions();
@@ -99,24 +103,68 @@ public class CustomerView extends Application {
         // #b6d8ff is silver
         // #3b3b3b is shadow
 
-        centerRec = new Rectangle(370,400, Paint.valueOf("#b6d8ff"));
+        Rectangle centerRec = new Rectangle(370,400, Paint.valueOf("#b6d8ff"));
         centerRec.setArcHeight(30);
         centerRec.setArcWidth(30);
         centerRec.setX(130);
         centerRec.setY(100);
         centerRec.toBack();
 
-        outlineRec = new Rectangle(380, 410, Paint.valueOf("#6987ff"));
+        Rectangle outlineRec = new Rectangle(380, 410, Paint.valueOf("#6987ff"));
         outlineRec.setArcWidth(30);
         outlineRec.setArcHeight(30);
         outlineRec.setX(125);
         outlineRec.setY(95);
 
-        shadowRec = new Rectangle(380, 410, Paint.valueOf("#3b3b3b"));
+        Rectangle shadowRec = new Rectangle(380, 410, Paint.valueOf("#3b3b3b"));
         shadowRec.setArcWidth(30);
         shadowRec.setArcHeight(30);
         shadowRec.setX(135);
         shadowRec.setY(105);
+
+        // fec1ff is light pink
+        // ff616f is light red
+
+        xCenterRec = new Rectangle(300, 60, Paint.valueOf("fec1ff") );
+        xCenterRec.setArcWidth(30);
+        xCenterRec.setArcHeight(30);
+        xCenterRec.setX(150);
+        xCenterRec.setY(495);
+
+        xOutlineRec = new Rectangle( 305, 65, Paint.valueOf("ff616f"));
+        xOutlineRec.setArcHeight(30);
+        xOutlineRec.setArcWidth(30);
+        xOutlineRec.setX(147.5);
+        xOutlineRec.setY(492.5);
+
+        xShadowRec = new Rectangle( 305, 65, Paint.valueOf("3b3b3b"));
+        xShadowRec.setArcHeight(30);
+        xShadowRec.setArcWidth(30);
+        xShadowRec.setX(152.5);
+        xShadowRec.setY(497.5);
+
+        xTopShadow = new Rectangle( 305, 5, Paint.valueOf("88008a"));
+        xTopShadow.setX(147.5);
+        xTopShadow.setY(505);
+
+        xTopLeftShadow = new Rectangle( 2.5, 5, Paint.valueOf("4e0050"));
+        xTopLeftShadow.setX(147.5);
+        xTopLeftShadow.setY(505);
+
+        xTopRightShadow = new Rectangle(2.5, 5, Paint.valueOf("4e0050"));
+        xTopRightShadow.setX(450);
+        xTopRightShadow.setY(505);
+
+        xCenterRec.setVisible(false);
+        xOutlineRec.setVisible(false);
+        xShadowRec.setVisible(false);
+        xTopShadow.setVisible(false);
+        xTopRightShadow.setVisible(false);
+        xTopLeftShadow.setVisible(false);
+
+        rectGroup = new Group();
+        rectGroup.getChildren().addAll( shadowRec, xShadowRec, xOutlineRec, xCenterRec, xTopShadow,
+                xTopLeftShadow, xTopRightShadow, outlineRec, centerRec);
     }
 
     /**
@@ -144,6 +192,8 @@ public class CustomerView extends Application {
      */
     private void setPositions(){
 
+        exceptionLabel.setLayoutX(175);
+        exceptionLabel.setLayoutY(520);
         customerLabel.setLayoutY(30);
         customerLabel.setLayoutX(200);
         orderLabel.setLayoutX(480);
@@ -228,8 +278,6 @@ public class CustomerView extends Application {
         driveRadio.setLayoutY(170);
     }
 
-
-
     /**
      * Adds all the nodes to a group.
      *
@@ -237,12 +285,12 @@ public class CustomerView extends Application {
      */
     private Group addNodes(){
         Group g = new Group();
-        g.getChildren().addAll( shadowRec, outlineRec, centerRec, customerLabel, orderLabel,
+        g.getChildren().addAll( rectGroup, customerLabel, orderLabel,
                 promptLabel, cancelField, toggleView, submitButton, nameField, priceLabel,
                 menuLabel, orderNumberLabel, meals, drinks, sides, done, drinkGroup, mealGroup,
                 sideGroup, icedGroup, hotDrinkGroup, hotMealGroup, coldMealGroup, addToOrder,
                 quantitySlider, doorDRadio, onsiteRadio, phoneRadio, driveRadio, cancelButton,
-                enterPhone, getPhoneNumber);
+                enterPhone, getPhoneNumber, exceptionLabel);
 
         return g;
     }
@@ -634,6 +682,26 @@ public class CustomerView extends Application {
     }
 
     public void setToggle(){ toggle = !toggle; }
+
+    /**
+     * Sets the text for the exception label
+     * @param text
+     */
+    public static void setExceptionLabel(String text){ exceptionLabel.setText( text ); }
+
+    /**
+     * Sets the exception's visibility
+     * @param vis
+     */
+    public void setVisibleException( Boolean vis ){
+        xOutlineRec.setVisible( vis );
+        xCenterRec.setVisible( vis );
+        xShadowRec.setVisible( vis );
+        exceptionLabel.setVisible( vis );
+        xTopLeftShadow.setVisible( vis );
+        xTopRightShadow.setVisible( vis );
+        xTopShadow.setVisible( vis );
+    }
 
     public String getCanceledOrder(){return cancelField.getText();}
 
