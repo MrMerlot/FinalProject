@@ -2,6 +2,7 @@ package View;
 
 import Controller.CookController;
 import Model.Order;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -14,7 +15,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
 
 
 public class CookView extends Application {
@@ -40,6 +41,8 @@ public class CookView extends Application {
 
     private Label currentOrder = new Label("");                                 //Label for the current Order
 
+    private Label exceptionText = new Label("");
+
     private Pane pane = new Pane();                                                 //Creating a new Pane
 
     private Rectangle currentRec,currentRec2,currentRecShadow,nextRec,nextRec2,nextRecShadow
@@ -58,7 +61,7 @@ public class CookView extends Application {
         setBackgroundLayout();                                                //initializing the background
         Group background = new Group();                                       //creating a new group for the background
         background.getChildren().addAll(xShadowRec,xOutlineRec,xCenterRec,currentRecShadow,currentRec2,
-                currentRec, nextRecShadow,nextRec2,nextRec);                //adding everything to the background
+                currentRec, nextRecShadow,nextRec2,nextRec,exceptionText);                //adding everything to the background
         pane.getChildren().addAll(background,currentRec,nextOrderLabel, toggleView, finishOrder, showPickupOrders,
                 CV, currentOrder,CO,NO);                                    //adding everything to the Pane for scene
         setLayout();                                                //initializing the scene layout
@@ -171,6 +174,11 @@ public class CookView extends Application {
         NO.setLayoutX(460);                         //setting the x-axis
         NO.setLayoutY(5);                           //setting the y-axis
         NO.setStyle("-fx-font-size: 16px;");        //sets the font size
+
+
+        exceptionText.setLayoutX( 175 );
+        exceptionText.setLayoutY( 520 );
+        exceptionText.setVisible( false );
 
     }
 
@@ -315,6 +323,31 @@ public class CookView extends Application {
         return secondScene;
     }
 
+    public void setExceptionText( String text ){
+        this.exceptionText.setText(text);
+    }
+
+    public Label getExceptionTextLabel(){
+        return this.exceptionText;
+    }
+
+    public void setVisibleException( Boolean vis ){
+        xOutlineRec.setVisible( vis );
+        xCenterRec.setVisible( vis );
+        xShadowRec.setVisible( vis );
+        exceptionText.setVisible( vis );
+    }
+
+    public void showException( String text ){
+
+        setExceptionText( text );
+        setVisibleException( true );
+
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(10));
+        pause.setOnFinished( event -> setVisibleException( false ) );
+        pause.playFromStart();
+    }
 
     public static void main(String[] args) {
         Application.launch(args);                           //calling launch

@@ -129,6 +129,7 @@ public class CookController implements EventHandler<ActionEvent> {
                 try{     //exception handling for PickupOrder button
                     //checking to see if pickupOrder Arraylist is empty or if the user didn't select an order
                     if(pickupOrdersTG.getSelectedToggle() == null) {
+                        cookView.showException("No order selected or No orders to be picked up");
                         throw new PickupOrderException();   //throwing the exception
                     }
                     RadioButton temp = (RadioButton) pickupOrdersTG.getSelectedToggle(); //setting the selected RP to a temp
