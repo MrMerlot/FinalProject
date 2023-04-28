@@ -157,6 +157,7 @@ public class CookController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
                 try {
                     if(cookView.getCurrentOrder().getText().equals("")){
+                        cookView.showException( "There are no orders to finish" );
                         throw new FinishOrderException();
                     }
                     if (orderData.getCurrentOrderObject().getOrderType() == 1 || orderData.getCurrentOrderObject().getOrderType() == 2) {

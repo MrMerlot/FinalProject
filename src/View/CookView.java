@@ -347,7 +347,7 @@ public class CookView extends Application {
         setVisibleException( true );                //setting the visibility of the Label to True
 
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(10));      //setting timer for popup
+        PauseTransition pause = new PauseTransition(Duration.seconds(5));      //setting timer for popup
         pause.setOnFinished( event -> setVisibleException( false ) );              //setting the visibility back to false
         pause.playFromStart();                                                     //restarting
     }
