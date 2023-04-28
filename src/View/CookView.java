@@ -331,7 +331,7 @@ public class CookView extends Application {
         return this.exceptionText;
     }
 
-    public void setVisibleException( Boolean vis ){
+    public void setVisibleException( Boolean vis ){ //sets visibility for exception pop up
         xOutlineRec.setVisible( vis );
         xCenterRec.setVisible( vis );
         xShadowRec.setVisible( vis );
