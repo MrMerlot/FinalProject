@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class OrderController implements EventHandler<ActionEvent> {
@@ -312,6 +313,21 @@ public class OrderController implements EventHandler<ActionEvent> {
 
     public int getOrdersArrayListLength(){
         return orderData.getOrderList().size();
+    }
+
+    public int findOrderNumber(){
+
+        ArrayList<Order> list = FileWriterController.fileOrderArrayList;
+        int max = 1;
+
+        for( int i = 0; i < list.size(); i++ ){
+
+            if( max <= list.get(i).getOrderNumber() ){
+                max = list.get(i).getOrderNumber() + 1;
+            }
+        }
+
+        return max;
     }
 
     private int getType(){

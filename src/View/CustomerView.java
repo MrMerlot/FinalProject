@@ -94,7 +94,7 @@ public class CustomerView extends Application {
 
     private void setBackGround(){
 
-        // #ececec is light grey
+        // #c6c6c6 is light grey
         // #6987ff is blue
         // #b6d8ff is silver
         // #3b3b3b is shadow
@@ -127,6 +127,8 @@ public class CustomerView extends Application {
         customerLabel.setFont(new Font("Arial",40));
         customerLabel.setStyle("-fx-border-width: 2;");
         customerLabel.setStyle("-fx-border-color: black;");
+
+        orderNumberLabel.setText("" + orderController.findOrderNumber() );
 
         cancelField.setMinWidth(50);
 
@@ -611,17 +613,24 @@ public class CustomerView extends Application {
     }
 
     public void toggle(){
-        if( toggle ) scene = getScene();
-        else scene = cookView.getSecondScene();
 
-        stage.setScene(scene);
+        Scene sc;
+
+        if( toggle ) {
+            sc = getScene();
+        }
+        else {
+            sc = cookView.getSecondScene();
+        }
+
+        stage.setScene(sc);
 
         setToggle();
     }
 
     public void setScene(){
         firstScene = new Scene( group, 600,600 );
-        firstScene.setFill(Paint.valueOf("#ececec"));
+        firstScene.setFill(Paint.valueOf("#c6c6c6"));
     }
 
     public void setToggle(){ toggle = !toggle; }
