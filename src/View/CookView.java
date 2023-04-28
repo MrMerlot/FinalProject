@@ -327,9 +327,7 @@ public class CookView extends Application {
         this.exceptionText.setText(text);
     }
 
-    public Label getExceptionTextLabel(){
-        return this.exceptionText;
-    }
+
 
     public void setVisibleException( Boolean vis ){ //sets visibility for exception pop up
         xOutlineRec.setVisible( vis );
@@ -340,13 +338,13 @@ public class CookView extends Application {
 
     public void showException( String text ){
 
-        setExceptionText( text );
-        setVisibleException( true );
+        setExceptionText( text );                   //setting the text for the Exception Label
+        setVisibleException( true );                //setting the visibility of the Label to True
 
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(10));
-        pause.setOnFinished( event -> setVisibleException( false ) );
-        pause.playFromStart();
+        PauseTransition pause = new PauseTransition(Duration.seconds(10));      //setting timer for popup
+        pause.setOnFinished( event -> setVisibleException( false ) );              //setting the visibility back to false
+        pause.playFromStart();                                                     //restarting
     }
 
     public static void main(String[] args) {
