@@ -187,7 +187,7 @@ public class CookController implements EventHandler<ActionEvent> {
                         }
                         orderData.getOrderList().remove(orderData.getNextOrderObject());
                         orderData.getCurrentOrderObject().setComplete("true");
-                        orderDataController.checkQueue();       //sets the current and next order V
+                        orderDataController.setCurrentOrder();       //sets the current and next order V
                         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());            //Sets the Label to the new Order
                         cookView.setNextOrderLabel(orderData.getNextOrder());               //Sets the Label for the next order
                         cookView.getPane().getChildren().removeAll(cookView.getCurrentOrder(), cookView.getNextOrderLabel());//removes the old Label from Pane

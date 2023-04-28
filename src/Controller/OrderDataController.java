@@ -34,6 +34,7 @@ public class OrderDataController {
      * Checks to see if current order is empty and sets it
      */
     public void setNextOrder(){
+
         HashTableID hashTable = new HashTableID();
         String input = "";
         ArrayList<Integer> itemID = new ArrayList<>();
@@ -84,22 +85,8 @@ public class OrderDataController {
         }
     }
 
-    /**
-     * Makes sure next and current order have an object, calls respective setter if not
-     * If both do, makes sure the next order is the highest priority order
-     * If not, puts next order back into respective queue and sets next order
-     */
-    public void checkQueue(){
+    public void replaceNextOrder(){
         Queue<Order> temp = new LinkedList<>();
-        if(orderData.getNextOrder().equals("")){   //checks for a next order object, if none set the next order
-            setNextOrder();
-            return;
-        }
-        else if(orderData.getCurrentOrder().equals("")){ //checks for a current order object, if none set the current order
-            setCurrentOrder();
-            return;
-        }
-
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an O Object and has been skipped less than 3 times
             if(!orderData.getDriveThroughQueue().isEmpty()) {               //if the DT Queue has an object
                 temp.add(orderData.getNextOrderObject());
@@ -135,42 +122,60 @@ public class OrderDataController {
             }
 
         }
-        else if (orderData.getNextOrderObject().getOrderType() == 4 && orderData.getNextOrderObject().getIfSkipped() < 3){     //if the next order is a DD object
-            if(!orderData.getDriveThroughQueue().isEmpty()){
+        else if (orderData.getNextOrderObject().getOrderType() == 4 && orderData.getNextOrderObject().getIfSkipped() < 3) {     //if the next order is a DD object
+            if (!orderData.getDriveThroughQueue().isEmpty()) {
                 temp.add(orderData.getNextOrderObject());
-                while(!orderData.getDoorDashQueue().isEmpty()){
+                while (!orderData.getDoorDashQueue().isEmpty()) {
                     temp.add(orderData.getDoorDashQueue().remove());    //puts the next order back into DD queue
                 }
-                while(!temp.isEmpty()){
+                while (!temp.isEmpty()) {
                     orderData.setDoorDashQueue(temp.remove());
                 }
                 orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
-            }
-            else if(!orderData.getOnSiteQueue().isEmpty() ){
+            } else if (!orderData.getOnSiteQueue().isEmpty()) {
                 temp.add(orderData.getNextOrderObject());
-                while(!orderData.getDoorDashQueue().isEmpty()){
+                while (!orderData.getDoorDashQueue().isEmpty()) {
                     temp.add(orderData.getDoorDashQueue().remove());    //puts the next order back into DD queue
                 }
-                while(!temp.isEmpty()){
+                while (!temp.isEmpty()) {
                     orderData.setDoorDashQueue(temp.remove());
                 }
                 orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
-            }
-            else if(!orderData.getPhoneQueue().isEmpty()){
+            } else if (!orderData.getPhoneQueue().isEmpty()) {
                 temp.add(orderData.getNextOrderObject());
-                while(!orderData.getDoorDashQueue().isEmpty()){
+                while (!orderData.getDoorDashQueue().isEmpty()) {
                     temp.add(orderData.getDoorDashQueue().remove());    //puts the next order back into DD queue
                 }
-                while(!temp.isEmpty()){
+                while (!temp.isEmpty()) {
                     orderData.setDoorDashQueue(temp.remove());
                 }
                 orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
-            }
-            if(orderData.getNextOrder().equals("")) {
-                setNextOrder();
             }
         }
     }
+
+    /**
+     * Makes sure next and current order have an object, calls respective setter if not
+     * If both do, makes sure the next order is the highest priority order
+     * If not, puts next order back into respective queue and sets next order
+     */
+    public void checkQueue(){
+        if(orderData.getNextOrder().equals("")){   //checks for a next order object, if none set the next order
+            setNextOrder();
+            return;
+        }
+        if(orderData.getCurrentOrder().equals("")){ //checks for a current order object, if none set the current order
+            setCurrentOrder();
+            return;
+        }
+
+        replaceNextOrder();
+
+        if(orderData.getNextOrder().equals("")) {
+            setNextOrder();
+        }
+    }
+
 
     /**
      * Removes the requested order from OrderData unless its complete or in progress

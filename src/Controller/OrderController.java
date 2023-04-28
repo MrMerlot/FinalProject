@@ -152,7 +152,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     orderData.addOrder( order );
                     FileWriterController.fileOrderArrayList.add(order);
                     orderData.getOrderList().add(order);
-                    orderDataController.setCurrentOrder();
+                    orderDataController.checkQueue();
                 }
                 catch(CustomerNameException e){}
                 catch (PhoneNumberException e){}
