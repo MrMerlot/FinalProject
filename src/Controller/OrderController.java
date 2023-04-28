@@ -99,6 +99,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     }
                     orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
                     fileWriterController.removeOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())).getName());
+                    //Removes cancelled order from the array list
                     orderData.getOrderList().remove(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
                 }
                 catch(CancelException e){}
@@ -151,6 +152,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                     cv.getItemQuantity().clear();
                     orderData.addOrder( order );
                     FileWriterController.fileOrderArrayList.add(order);
+                    //adds order to the array list
                     orderData.getOrderList().add(order);
                     orderDataController.checkQueue();
                 }
@@ -360,6 +362,7 @@ public class OrderController implements EventHandler<ActionEvent> {
         for (int i=0; i<FileWriterController.fileOrderArrayList.size();i++){
             if(FileWriterController.fileOrderArrayList.get(i).getIsComplete()==false) {
                 orderData.addOrder(FileWriterController.fileOrderArrayList.get(i));
+                //Sets non-pickup orders
             }
         }
         orderDataController.setCurrentOrder();

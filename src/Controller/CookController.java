@@ -134,7 +134,7 @@ public class CookController implements EventHandler<ActionEvent> {
                     RadioButton temp = (RadioButton) pickupOrdersTG.getSelectedToggle(); //setting the selected RP to a temp
                     String tempS = temp.getText();                            //getting the text(Order) from the selected RB
                     orderData.getPickupOrders().remove(tempS);//removing the order from Pick up orders
-                    fileWriterController.removeOrder(tempS.substring(0,tempS.indexOf("\n")));
+                    fileWriterController.removeOrder(tempS.substring(0,tempS.indexOf("\n")));//removes order from array list
                     cookView.getPickupOrders().setSelected(false);            //unselecting the checkbox
                     resetVbox();                                              //resetting everything in the CheckBox Handler
                     pickupOrdersTG.selectToggle(null);
@@ -160,6 +160,7 @@ public class CookController implements EventHandler<ActionEvent> {
                     }
                     if (orderData.getCurrentOrderObject().getOrderType() == 1 || orderData.getCurrentOrderObject().getOrderType() == 2) {
                         fileWriterController.removeOrder(orderData.getCurrentOrder().substring(0,orderData.getCurrentOrder().indexOf("\n")));
+                        //If order isnt a pickup order, delete if from the array list
                     }
                     if(cookView.getNextOrderLabel().getText().equals("") && !orderDataController.isEmpty()){
                         orderDataController.setNextOrder();
