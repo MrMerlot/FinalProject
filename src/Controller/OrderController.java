@@ -19,6 +19,7 @@ public class OrderController implements EventHandler<ActionEvent> {
     private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
     private HashTableID hashTableID = new HashTableID();
+    FileWriterController fileWriterController = new FileWriterController();
 
 
     /**
@@ -97,6 +98,7 @@ public class OrderController implements EventHandler<ActionEvent> {
                         throw new CancelException();
                     }
                     orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
+                    fileWriterController.removeOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())).getName());
                     orderData.getOrderList().remove(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
                 }
                 catch(CancelException e){}

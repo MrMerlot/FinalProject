@@ -127,11 +127,11 @@ public class FileWriterController{
             for (int i = 0; i < fileOrderArrayList.size(); i++) {
                 if (fileOrderArrayList.get(i).getName().equals(s)) {
                     fileOrderArrayList.remove(i);
+                    System.out.println("Remove");
                 }
-                System.out.println(s);
             }
-
         }
+
 
         public static void main(String[] args) throws IOException {
             //Creates test case
