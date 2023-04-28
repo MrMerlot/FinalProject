@@ -95,9 +95,11 @@ public class OrderController implements EventHandler<ActionEvent> {
             public void handle(MouseEvent event) {
                 try{
                     if(!isNumber(cv.getCanceledOrder()) || Integer.parseInt(cv.getCanceledOrder()) == 1){   //if request isnt a number or is the number 1
+                        showException("Order nonexistent or in progress.");
                         throw new CancelException();
                     }
                     else if(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())) == null){
+                        showException("Order nonexistent or in progress.");
                         throw new CancelException();
                     }
                     orderDataController.cancelOrder(orderNumToOrder(Integer.parseInt(cv.getCanceledOrder())));
@@ -119,12 +121,17 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                 try{
                     if(cv.getNameButton().getText().equals("")){
+                        showException("Enter a name before submitting your order");
                         throw new CustomerNameException();
                     }
-                    if(getType() == 3 && !isNumber(cv.getGetPhoneNumber().getText()))
+                    if(getType() == 3 && !isNumber(cv.getGetPhoneNumber().getText())){
+                        showException("Enter a valid phone number (Only numbers)");
                         throw new PhoneNumberException();
-                    if(cv.getItemID().isEmpty())
+                    }
+                    if(cv.getItemID().isEmpty()){
+                        showException("Cannot submit empty orders");
                         throw new SubmitOrderException();
+                    }
 
                     customerName = cv.getNameButton().getText();
                     orderType = getType( );
@@ -162,8 +169,6 @@ public class OrderController implements EventHandler<ActionEvent> {
                 catch(CustomerNameException e){}
                 catch (PhoneNumberException e){}
                 catch(SubmitOrderException e){}
-
-                showException("Testing");
             }
         });
 
@@ -228,8 +233,10 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 try{
-                    if(getItemID() == 0)
+                    if(getItemID() == 0){
+                        showException("Invalid selection: Cannot add to order");
                         throw new AddToOrderException();
+                    }
                     cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
                     cv.addItemID( getItemID() );
                 }

@@ -53,7 +53,7 @@ public class CustomerView extends Application {
     private ArrayList<Integer> itemQuantity = new ArrayList<>();
     private RadioButton doorDRadio, driveRadio, onsiteRadio, phoneRadio;
     private Label enterPhone = new Label("Enter Number: ");
-    private static Label exceptionLabel = new Label("");
+    private Label exceptionLabel = new Label("");
     private TextField getPhoneNumber = new TextField();
     private Rectangle xCenterRec, xOutlineRec, xShadowRec, xTopShadow,
             xTopLeftShadow, xTopRightShadow;
@@ -687,7 +687,7 @@ public class CustomerView extends Application {
      * Sets the text for the exception label
      * @param text
      */
-    public static void setExceptionLabel(String text){ exceptionLabel.setText( text ); }
+    public void setExceptionLabel(String text){ exceptionLabel.setText( text ); }
 
     /**
      * Sets the exception's visibility

@@ -42,7 +42,8 @@ public class CookView extends Application {
 
     private Pane pane = new Pane();                                                 //Creating a new Pane
 
-    private Rectangle currentRec,currentRec2,currentRecShadow,nextRec,nextRec2,nextRecShadow;   //for background
+    private Rectangle currentRec,currentRec2,currentRecShadow,nextRec,nextRec2,nextRecShadow
+            ,xCenterRec,xOutlineRec,xShadowRec;   //for background
 
     CookController controller = new CookController(this);                       //Object of Cook Controller
 
@@ -56,8 +57,8 @@ public class CookView extends Application {
         customerView1 = customerView;
         setBackgroundLayout();                                                //initializing the background
         Group background = new Group();                                       //creating a new group for the background
-        background.getChildren().addAll(currentRecShadow,currentRec2,currentRec,
-                nextRecShadow,nextRec2,nextRec);                             //adding everything to the background
+        background.getChildren().addAll(xShadowRec,xOutlineRec,xCenterRec,currentRecShadow,currentRec2,
+                currentRec, nextRecShadow,nextRec2,nextRec);                //adding everything to the background
         pane.getChildren().addAll(background,currentRec,nextOrderLabel, toggleView, finishOrder, showPickupOrders,
                 CV, currentOrder,CO,NO);                                    //adding everything to the Pane for scene
         setLayout();                                                //initializing the scene layout
@@ -104,6 +105,30 @@ public class CookView extends Application {
         nextRecShadow.setArcHeight(30);           //setting rounded edges
         nextRecShadow.setX(415);                  //setting the x-axis
         nextRecShadow.setY(35);                  //setting the y-axis
+
+
+        xCenterRec = new Rectangle(300, 60, Paint.valueOf("fec1ff") );
+        xCenterRec.setArcWidth(30);            //setting rounded edges
+        xCenterRec.setArcHeight(30);           //setting rounded edges
+        xCenterRec.setX(150);                  //setting the x-axis
+        xCenterRec.setY(495);                  //setting the y-axis
+
+        xOutlineRec = new Rectangle( 305, 65, Paint.valueOf("ff616f"));
+        xOutlineRec.setArcHeight(30);           //setting rounded edges
+        xOutlineRec.setArcWidth(30);           //setting rounded edges
+        xOutlineRec.setX(147.5);                  //setting the x-axis
+        xOutlineRec.setY(492.5);                  //setting the y-axis
+
+        xShadowRec = new Rectangle( 305, 65, Paint.valueOf("3b3b3b"));
+        xShadowRec.setArcHeight(30);           //setting rounded edges
+        xShadowRec.setArcWidth(30);           //setting rounded edges
+        xShadowRec.setX(152.5);                  //setting the x-axis
+        xShadowRec.setY(497.5);                  //setting the y-axis
+
+
+        xCenterRec.setVisible(false);           //setting visibility
+        xOutlineRec.setVisible(false);           //setting visibility
+        xShadowRec.setVisible(false);           //setting visibility
 
     }
 
