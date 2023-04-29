@@ -10,14 +10,11 @@ import java.util.*;
 
 public class FileWriterController{
 
-        static ArrayList<Order> fileOrderArrayList = new ArrayList<>();
+        public static ArrayList<Order> fileOrderArrayList = new ArrayList<>();
         //Creates a static array list to store orders in
-        protected static File file = new File("savedData.txt");
+        private static File file = new File("savedData.txt");
         //Creates a static file to save the orders in
 
-    public File getFile() {
-            return file;
-        }
 
         public static void closeFileAction(FileWriterController fileWriterController) {
             try {
@@ -33,7 +30,7 @@ public class FileWriterController{
             }
         }
 
-        public void writeToFile() throws IOException {
+        private void writeToFile() throws IOException {
             /**
              * ORDER TYPE
              * CUSTOMER NAME
@@ -78,7 +75,7 @@ public class FileWriterController{
             //Closes file
         }
 
-        public List<Integer> toIntArray(String x) { //Converts the string line to int array
+        private List<Integer> toIntArray(String x) { //Converts the string line to int array
             x = x.replace("[", ""); //Removes initial bracket for the input string
             x = x.replace("]", ""); //Removes final bracket for the input string
             x = x.replace(" ", ""); //Removes all spaces from the input string

@@ -1,19 +1,16 @@
 package Model;
 
-import Controller.OrderController;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    protected int orderNumber;
-    protected ArrayList<Integer> itemID = new ArrayList<>();
-    protected ArrayList<Integer> quantity = new ArrayList<>();
-    protected int orderType;
-    protected boolean complete = false;
-    protected String orderInfo;
-    protected String name;
-    protected int skipped = 0;
+    private int orderNumber;
+    private ArrayList<Integer> itemID = new ArrayList<>();
+    private ArrayList<Integer> quantity = new ArrayList<>();
+    private int orderType;
+    private boolean complete = false;
+    private String name;
+    private int skipped = 0;
 
     /**
      * Creates an order with a name and number
@@ -132,9 +129,5 @@ public class Order {
      * Sets the order as complete
      */
     public void completeOrder() { complete = true; }
-
-    public String orderInfo() {
-        return null;
-    }
 
 }

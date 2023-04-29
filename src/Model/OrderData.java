@@ -64,14 +64,6 @@ public class OrderData {
     }
 
     /**
-     * Adds a Drive Through Order to DriveThrough Queue
-     * @param DTOrder DriveThrough Order
-     */
-    public void setDriveThroughQueue(Order DTOrder){
-        driveThroughQueue.add(DTOrder);
-    }
-
-    /**
      * Gets the OnSite Queue
      * @return OnSite Queue
      */
@@ -102,16 +94,6 @@ public class OrderData {
      */
     public void setPickupOrders(String order){
         pickupOrders.add(order);
-    }
-
-
-    /**
-     * Removes the order that has been picked up
-     * @param rpu String
-     */
-    public void removePickUpOrder(String rpu){
-        pickupOrders.remove(rpu);
-
     }
 
     /**
@@ -155,49 +137,6 @@ public class OrderData {
     public String getCurrentOrder(){
         return currentOrder;
     }
-
-    /**
-     * Adds an item to the menu
-     * @param itemID Int
-     * @param itemName String
-     */
-    public void setItemIDNames(int itemID, String itemName){
-        itemIDNames.put(itemID,itemName);
-    }
-
-
-    /**
-     * returns the wanted Item from the HashMap
-     * @param itemId Int
-     * @return String
-     */
-    public String getItemIDNames(int itemId){
-        return itemIDNames.get(itemId);
-    }
-
-    /**
-     * Adds an items price to the menu
-     * @param itemID Int
-     * @param itemPrice Int
-     */
-    public void setItemIDPrice(int itemID, double itemPrice){
-        itemIDPrice.put(itemID,itemPrice);
-    }
-
-
-    /**
-     * returns the wanted Item Price from the HashMap
-     * @param itemId Int
-     * @return String
-     */
-    public double getItemIDPrice(int itemId){
-        return itemIDPrice.get(itemId);
-    }
-
-    /**
-     * Sets the next order Object
-     * @param nxtOrderObject Order
-     */
     public void setNextOrderObject(Order nxtOrderObject){
         nextOrderObject = nxtOrderObject;
     }
