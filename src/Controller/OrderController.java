@@ -104,7 +104,7 @@ public class OrderController implements EventHandler<ActionEvent> {
             @Override
             public void handle(MouseEvent event) {
                 try{
-                    if(!isNumber(cv.getCanceledOrder()) || Integer.parseInt(cv.getCanceledOrder()) == 1){   //if request isnt a number or is the number 1
+                    if(!isNumber(cv.getCanceledOrder()) || Integer.parseInt(cv.getCanceledOrder()) == orderData.getCurrentOrderObject().getOrderNumber()){   //if request isnt a number or is the number 1
                         showException("Order nonexistent or in progress.");
                         throw new CancelException();
                     }
