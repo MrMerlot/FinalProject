@@ -17,16 +17,35 @@ public class HashTableID {
     private HashMap<Integer, String> itemIDTable = new HashMap<>();
     private HashMap<Integer, Double> itemPriceTable = new HashMap<>();
 
-
+    /**
+     * Constuctor that creates the hashmaps.
+     */
     public HashTableID(){
         createItemIDTable();
         createitemPriceTable();
     }
+
+    /**
+     * Gets the name of an item's ID number
+     *
+     * @param ID  The ID number of an item
+     * @return  The name of the item
+     */
     public String getItemIDName( int ID ){
         return itemIDTable.get( ID );
     }
+
+    /**
+     * Gets the price of an item's ID number
+     *
+     * @param ID  The ID number of an item
+     * @return  The price of an item
+     */
     public double getItemPrice( int ID ){ return itemPriceTable.get( ID ); }
 
+    /**
+     * Creates the hashmap for converting the ID number to a name
+     */
     public void createItemIDTable(){
         itemIDTable.put( 1, "Iced Tea");
         itemIDTable.put( 2, "Water");
@@ -42,6 +61,9 @@ public class HashTableID {
         itemIDTable.put(12, "The Special");
     }
 
+    /**
+     * Creates the hashmap that converts the ID number to a price.
+     */
     public void createitemPriceTable(){
         itemPriceTable.put( 1, 8.99);
         itemPriceTable.put( 2, 9.99);
