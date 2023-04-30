@@ -208,6 +208,8 @@ public class OrderDataController {
      */
     private void replaceNextOrder(){
         Queue<Order> temp = new LinkedList<>();
+        Queue<Order> arr = new LinkedList<>();
+
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an O Object and has been skipped less than 3 times
             if(!orderData.getDriveThroughQueue().isEmpty()) {     //if the DT Queue is not empty
                 temp.add(orderData.getNextOrderObject());
@@ -218,6 +220,28 @@ public class OrderDataController {
                 }
                 while(!temp.isEmpty()){
                     orderData.setOnSiteQueue(temp.remove());         //puts the next order back into O queue
+                }
+            }
+            if(!orderData.getPhoneQueue().isEmpty()) { //if the onsite queue is not empty
+                while(!orderData.getPhoneQueue().isEmpty()){   //while onsite queue is not empty
+                    if(orderData.getPhoneQueue().peek().getOrderNumber() < orderData.getOnSiteQueue().peek().getOrderNumber()){
+                        orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() - 1);
+                    }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                    arr.add(orderData.getPhoneQueue().remove());
+                }
+                while(!arr.isEmpty()){         //reads all orders in temp back into queue
+                    orderData.setPhoneQueue(arr.remove());
+                }
+            }
+            if(!orderData.getDoorDashQueue().isEmpty()) { //if the onsite queue is not empty
+                while(!orderData.getDoorDashQueue().isEmpty()){   //while onsite queue is not empty
+                    if(orderData.getDoorDashQueue().peek().getOrderNumber() < orderData.getOnSiteQueue().peek().getOrderNumber()){
+                        orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() - 1);
+                    }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                    arr.add(orderData.getDoorDashQueue().remove());
+                }
+                while(!arr.isEmpty()){         //reads all orders in temp back into queue
+                    orderData.setDoorDashQueue(arr.remove());
                 }
             }
         }
@@ -244,7 +268,17 @@ public class OrderDataController {
                     orderData.setPhoneQueue(temp.remove());
                 }
             }
-
+            if(!orderData.getDoorDashQueue().isEmpty()) { //if the onsite queue is not empty
+                while(!orderData.getDoorDashQueue().isEmpty()){   //while onsite queue is not empty
+                    if(orderData.getDoorDashQueue().peek().getOrderNumber() < orderData.getPhoneQueue().peek().getOrderNumber()){
+                        orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() - 1);
+                    }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                    arr.add(orderData.getDoorDashQueue().remove());
+                }
+                while(!arr.isEmpty()){         //reads all orders in temp back into queue
+                    orderData.setDoorDashQueue(arr.remove());
+                }
+            }
         }
         else if (orderData.getNextOrderObject().getOrderType() == 4 && orderData.getNextOrderObject().getIfSkipped() < 3) {//if the next order is an DD Object and has been skipped less than 3 times
             if (!orderData.getDriveThroughQueue().isEmpty()) {      //if the DT queue is not empty
