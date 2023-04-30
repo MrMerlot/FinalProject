@@ -141,7 +141,11 @@ public class OrderController implements EventHandler<ActionEvent> {
                         throw new CustomerNameException();
                     }
                     if(getType() == 3 && !isNumber(cv.getGetPhoneNumber().getText())){
-                        showException("Enter a valid phone number (Only numbers)");
+                        showException("Enter a valid phone number (No Characters)");
+                        throw new PhoneNumberException();
+                    }
+                    else if(getType()==3 && cv.getGetPhoneNumber().getText().length() > 10){
+                        showException("Enter a valid phone number (<11 Digits)");
                         throw new PhoneNumberException();
                     }
                     if(cv.getItemID().isEmpty()){
