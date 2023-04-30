@@ -155,13 +155,18 @@ public class OrderController implements EventHandler<ActionEvent> {
                     Order order;
                     cv.addOrderNumber();
 
-                    //  Sets the order according to the order number type
                     if( orderType == 4 ) order = new DoorDash( customerName, orderNumber);
                     else if( orderType == 1 ) order = new DriveThrough( customerName, orderNumber);
                     else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
                     else order = new Phone( customerName, orderNumber, phone);
 
-                    //  Adds 5% charge to door dash
+                    String items = "";//test
+                    for( int i = 0; i < cv.getItemID().size(); i++ ){
+                        order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
+                        items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
+                    }
+                    System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
+
                     if( orderType == 4 ) {
 
                         String price = String.format("%.2f", 1.05 * getPrice(cv.getItemID(), cv.getItemQuantity()));
@@ -169,11 +174,8 @@ public class OrderController implements EventHandler<ActionEvent> {
                         cv.getPriceLabel().setText( price );
                     }
                     else{
-                        cv.getPriceLabel().setText(String.format("%.2f", getPrice(cv.getItemID(),
-                                cv.getItemQuantity())));
+                        cv.getPriceLabel().setText( "$" + getPrice(cv.getItemID(), cv.getItemQuantity()));
                     }
-
-                    //  Clears the info in customerView
                     cv.getItemID().clear();
                     cv.getItemQuantity().clear();
                     orderData.addOrder( order );
@@ -266,9 +268,6 @@ public class OrderController implements EventHandler<ActionEvent> {
             }
         });
 
-        /**
-         * Handles the toggle button. Switches the scene between CustomerView or CookView
-         */
         cv.getToggleView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -277,10 +276,6 @@ public class OrderController implements EventHandler<ActionEvent> {
             }
         });
 
-        /**
-         * Handles the phone radio button. When it is selected, a phone text field will show up.
-         * The opposite is true as well.
-         */
         cv.getPhoneRadio().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -351,11 +346,6 @@ public class OrderController implements EventHandler<ActionEvent> {
         return id;
     }
 
-    /**
-     * Gets the max order number
-     *
-     * @return  The max order number plus 1
-     */
     public int findOrderNumber(){
 
         ArrayList<Order> list = FileWriterController.fileOrderArrayList;
@@ -371,11 +361,6 @@ public class OrderController implements EventHandler<ActionEvent> {
         return max;
     }
 
-    /**
-     * Gets the order type and sets it equal to a number
-     *
-     * @return  An integer of the order type.
-     */
     private int getType(){
         int type = 0;
 
@@ -387,13 +372,6 @@ public class OrderController implements EventHandler<ActionEvent> {
         return type;
     }
 
-    /**
-     * Gets the price of the order
-     *
-     * @param item  Arraylist of the items in the order
-     * @param quantity  Arraylist of the quantity of items in the order
-     * @return  The total price of the order
-     */
     private double getPrice( ArrayList<Integer> item, ArrayList<Integer> quantity ){
 
         double price = 0;
@@ -407,9 +385,6 @@ public class OrderController implements EventHandler<ActionEvent> {
         return price;
     }
 
-    /**
-     * Sets the non-pickup orders
-     */
     public void setOrders() {
         for (int i=0; i<FileWriterController.fileOrderArrayList.size();i++){
             if(FileWriterController.fileOrderArrayList.get(i).getIsComplete()==false) {
