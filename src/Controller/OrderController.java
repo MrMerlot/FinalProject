@@ -1,3 +1,13 @@
+/**
+ * OrderController.java
+ *
+ * This is the main button handler for CustomerView. It has access to the data in the models,
+ * and sends it to CustomerView to display. It is able to distribute tasks to other classes
+ * like creating orders, cancelling orders, and handling exceptions.
+ *
+ * @author Miles Hoffman
+ */
+
 package Controller;
 import Exceptions.*;
 import Model.*;
@@ -12,7 +22,6 @@ import java.util.ArrayList;
 
 public class OrderController implements EventHandler<ActionEvent> {
     private CustomerView cv;
-
     private OrderData orderData = new OrderData();
     private String customerName;
     private int orderType;
@@ -87,6 +96,10 @@ public class OrderController implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
+        /**
+         * Handles the cancel button. When it is pressed, the order is cancelled
+         * unless it is currently being cooked.
+         */
         cv.getCancel().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -110,7 +123,8 @@ public class OrderController implements EventHandler<ActionEvent> {
         });
 
         /**
-         * When submit is hit, a new order is created
+         * Handles the submit button. When submit is hit, a new order is created
+         * and added to the correct queue in OrderData.
          */
         cv.getSubmit().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -165,6 +179,9 @@ public class OrderController implements EventHandler<ActionEvent> {
                     //adds order to the array list
                     orderData.getOrderList().add(order);
                     orderDataController.checkQueue();
+
+                    cv.getDoneButton().setSelected(true);
+                    clearMenu();
                 }
                 catch(CustomerNameException e){}
                 catch (PhoneNumberException e){}
@@ -239,6 +256,9 @@ public class OrderController implements EventHandler<ActionEvent> {
                     }
                     cv.addItemQuantity( (int) cv.getQuantitySlider().getValue() );
                     cv.addItemID( getItemID() );
+
+                    cv.getDoneButton().setSelected(true);
+                    clearMenu();
                 }
                 catch(AddToOrderException e){}
             }

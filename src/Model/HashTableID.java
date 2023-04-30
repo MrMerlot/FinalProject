@@ -1,3 +1,13 @@
+/**
+ * HashTableID.java
+ *
+ * This holds the information for the items (food). It converts an item's ID number
+ * into a price or a name. It allows for access to our items so that we can
+ * add or remove items easily.
+ *
+ * @author Miles Hoffman
+ */
+
 package Model;
 
 import java.util.HashMap;

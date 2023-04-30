@@ -1,3 +1,12 @@
+/**
+ * CustomerView.java
+ *
+ * Main application for the program. It holds all the UI elements in the customer's view.
+ * It also outputs the information given to it by the controllers.
+ *
+ * @author Miles Hoffman
+ */
+
 package View;
 
 import Controller.FileWriterController;
