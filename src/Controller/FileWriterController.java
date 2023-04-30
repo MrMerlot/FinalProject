@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.util.*;
 
 public class FileWriterController{
-
         public static ArrayList<Order> fileOrderArrayList = new ArrayList<>();
         //Creates a static array list to store orders in
         private static File file = new File("savedData.txt");
         //Creates a static file to save the orders in
+        OrderData orderData = new OrderData();
 
 
         public static void closeFileAction(FileWriterController fileWriterController) {
@@ -113,6 +113,7 @@ public class FileWriterController{
                 order.setSkipped(Integer.parseInt(s.nextLine())); //sets skipped count to order
                 order.setComplete(s.nextLine());//sets the order completion status
                 fileOrderArrayList.add(order); //adds order to array list
+                orderData.getOrderList().add(order);
             }
             try {
                 new FileWriter(file,false).close();

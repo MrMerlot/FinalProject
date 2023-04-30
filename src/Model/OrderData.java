@@ -18,7 +18,7 @@ public class OrderData {
     private static HashMap<Integer,String> itemIDNames = new HashMap<>();               //Hashmap for Item Names
     private static HashMap<Integer,Double> itemIDPrice = new HashMap<>();              //Hashmap for Item Prices
 
-    private ArrayList<Order> ordersArrayList = new ArrayList<>();
+    private static ArrayList<Order> ordersArrayList = new ArrayList<>();
     private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
 
     public void addOrder( Order order ) {
