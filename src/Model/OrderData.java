@@ -23,7 +23,7 @@ public class OrderData {
     private static String currentOrder = "";                                           //String for the current order
     private static String nextOrder = "";                                                //String for the next order
 
-    private ArrayList<Order> ordersArrayList = new ArrayList<>();                   //ArrayList
+    private static ArrayList<Order> ordersArrayList = new ArrayList<>();                   //ArrayList
     private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
 
     public void addOrder( Order order ) {
