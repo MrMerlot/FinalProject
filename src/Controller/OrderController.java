@@ -160,12 +160,11 @@ public class OrderController implements EventHandler<ActionEvent> {
                     else if( orderType == 2 ) order = new Onsite( customerName, orderNumber);
                     else order = new Phone( customerName, orderNumber, phone);
 
-                    String items = "";//test
+                    String items = "";
                     for( int i = 0; i < cv.getItemID().size(); i++ ){
                         order.addItem( cv.getItemID().get(i), cv.getItemQuantity().get(i) );
                         items +=  "\n"+ cv.getItemID().get(i) + " " + cv.getItemQuantity().get(i);//test
                     }
-                    System.out.println("ORDER#" + orderNumber + customerName +" "+orderType+ " "+items);//test
 
                     if( orderType == 4 ) {
 
