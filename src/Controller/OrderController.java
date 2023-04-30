@@ -191,6 +191,8 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                     cv.getDoneButton().setSelected(true);
                     clearMenu();
+
+                    cv.getQuantitySlider().setValue(1.0);
                 }
                 catch(CustomerNameException e){}
                 catch (PhoneNumberException e){}
