@@ -14,19 +14,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
 public class CookController implements EventHandler<ActionEvent> {
 
-    OrderDataController orderDataController = new OrderDataController(this);
-    OrderData orderData = new OrderData();      //new instance of OrderData
-    CookView cookView;                          //instance of CookView
-    ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
+    private OrderDataController orderDataController = new OrderDataController(this);
+    private OrderData orderData = new OrderData();      //new instance of OrderData
+    private CookView cookView;                          //instance of CookView
+    private ToggleGroup pickupOrdersTG = new ToggleGroup(); //New Toggle Group
 
-    VBox tempVbox = new VBox();                 //New vBox
-    FileWriterController fileWriterController = new FileWriterController();
+    private VBox tempVbox = new VBox();                 //New vBox
+    private FileWriterController fileWriterController = new FileWriterController();
 
-    HashTableID hashTableID = new HashTableID();
+    private HashTableID hashTableID = new HashTableID();
 
 
     public CookController(CookView view) {
@@ -40,7 +38,7 @@ public class CookController implements EventHandler<ActionEvent> {
     /**
      * resets the Vbox
      */
-    public void resetVbox(){
+    private void resetVbox(){
         if (!cookView.getPickupOrders().isSelected()){
             cookView.getPane().getChildren().remove(tempVbox);      //removing vBox from the pane
             tempVbox.getChildren().clear();                         //resetting the vBox
@@ -51,7 +49,7 @@ public class CookController implements EventHandler<ActionEvent> {
     /**
      * sets the current and next order labels
      */
-    public void setOrders(){
+    private void setOrders(){
         cookView.setCurrentOrderLabel(orderData.getCurrentOrder());
         cookView.setNextOrderLabel(orderData.getNextOrder());
     }

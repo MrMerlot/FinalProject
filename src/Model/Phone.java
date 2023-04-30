@@ -1,15 +1,14 @@
 package Model;
 
-import java.io.IOException;
 
 public class Phone extends Order{
-    protected String phoneNumber;
+    private String phoneNumber;
     public Phone(String name, int orderNumber, String phone ) {
         super(name,orderNumber, 3);
         phoneNumber = phone;
     }
     public int getPhoneNumber() {
-        if (orderType==3){
+        if (getOrderType()==3){
 
             return Integer.parseInt(phoneNumber);
         }

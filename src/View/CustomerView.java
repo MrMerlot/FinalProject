@@ -2,12 +2,10 @@ package View;
 
 import Controller.FileWriterController;
 import Controller.OrderController;
-import Controller.OrderDataController;
-import Model.OrderData;
-import com.sun.prism.paint.Color;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,16 +14,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import org.w3c.dom.css.Rect;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class CustomerView extends Application {
-    public boolean toggle = true;
-    public Scene firstScene;
-    public Stage stage = new Stage();
+    private boolean toggle = true;
+    private Scene firstScene;
+    private Stage stage = new Stage();
     private Label customerLabel = new Label("Bou-shei");
     private Label orderLabel = new Label("Order # ");
     private Label orderNumberLabel = new Label(""+1);
@@ -38,7 +34,6 @@ public class CustomerView extends Application {
     private Label priceLabel = new Label("");
     private Label menuLabel = new Label("Menu:");
     private CookView cookView;
-    private Scene scene;
     private Group group, drinkGroup, mealGroup, sideGroup, icedGroup,
             hotDrinkGroup, coldMealGroup, hotMealGroup;
     private RadioButton hotDrink, coldDrink, hotMeal, coldMeal, fries,
@@ -678,7 +673,7 @@ public class CustomerView extends Application {
     /**
      * @return  the firstScene, which is the scene for CustomerView
      */
-    public Scene getScene(){
+    private Scene getScene(){
         return firstScene;
     }
 
@@ -704,14 +699,14 @@ public class CustomerView extends Application {
     /**
      * Sets the firstScene with all buttons and UI elements
      */
-    public void setScene(){
+    private void setScene(){
         firstScene = new Scene( group, 600,600 );
     }
 
     /**
      * Sets the toggle to opposite boolean value
      */
-    public void setToggle(){ toggle = !toggle; }
+    private void setToggle(){ toggle = !toggle; }
 
     /**
      * Sets the text for the exception label

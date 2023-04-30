@@ -1,6 +1,5 @@
 package Model;
 
-import java.io.IOException;
 
 public class DriveThrough extends Order {
 

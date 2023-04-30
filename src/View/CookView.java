@@ -1,7 +1,7 @@
 package View;
 
 import Controller.CookController;
-import Model.Order;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -19,8 +19,8 @@ import javafx.util.Duration;
 
 
 public class CookView extends Application {
-    CustomerView customerView1;
-    public Scene secondScene;                                                         //Scene for CookView
+    private CustomerView customerView1;
+    private Scene secondScene;                                                         //Scene for CookView
     private Label nextOrderLabel = new Label("H");                              //shows next order
 
     private Button toggleView = new Button( "Switch to Customer View" );        //Switches back to the Customers View
@@ -48,7 +48,7 @@ public class CookView extends Application {
     private Rectangle currentRec,currentRec2,currentRecShadow,nextRec,nextRec2,nextRecShadow
             ,xCenterRec,xOutlineRec,xShadowRec;   //for background
 
-    CookController controller = new CookController(this);                       //Object of Cook Controller
+    private CookController controller = new CookController(this);                       //Object of Cook Controller
 
 
     /**
@@ -71,7 +71,7 @@ public class CookView extends Application {
     /**
      * Sets the background up for the view
      */
-    public void setBackgroundLayout(){
+    private void setBackgroundLayout(){
         currentRec = new Rectangle(175,200, Paint.valueOf( "#b6d8ff" ));
         currentRec.setArcWidth(30);           //setting rounded edges
         currentRec.setArcHeight(30);           //setting rounded edges
@@ -138,7 +138,7 @@ public class CookView extends Application {
     /**
      * Sets the layout of Buttons/Labels for view up
      */
-    public void setLayout(){
+    private void setLayout(){
         nextOrderLabel.setLayoutX(435);                  //setting the x-axis
         nextOrderLabel.setLayoutY(30);                  //setting the y-axis
 
@@ -193,15 +193,9 @@ public class CookView extends Application {
     /**
      * Sets the scene
      */
-    public void setScene(){
+    private void setScene(){
         secondScene = new Scene( pane, 600,600 );
     }
-
-    /**
-     * Gets the cookView Scene
-     * @return scene
-     */
-    public Scene getScene(){ return secondScene; }
 
     /**
      * Allows the Cool Controller to access toggleView
@@ -241,10 +235,6 @@ public class CookView extends Application {
      */
     public Pane getPane(){
         return pane;
-    }
-
-    public void removeRB(Node node){
-        pane.getChildren().remove(node);
     }
 
     /**
@@ -328,13 +318,13 @@ public class CookView extends Application {
      * sets the Exception Text popup
      * @param text String
      */
-    public void setExceptionText( String text ){
+    private void setExceptionText( String text ){
         this.exceptionText.setText(text);
     }
 
 
 
-    public void setVisibleException( Boolean vis ){ //sets visibility for exception pop up
+    private void setVisibleException( Boolean vis ){ //sets visibility for exception pop up
         xOutlineRec.setVisible( vis );
         xCenterRec.setVisible( vis );
         xShadowRec.setVisible( vis );

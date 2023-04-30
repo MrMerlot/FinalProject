@@ -2,14 +2,12 @@ package Controller;
 import Exceptions.*;
 import Model.*;
 import View.CustomerView;
-import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class OrderController implements EventHandler<ActionEvent> {
@@ -19,7 +17,6 @@ public class OrderController implements EventHandler<ActionEvent> {
     private String customerName;
     private int orderType;
     private int orderNumber;
-    private boolean flip = false;
     private OrderDataController orderDataController = new OrderDataController(this);
     private HashTableID hashTableID = new HashTableID();
     private FileWriterController fileWriterController = new FileWriterController();
@@ -75,7 +72,7 @@ public class OrderController implements EventHandler<ActionEvent> {
      * @param orderNumber
      * @return order
      */
-    public Order orderNumToOrder(int orderNumber){
+    private Order orderNumToOrder(int orderNumber){
         for(int i = 0; i < orderData.getOrderList().size(); i++){
             if(orderData.getOrderList().get(i).getOrderNumber() == orderNumber)
                 return orderData.getOrderList().get(i);
