@@ -219,7 +219,6 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setOnSiteQueue(temp.remove());         //puts the next order back into O queue
                 }
-                orderData.getOnSiteQueue().peek().setSkipped(orderData.getOnSiteQueue().peek().getIfSkipped() + 1); //increment the moved orders skips by one
             }
         }
         else if (orderData.getNextOrderObject().getOrderType() == 3 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an P Object and has been skipped less than 3 times
@@ -233,7 +232,6 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setPhoneQueue(temp.remove());
                 }
-                orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() + 1); //increment the moved orders skips by one
             }
             else if(!orderData.getOnSiteQueue().isEmpty()){          //if O queue is not empty
                 temp.add(orderData.getNextOrderObject());
@@ -245,7 +243,6 @@ public class OrderDataController {
                 while(!temp.isEmpty()){
                     orderData.setPhoneQueue(temp.remove());
                 }
-                orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() + 1); //increment the moved orders skips by one
             }
 
         }
@@ -260,7 +257,6 @@ public class OrderDataController {
                 while (!temp.isEmpty()) {
                     orderData.setDoorDashQueue(temp.remove());
                 }
-                orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1); //increment the moved orders skips by one
             } else if (!orderData.getOnSiteQueue().isEmpty()) {     //if the O queue is not empty
                 temp.add(orderData.getNextOrderObject());
                 orderData.setNextOrderObject(null);
@@ -271,7 +267,6 @@ public class OrderDataController {
                 while (!temp.isEmpty()) {
                     orderData.setDoorDashQueue(temp.remove());
                 }
-                orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1); //increment the moved orders skips by one
             } else if (!orderData.getPhoneQueue().isEmpty()) {      // if the P queue is not empty
                 temp.add(orderData.getNextOrderObject());
                 orderData.setNextOrderObject(null);
@@ -282,7 +277,6 @@ public class OrderDataController {
                 while (!temp.isEmpty()) {
                     orderData.setDoorDashQueue(temp.remove());
                 }
-                orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1); //increment the moved orders skips by one
             }
         }
     }
