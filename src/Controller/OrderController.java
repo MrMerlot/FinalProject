@@ -270,6 +270,7 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                     cv.getDoneButton().setSelected(true);
                     clearMenu();
+                    cv.getQuantitySlider().setValue(1.0);
                 }
                 catch(AddToOrderException e){}
             }
@@ -427,6 +428,7 @@ public class OrderController implements EventHandler<ActionEvent> {
             }
         }
         orderDataController.setCurrentOrder();
+        orderData.setCurrentOrderObject(FileWriterController.fileOrderArrayList.get(0));
     }
 
     /**
