@@ -1,3 +1,11 @@
+/**
+ * CookController
+ *
+ * Handles all the users input in
+ * cookView
+ *
+ * @Author Brayden Boyer
+ */
 package Controller;
 
 import Exceptions.FinishOrderException;

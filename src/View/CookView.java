@@ -1,3 +1,11 @@
+/**
+ * CookView
+ *
+ * Holds the UI elements for the cooks view
+ * updates based on the users input and the controllers output
+ *
+ * @Author Brayden Boyer
+ */
 package View;
 
 import Controller.CookController;
