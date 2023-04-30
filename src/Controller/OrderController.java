@@ -173,10 +173,10 @@ public class OrderController implements EventHandler<ActionEvent> {
 
                         String price = String.format("%.2f", 1.05 * getPrice(cv.getItemID(), cv.getItemQuantity()));
 
-                        cv.getPriceLabel().setText( price );
+                        cv.getPriceLabel().setText( "$" + price );
                     }
                     else{
-                        cv.getPriceLabel().setText(String.format("%.2f", getPrice(cv.getItemID(),
+                        cv.getPriceLabel().setText( "$" + String.format("%.2f", getPrice(cv.getItemID(),
                                 cv.getItemQuantity())));
                     }
 
