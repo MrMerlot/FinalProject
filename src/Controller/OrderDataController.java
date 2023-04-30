@@ -6,9 +6,9 @@ import Model.OrderData;
 import java.util.*;
 
 public class OrderDataController {
-    public OrderData orderData = new OrderData();
-    public OrderController orderController;
-    public CookController cookController;
+    private OrderData orderData = new OrderData();
+    private OrderController orderController;
+    private CookController cookController;
     public OrderDataController(OrderController orderController){
         this.orderController = orderController;
     }
@@ -30,7 +30,7 @@ public class OrderDataController {
     /**
      * Increments skip count of all orders still in a queue that were placed before the nextOrder Object
      */
-    public void checkSkipped(){
+    private void checkSkipped(){
         Queue<Order> temp = new LinkedList<>();
         if(!orderData.getOnSiteQueue().isEmpty()) { //if the onsite queue is not empty
             while(!orderData.getOnSiteQueue().isEmpty()){   //while onsite queue is not empty
@@ -67,7 +67,7 @@ public class OrderDataController {
         }
     }
 
-    public int getMaxSkipped(){
+    private int getMaxSkipped(){
         int num = 0;
         ArrayList<Integer> arr = new ArrayList<>();
         if(!orderData.getOnSiteQueue().isEmpty()) {
@@ -96,7 +96,7 @@ public class OrderDataController {
      * @param input
      * @return String
      */
-    public String checkMaxSkipped(String input){
+    private String checkMaxSkipped(String input){
         HashTableID hashTable = new HashTableID();
         ArrayList<Integer> itemID = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
@@ -206,7 +206,7 @@ public class OrderDataController {
     /**
      * Places nextOrder object back into respective queue if it is not the highest priority available
      */
-    public void replaceNextOrder(){
+    private void replaceNextOrder(){
         Queue<Order> temp = new LinkedList<>();
         if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an O Object and has been skipped less than 3 times
             if(!orderData.getDriveThroughQueue().isEmpty()) {     //if the DT Queue is not empty
