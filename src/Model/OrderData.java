@@ -1,3 +1,11 @@
+/**
+ * OrderData
+ *
+ *Class where all the applications
+ * data will be stored
+ *
+ * @Author Brayden Boyer
+ */
 package Model;
 
 import java.util.*;
@@ -18,7 +26,7 @@ public class OrderData {
     private static HashMap<Integer,String> itemIDNames = new HashMap<>();               //Hashmap for Item Names
     private static HashMap<Integer,Double> itemIDPrice = new HashMap<>();              //Hashmap for Item Prices
 
-    private static ArrayList<Order> ordersArrayList = new ArrayList<>();
+    private ArrayList<Order> ordersArrayList = new ArrayList<>();                   //ArrayList
     private static ArrayList< String > pickupOrders = new ArrayList<>();          //where completed orders are stored
 
     public void addOrder( Order order ) {
