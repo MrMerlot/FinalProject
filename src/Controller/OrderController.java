@@ -428,7 +428,6 @@ public class OrderController implements EventHandler<ActionEvent> {
             }
         }
         orderDataController.setCurrentOrder();
-        orderData.setCurrentOrderObject(FileWriterController.fileOrderArrayList.get(0));
     }
 
     /**
