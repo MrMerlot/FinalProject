@@ -2,10 +2,8 @@ package Controller;
 import Model.HashTableID;
 import Model.Order;
 import Model.OrderData;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+
+import java.util.*;
 
 public class OrderDataController {
     public OrderData orderData = new OrderData();
@@ -33,40 +31,63 @@ public class OrderDataController {
      * Increments skip count of all orders still in a queue that were placed before the nextOrder Object
      */
     public void checkSkipped(){
-        Stack<Order> temp = new Stack<>();
+        Queue<Order> temp = new LinkedList<>();
         if(!orderData.getOnSiteQueue().isEmpty()) { //if the onsite queue is not empty
-            while(orderData.getOnSiteQueue().peek().getOrderNumber() < orderData.getNextOrderObject().getOrderNumber()){//while Onsite queue heads orderNum is less than nextOrders orderNum
-                orderData.getOnSiteQueue().peek().setSkipped(orderData.getOnSiteQueue().peek().getIfSkipped() + 1); //increment head of onsite queue skip count by one
-                temp.add(orderData.getOnSiteQueue().remove());//remove head from queue and store in temp
-                if(orderData.getOnSiteQueue().isEmpty())
-                    break;
+            while(!orderData.getOnSiteQueue().isEmpty()){   //while onsite queue is not empty
+                if(orderData.getOnSiteQueue().peek().getOrderNumber() < orderData.getNextOrderObject().getOrderNumber()){
+                    orderData.getOnSiteQueue().peek().setSkipped(orderData.getOnSiteQueue().peek().getIfSkipped() + 1);
+                }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                temp.add(orderData.getOnSiteQueue().remove());
             }
             while(!temp.isEmpty()){         //reads all orders in temp back into queue
-                orderData.setOnSiteQueue(temp.pop());
+                orderData.setOnSiteQueue(temp.remove());
             }
         }
         if(!orderData.getPhoneQueue().isEmpty()) {
-            while(orderData.getPhoneQueue().peek().getOrderNumber() < orderData.getNextOrderObject().getOrderNumber()){//while Phone queue heads orderNum is less than nextOrders orderNum
-                orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() + 1); //increment head of Phone queue skip count by one
-                temp.add(orderData.getPhoneQueue().remove());//remove head from queue and store in temp
-                if(orderData.getPhoneQueue().isEmpty())
-                    break;
+            while(!orderData.getPhoneQueue().isEmpty()){   //while onsite queue is not empty
+                if(orderData.getPhoneQueue().peek().getOrderNumber() < orderData.getNextOrderObject().getOrderNumber()){
+                    orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() + 1);
+                }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                temp.add(orderData.getPhoneQueue().remove());
             }
-            while(!temp.isEmpty()){           //reads all orders in temp back into queue
-                orderData.setPhoneQueue(temp.pop());
+            while(!temp.isEmpty()){         //reads all orders in temp back into queue
+                orderData.setPhoneQueue(temp.remove());
             }
         }
         if(!orderData.getDoorDashQueue().isEmpty()) {
-            while(orderData.getDoorDashQueue().peek().getOrderNumber() < orderData.getNextOrderObject().getOrderNumber()){//while DD queue heads orderNum is less than nextOrders orderNum
-                orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1); //increment head of DD queue skip count by one
-                temp.add(orderData.getDoorDashQueue().remove());//remove head from queue and store in temp
-                if(orderData.getDoorDashQueue().isEmpty())
-                    break;
+            while(!orderData.getDoorDashQueue().isEmpty()){   //while onsite queue is not empty
+                if(orderData.getDoorDashQueue().peek().getOrderNumber() < orderData.getNextOrderObject().getOrderNumber()){
+                    orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() + 1);
+                }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                temp.add(orderData.getDoorDashQueue().remove());
             }
-            while(!temp.isEmpty()){     //reads all orders in temp back into queue
-                orderData.setDoorDashQueue(temp.pop());
+            while(!temp.isEmpty()){         //reads all orders in temp back into queue
+                orderData.setDoorDashQueue(temp.remove());
             }
         }
+    }
+
+    public int getMaxSkipped(){
+        int num = 0;
+        ArrayList<Integer> arr = new ArrayList<>();
+        if(!orderData.getOnSiteQueue().isEmpty()) {
+            if (orderData.getOnSiteQueue().peek().getIfSkipped() >= 3) {
+                arr.add(orderData.getOnSiteQueue().peek().getOrderNumber());
+            }
+        }
+        if(!orderData.getPhoneQueue().isEmpty()) {
+            if (orderData.getPhoneQueue().peek().getIfSkipped() >= 3) {
+                arr.add(orderData.getPhoneQueue().peek().getOrderNumber());
+            }
+        }
+        if(!orderData.getDoorDashQueue().isEmpty()) {
+            if (orderData.getDoorDashQueue().peek().getIfSkipped() >= 3) {
+                arr.add(orderData.getDoorDashQueue().peek().getOrderNumber());
+            }
+        }
+        if(!arr.isEmpty())
+            return Collections.min(arr);
+        return 0;
     }
 
     /**
@@ -79,7 +100,9 @@ public class OrderDataController {
         HashTableID hashTable = new HashTableID();
         ArrayList<Integer> itemID = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
-        if(!orderData.getOnSiteQueue().isEmpty()) {
+        int orderNum = getMaxSkipped();
+
+        if(!orderData.getOnSiteQueue().isEmpty() && orderData.getOnSiteQueue().peek().getOrderNumber() == orderNum) {
             if (orderData.getOnSiteQueue().peek().getIfSkipped() >= 3) {//if onsite queue head has been skipped 3 times
                 input += orderData.getOnSiteQueue().peek().getName() + "\n";
                 itemID = orderData.getOnSiteQueue().peek().getItemID();
@@ -92,7 +115,7 @@ public class OrderDataController {
             }
             return input;
         }
-        if(!orderData.getPhoneQueue().isEmpty()) {
+        if(!orderData.getPhoneQueue().isEmpty() && orderData.getPhoneQueue().peek().getOrderNumber() == orderNum) {
             if (orderData.getPhoneQueue().peek().getIfSkipped() >= 3) { //if Phone queue head has been skipped 3 times
                 input += orderData.getPhoneQueue().peek().getName() + "\n";
                 itemID = orderData.getPhoneQueue().peek().getItemID();
@@ -105,7 +128,7 @@ public class OrderDataController {
             }
             return input;
         }
-        if(!orderData.getDoorDashQueue().isEmpty()) {
+        if(!orderData.getDoorDashQueue().isEmpty() && orderData.getDoorDashQueue().peek().getOrderNumber() == orderNum) {
             if (orderData.getDoorDashQueue().peek().getIfSkipped() >= 3) { //if DoorDash queue head has been skipped 3 times
                 input += orderData.getDoorDashQueue().peek().getName() + "\n";
                 itemID = orderData.getDoorDashQueue().peek().getItemID();
