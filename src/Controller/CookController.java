@@ -111,8 +111,6 @@ public class CookController implements EventHandler<ActionEvent> {
             cookView.setPane(tempVbox);                                    //sending it to the Pane in view to be shown
         }
 
-
-
         /**
          * Handler for the back button when List pickup orders is selected
          */
@@ -124,7 +122,6 @@ public class CookController implements EventHandler<ActionEvent> {
 
             }
         });
-
 
         /**
          * Handler for picking up a completed order
@@ -153,7 +150,6 @@ public class CookController implements EventHandler<ActionEvent> {
         cookView.getToggleView().setOnMouseClicked(event1 -> {
             cookView.toggle();          //toggles the view
         });
-
 
         /**
          * Handler for the Finish Order Button

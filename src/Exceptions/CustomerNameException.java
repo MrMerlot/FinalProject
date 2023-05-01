@@ -1,7 +1,5 @@
 package Exceptions;
 
-import View.CustomerView;
-
 public class CustomerNameException extends Exception{
     public CustomerNameException(){
         super();

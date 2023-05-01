@@ -11,11 +11,8 @@ package View;
 
 import Controller.FileWriterController;
 import Controller.OrderController;
-
-import Model.OrderData;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -24,7 +21,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.util.ArrayList;
 
 

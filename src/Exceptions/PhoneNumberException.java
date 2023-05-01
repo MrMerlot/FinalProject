@@ -1,6 +1,5 @@
 package Exceptions;
 
-import Model.Phone;
 
 public class PhoneNumberException extends Exception{
     public PhoneNumberException(){
