@@ -16,9 +16,20 @@ public class OrderDataController {
     private OrderData orderData = new OrderData();
     private OrderController orderController;
     private CookController cookController;
+
+    /**
+     * Constructor for OrderDataController class
+     *
+     * @param orderController
+     */
     public OrderDataController(OrderController orderController){
         this.orderController = orderController;
     }
+    /**
+     * Constructor for OrderDataController class
+     *
+     * @param cookController
+     */
     public OrderDataController(CookController cookController){
         this.cookController = cookController;
     }

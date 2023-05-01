@@ -1,8 +1,7 @@
 /**
- * OrderData
+ * OrderData.java
  *
- * Class where all the applications
- * data will be stored
+ * Class where all the applications data will be stored
  *
  * @Author Brayden Boyer
  */

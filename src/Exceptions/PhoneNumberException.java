@@ -1,3 +1,10 @@
+/**
+ * PhoneNumberException.java
+ *
+ * Throws a phone number exception
+ *
+ * @author William Freeburn
+ */
 package Exceptions;
 
 

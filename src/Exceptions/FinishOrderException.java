@@ -1,3 +1,10 @@
+/**
+ * FinishOrderException.java
+ *
+ * Throws a finish order exception
+ *
+ * @author William Freeburn
+ */
 package Exceptions;
 
 public class FinishOrderException extends Exception{

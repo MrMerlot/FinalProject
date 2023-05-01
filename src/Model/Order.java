@@ -1,12 +1,16 @@
-package Model;
+/**
+ * Order.java
+ *
+ * Creates an object for each order placed
+ *
+ * @author Daniel Edinger
+ */
 
+package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Creates an object for each order placed
- * @author danieledinger
- */
+
 public class Order {
     private int orderNumber;
     private ArrayList<Integer> itemID = new ArrayList<>();

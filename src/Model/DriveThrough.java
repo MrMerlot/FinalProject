@@ -5,7 +5,6 @@
  *
  * @author Daniel Edinger
  */
-
 package Model;
 
 

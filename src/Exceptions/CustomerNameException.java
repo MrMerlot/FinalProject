@@ -1,3 +1,10 @@
+/**
+ * CustomerNameException.java
+ *
+ * Throws a customer name exception
+ *
+ * @author William Freeburn
+ */
 package Exceptions;
 
 public class CustomerNameException extends Exception{

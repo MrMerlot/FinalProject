@@ -1,3 +1,10 @@
+/**
+ * CancelException.java
+ *
+ * Throws a submit order exception
+ *
+ * @author William Freeburn
+ */
 package Exceptions;
 
 public class CancelException extends Exception{

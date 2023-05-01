@@ -1,3 +1,10 @@
+/**
+ * PickupOrderException.java
+ *
+ * Throws a pickup exception
+ *
+ * @author William Freeburn
+ */
 package Exceptions;
 
 public class PickupOrderException extends Exception{
