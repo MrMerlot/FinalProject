@@ -1,8 +1,15 @@
+/**
+ * OrderDataController.java
+ *
+ * Makes sure the next and current orders contain the appropriate object at all times
+ * Deletes the order that was requested to be canceled from orderData
+ *
+ * @author William
+ */
 package Controller;
 import Model.HashTableID;
 import Model.Order;
 import Model.OrderData;
-
 import java.util.*;
 
 public class OrderDataController {
@@ -67,6 +74,11 @@ public class OrderDataController {
         }
     }
 
+    /**
+     * Returns the number corresponding to the queue holding the lowest numbered order with 3 skips at its head
+     *
+     * @return int
+     */
     private int getMaxSkipped(){
         int num = 0;
         ArrayList<Integer> arr = new ArrayList<>();
@@ -205,12 +217,14 @@ public class OrderDataController {
 
     /**
      * Places nextOrder object back into respective queue if it is not the highest priority available
+     * If this order skipped any others previously, subtracts 1 from the skipped orders skip count
      */
     private void replaceNextOrder(){
         Queue<Order> temp = new LinkedList<>();
         Queue<Order> arr = new LinkedList<>();
 
-        if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an O Object and has been skipped less than 3 times
+        //if the next order is an O Object and has been skipped less than 3 times
+        if(orderData.getNextOrderObject().getOrderType() == 2 && orderData.getNextOrderObject().getIfSkipped() < 3){
             if(!orderData.getDriveThroughQueue().isEmpty()) {     //if the DT Queue is not empty
                 temp.add(orderData.getNextOrderObject());
                 orderData.setNextOrderObject(null);
@@ -219,96 +233,65 @@ public class OrderDataController {
                     temp.add(orderData.getOnSiteQueue().remove());
                 }
                 while(!temp.isEmpty()){
-                    orderData.setOnSiteQueue(temp.remove());         //puts the next order back into O queue
+                    orderData.setOnSiteQueue(temp.remove());        //puts the next order back into O queue
                 }
             }
-            if(!orderData.getPhoneQueue().isEmpty()) { //if the onsite queue is not empty
-                while(!orderData.getPhoneQueue().isEmpty()){   //while onsite queue is not empty
+            if(!orderData.getPhoneQueue().isEmpty()) { //if the Phone queue is not empty
+                while(!orderData.getPhoneQueue().isEmpty()){   //while Phone queue is not empty
                     if(orderData.getPhoneQueue().peek().getOrderNumber() < orderData.getOnSiteQueue().peek().getOrderNumber()){
                         orderData.getPhoneQueue().peek().setSkipped(orderData.getPhoneQueue().peek().getIfSkipped() - 1);
-                    }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                    }//subtracts 1 skip from every order in Phone queue with a smaller order number then the Onsite
+                     //order that was placed back into its queue
                     arr.add(orderData.getPhoneQueue().remove());
-                }
-                while(!arr.isEmpty()){         //reads all orders in temp back into queue
+                }while(!arr.isEmpty()){
                     orderData.setPhoneQueue(arr.remove());
                 }
             }
-            if(!orderData.getDoorDashQueue().isEmpty()) { //if the onsite queue is not empty
-                while(!orderData.getDoorDashQueue().isEmpty()){   //while onsite queue is not empty
+            if(!orderData.getDoorDashQueue().isEmpty()) { //if the DoorDash queue is not empty
+                while(!orderData.getDoorDashQueue().isEmpty()){   //while DoorDash queue is not empty
                     if(orderData.getDoorDashQueue().peek().getOrderNumber() < orderData.getOnSiteQueue().peek().getOrderNumber()){
                         orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() - 1);
-                    }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                    }//subtracts 1 skip from every order in DoorDash queue with a smaller order number then the
+                     // Onsite order that was placed back into its queue
                     arr.add(orderData.getDoorDashQueue().remove());
-                }
-                while(!arr.isEmpty()){         //reads all orders in temp back into queue
+                }while(!arr.isEmpty()){
                     orderData.setDoorDashQueue(arr.remove());
                 }
             }
         }
-        else if (orderData.getNextOrderObject().getOrderType() == 3 && orderData.getNextOrderObject().getIfSkipped() < 3){//if the next order is an P Object and has been skipped less than 3 times
-            if(!orderData.getDriveThroughQueue().isEmpty()){          //if DT queue is not empty
+        //if the next order is an P Object and has been skipped less than 3 times
+        else if (orderData.getNextOrderObject().getOrderType() == 3 && orderData.getNextOrderObject().getIfSkipped() < 3){
+            if(!orderData.getDriveThroughQueue().isEmpty() || !orderData.getOnSiteQueue().isEmpty()){          //if DT queue is not empty
                 temp.add(orderData.getNextOrderObject());
                 orderData.setNextOrderObject(null);
                 orderData.setNextOrder("");
                 while(!orderData.getPhoneQueue().isEmpty()){
                     temp.add(orderData.getPhoneQueue().remove());    //puts the next order back into P queue
-                }
-                while(!temp.isEmpty()){
+                }while(!temp.isEmpty()){
                     orderData.setPhoneQueue(temp.remove());
                 }
             }
-            else if(!orderData.getOnSiteQueue().isEmpty()){          //if O queue is not empty
-                temp.add(orderData.getNextOrderObject());
-                orderData.setNextOrderObject(null);
-                orderData.setNextOrder("");
-                while(!orderData.getPhoneQueue().isEmpty()){
-                    temp.add(orderData.getPhoneQueue().remove());    //puts the next order back into P queue
-                }
-                while(!temp.isEmpty()){
-                    orderData.setPhoneQueue(temp.remove());
-                }
-            }
-            if(!orderData.getDoorDashQueue().isEmpty()) { //if the onsite queue is not empty
-                while(!orderData.getDoorDashQueue().isEmpty()){   //while onsite queue is not empty
+            if(!orderData.getDoorDashQueue().isEmpty()) { //if the DD queue is not empty
+                while(!orderData.getDoorDashQueue().isEmpty()){
                     if(orderData.getDoorDashQueue().peek().getOrderNumber() < orderData.getPhoneQueue().peek().getOrderNumber()){
                         orderData.getDoorDashQueue().peek().setSkipped(orderData.getDoorDashQueue().peek().getIfSkipped() - 1);
-                    }   //adds one to the skip count if orderNum is less than nextOrder objects orderNum
+                    }//subtracts 1 skip from every order in DoorDash queue with a smaller order number then the
+                    //Phone order that was placed back into its queue
                     arr.add(orderData.getDoorDashQueue().remove());
-                }
-                while(!arr.isEmpty()){         //reads all orders in temp back into queue
+                }while(!arr.isEmpty()){         //reads all orders in temp back into queue
                     orderData.setDoorDashQueue(arr.remove());
                 }
             }
         }
         else if (orderData.getNextOrderObject().getOrderType() == 4 && orderData.getNextOrderObject().getIfSkipped() < 3) {//if the next order is an DD Object and has been skipped less than 3 times
-            if (!orderData.getDriveThroughQueue().isEmpty()) {      //if the DT queue is not empty
+            if (!orderData.getDriveThroughQueue().isEmpty() || !orderData.getOnSiteQueue().isEmpty()
+                    || !orderData.getPhoneQueue().isEmpty()) {  //if the DT,P, or O queues are not empty
                 temp.add(orderData.getNextOrderObject());
                 orderData.setNextOrderObject(null);
                 orderData.setNextOrder("");
                 while (!orderData.getDoorDashQueue().isEmpty()) {
                     temp.add(orderData.getDoorDashQueue().remove());    //puts the next order back into DD queue
-                }
-                while (!temp.isEmpty()) {
-                    orderData.setDoorDashQueue(temp.remove());
-                }
-            } else if (!orderData.getOnSiteQueue().isEmpty()) {     //if the O queue is not empty
-                temp.add(orderData.getNextOrderObject());
-                orderData.setNextOrderObject(null);
-                orderData.setNextOrder("");
-                while (!orderData.getDoorDashQueue().isEmpty()) {
-                    temp.add(orderData.getDoorDashQueue().remove());    //puts the next order back into DD queue
-                }
-                while (!temp.isEmpty()) {
-                    orderData.setDoorDashQueue(temp.remove());
-                }
-            } else if (!orderData.getPhoneQueue().isEmpty()) {      // if the P queue is not empty
-                temp.add(orderData.getNextOrderObject());
-                orderData.setNextOrderObject(null);
-                orderData.setNextOrder("");
-                while (!orderData.getDoorDashQueue().isEmpty()) {
-                    temp.add(orderData.getDoorDashQueue().remove());    //puts the next order back into DD queue
-                }
-                while (!temp.isEmpty()) {
+                }while (!temp.isEmpty()) {
                     orderData.setDoorDashQueue(temp.remove());
                 }
             }
@@ -372,6 +355,5 @@ public class OrderDataController {
         }
         return false;
     }
-    //Fix
 }
 
