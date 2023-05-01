@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class FileWriterController{
@@ -17,7 +16,7 @@ public class FileWriterController{
         OrderData orderData = new OrderData();
 
 
-        public static void closeFileAction(FileWriterController fileWriterController) {
+    public static void closeFileAction(FileWriterController fileWriterController) {
             try {
                 FileWriter fileWriter = new FileWriter(file);
                 //Creates a new file writer object

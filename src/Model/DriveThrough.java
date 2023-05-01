@@ -1,3 +1,11 @@
+/**
+ * DriveThrough.java
+ *
+ * Inherits from Order class, this is an order class with a priority level of 1
+ *
+ * @author Daniel Edinger
+ */
+
 package Model;
 
 

@@ -1,3 +1,11 @@
+/**
+ * Onsite.java
+ *
+ * Inherits from Order class, this is an order class with a priority level of 2
+ *
+ * @author Miles Hoffman
+ */
+
 package Model;
 
 

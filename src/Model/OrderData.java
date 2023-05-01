@@ -1,7 +1,7 @@
 /**
  * OrderData
  *
- *Class where all the applications
+ * Class where all the applications
  * data will be stored
  *
  * @Author Brayden Boyer

@@ -1,6 +1,5 @@
 package Exceptions;
 
-import View.CustomerView;
 
 public class AddToOrderException extends Exception{
     public AddToOrderException(){
