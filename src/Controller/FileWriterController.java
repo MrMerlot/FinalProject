@@ -6,9 +6,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.*;
 
+/**
+ * FileWriterController writes and reads data from the file
+ * Used for the save functionality
+ * @author Daniel Edinger
+ */
 public class FileWriterController{
         public static ArrayList<Order> fileOrderArrayList = new ArrayList<>();
         //Creates a static array list to store orders in
@@ -16,7 +20,11 @@ public class FileWriterController{
         //Creates a static file to save the orders in
         OrderData orderData = new OrderData();
 
-
+    /**
+     * Calls writeToFile upon closing the program
+     * @param fileWriterController
+     * @author Daniel Edinger
+     */
         public static void closeFileAction(FileWriterController fileWriterController) {
             try {
                 FileWriter fileWriter = new FileWriter(file);
@@ -31,6 +39,11 @@ public class FileWriterController{
             }
         }
 
+    /**
+     * Writes program data to the file
+     * @throws IOException
+     * @author Daniel Edinger
+     */
         private void writeToFile() throws IOException {
             /**
              * ORDER TYPE
@@ -76,6 +89,12 @@ public class FileWriterController{
             //Closes file
         }
 
+    /**
+     * Converts a string into a list of integers
+     * @param x
+     * @return List of integers
+     * @author Daniel Edinger
+     */
         private List<Integer> toIntArray(String x) { //Converts the string line to int array
             x = x.replace("[", ""); //Removes initial bracket for the input string
             x = x.replace("]", ""); //Removes final bracket for the input string
@@ -88,6 +107,11 @@ public class FileWriterController{
             return array;
         }
 
+    /**
+     * Reads in file into the static fileOrders array list
+     * @throws FileNotFoundException
+     * @author Daniel Edinger
+     */
         public void readInFile() throws FileNotFoundException {
             Scanner s = new Scanner(file); //Read in from file
             while (s.hasNextLine()) {
@@ -125,14 +149,20 @@ public class FileWriterController{
             }
         }
 
-        /*public Order getOrder(int i) {
-            return fileOrderArrayList.get(i);
-        }*/
-
+    /**
+     * Gets the length of the OrdersArrayList
+     * @return size of fileOrderArrayList
+     * @author Daniel Edinger
+     */
         public int getOrdersArrayListLength() {
             return fileOrderArrayList.size();
         }  //Returns size of array list
 
+    /**
+     * Removes order from fileOrderArrayList
+     * @param s
+     * @author Daniel Edinger
+     */
         public void removeOrder(String s) {
             for (int i = 0; i < fileOrderArrayList.size(); i++) {
                 //Loops through the array list
